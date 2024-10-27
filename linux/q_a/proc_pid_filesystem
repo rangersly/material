@@ -1,0 +1,26 @@
+VmSize: 虚拟内存总大小。 整个进程使用虚拟内存大小，是VmLib, VmExe, VmData, 和 VmStk的总和。占所有虚拟内存分配（文件映射，共享内存，堆内存，任何内存）的份额。
+VmLck: 虚拟内存锁。进程当前使用的并且加锁的虚拟内存总数.锁住的物理内存不能交换到硬盘.
+VmRSS: 虚拟内存驻留集合大小。这是驻留在物理内存的一部分。它没有交换到硬盘。它包括代码，数据和栈。
+VmData: 虚拟内存数据。堆使用的虚拟内存。表示进程数据段的大小.
+VmStk: 虚拟内存栈。表示进程堆栈段的大小.
+VmLib: 虚拟内存库，动态链接库所使用的虚拟内存  表示进程所使用LIB库的大小.
+VmPeak代表当前进程运行过程中占用内存的峰值.
+VmHWM是程序得到分配到物理内存的峰值.
+VmRSS是程序现在使用的物理内存.
+VmExe:表示进程代码的大小.可执行的虚拟内存，可执行的和静态链接库所使用的虚拟内存
+VmPTE:占用的页表的大小.
+VmSwap:进程占用Swap的大小.
+Threads:表示当前进程组的线程数量.
+SigPnd:屏蔽位,存储了该线程的待处理信号,等同于线程的PENDING信号.
+ShnPnd:屏蔽位,存储了该线程组的待处理信号.等同于进程组的PENDING信号.
+SigBlk:存放被阻塞的信号,等同于BLOCKED信号.
+SigIgn:存放被忽略的信号,等同于IGNORED信号.
+SigCgt:存放捕获的信号,等同于CAUGHT信号.
+CapEff:当一个进程要进行某个特权操作时,操作系统会检查cap_effective的对应位是否有效,而不再是检查进程的有效UID是否为0.
+CapPrm:表示进程能够使用的能力,在cap_permitted中可以包含cap_effective中没有的能力，这些能力是被进程自己临时放弃的,也可以说cap_effective是cap_permitted的一个子集.
+CapInh:表示能够被当前进程执行的程序继承的能力.
+CapBnd:是系统的边界能力,我们无法改变它.
+Cpus_allowed:3指出该进程可以使用CPU的亲和性掩码,因为我们指定为两块CPU,所以这里就是3,如果该进程指定为4个CPU(如果有话),这里就是F(1111).
+Cpus_allowed_list:0-1指出该进程可以使用CPU的列表,这里是0-1.
+voluntary_ctxt_switches表示进程主动切换的次数.
+nonvoluntary_ctxt_switches表示进程被动切换的次数.

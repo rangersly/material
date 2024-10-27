@@ -1,0 +1,6 @@
+#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)//判断这个键是否按下
+#define KEY_UP(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 0 : 1)//判断这个键是否弹起
+#define KEY_EVERY(lpkeyState) GetKeyboardState(lpKeyState)//获得所有的256个键（键盘按键、鼠标按键等等）的状态，lpKeyState是指向一个256bit的数组，存放所有键的状态。
+#define KEY_NOW(nVirtKey) GetKeyState(nVirtKey)//用于判断nVirtKey的状态。用返回值的最高位表示，最高位为1表示当前键处于down的状态；最高位为0当前键处于up状态。此函数从消息队列中读取消息进行处理。
+#define setcolor(x) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),x)//设置颜色
+#define GetWindow() GetForegroundWindow();//得到窗口信息

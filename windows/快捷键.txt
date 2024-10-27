@@ -1,0 +1,53 @@
+Windows快捷键大全
+
+一、常见用法：
+
+F2　　　　　　　　　　　当你选中一个文件的话，这意味着“重命名”
+
+F10或ALT　　　　　　　　激活当前程序的菜单栏
+
+windows键或CTRL+ESC　　 打开开始菜单
+
+DELETE　　　　　　　　　删除被选择的选择项目，如果是文件，将被放入回收站
+
+SHIFT+DELETE　　　　　　删除被选择的选择项目，如果是文件，将被直接删除而不是放入回收站
+
+CTRL+N　　　　　　　　　打开“桌面”文件夹
+
+CTRL+O　　　　　　　　　打开“打开文件”对话框
+
+CTRL+P　　　　　　　　　打开“打印”对话框
+
+CTRL+S　　　　　　　　　保存当前操作的文件
+
+CTRL+X　　　　　　　　　剪切被选择的项目到剪贴板
+
+CTRL+INSERT 或 CTRL+C　 复制被选择的项目到剪贴板
+
+SHIFT+INSERT 或 CTRL+V　粘贴剪贴板中的内容到当前位置
+
+ALT+BACKSPACE 或 CTRL+Z 撤销上一步的操作
+
+ALT+SHIFT+BACKSPACE　　 重做上一步怀废 牟僮?br>
+
+Windows键+M　　　　　　 最小化所有被打开的窗口。
+
+Windows键+E　　　　　　 打开资源管理器
+
+Windows键+R　　　　　　 打开“运行”对话框
+
+Windows键+'+'		放大镜
+
+SHIFT+F10或鼠标右击　　 打开当前活动项目的快捷菜单
+
+ALT+F4　　　　　　　　　关闭当前应用程序
+
+ALT+SPACEBAR　　　　　　打开程序最左上角的菜单
+
+ALT+TAB　　　　　　　　 切换当前程序
+
+ALT+ESC　　　　　　　　 切换当前程序
+
+ALT+ENTER　　　　　　　 将windows下运行的MSDOS窗口在窗口和全屏幕状态间切换
+
+PRINT SCREEN　　　　　　将当前屏幕以图象方式拷贝到剪贴板

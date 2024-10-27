@@ -1,0 +1,740 @@
+一、注册表的由来 
+PC机及其操作系统的一个特点就是允许用户按照自己的要求对计算机系统的硬件和软件进行各种各样的配置。早期的图形操作系统，如Win3.x中，对软硬件工作环境的配置是通过对扩展名为.ini的文件进行修改来完成的，但INI文件管理起来很不方便，因为每种设备或应用程序都得有自己的INI文件，并且在网络上难以实现远程访问。
+
+为了克服上述这些问题，在Windows 95及其后继版本中，采用了一种叫做“注册表”的数据库来统一进行管理，将各种信息资源集中起来并存储各种配置信息。按照这一原则，Windows各版本中都采用了将应用程序和计算机系统全部配置信息容纳在一起的注册表，用来管理应用程序和文件的关联、硬件设备说明、状态属性以及各种状态信息和数据等。
+
+与INI文件不同的是： 
+1.注册表采用了二进制形式登录数据； 
+2.注册表支持子键，各级子关键字都有自己的“键值”； 
+3.注册表中的键值项可以包含可执行代码，而不是简单的字串； 
+4.在同一台计算机上，注册表可以存储多个用户的特性。
+
+注册表的特点有： 
+1.注册表允许对硬件、系统参数、应用程序和设备驱动程序进行跟踪配置，这使得修改某些设置后不用重新启动成为可能。 
+2.注册表中登录的硬件部分数据可以支持高版本Windows的即插即用特性。当Windows检测到机器上的新设备时，就把有关数据保存到注册表中，另外，还可以避免新设备与原有设备之间的资源冲突。 
+3.管理人员和用户通过注册表可以在网络上检查系统的配置和设置，使得远程管理得以实现。
+
+二、使用注册表 
+1.大家可以在开始菜单中的运行里输入regedit 
+2.也可以在DOS下输入regedit
+
+三、注册表根键说明 
+hkey_classes_root 包含注册的所有OLE信息和文档类型，是从 hkey_local_machine\software\classes复制的。 
+hkey_current_user 包含登录的用户配置信息，是从hkey_users\当前用户子树复制的。 
+hkey_local_machine 包含本机的配置信息。其中config子树是显示器打印机信息； enum子树是即插即用设备信息；system子树是设备驱动程序和服务参数的控制集合；software子树是应用程序专用设置。 
+hkey_users 所有登录用户信息。 
+hkey_current_config 包含常被用户改变的部分硬件软件配置，如字体设置、显示器类型、打印机设置等。是从hkey_local_machine\config复制的。 
+hkey_dyn_data 包含现在计算机内存中保存的系统信息。
+
+
+四、注册表详细内容 
+　　Hkey_local_machine\software\microsoft\windows\currentVersion\explorer\user shell folders 保存个人文件夹、收藏夹的路径 
+　　Hkey_local_machine\system\currentControlSet\control\keyboard Layouts保存键盘使用的语言以及各种中文输入法 
+      Hkey_users\.Default\software\microsoft\internet explorer\typeURLs保存IE浏览器地址栏中输入的URL地址列表信息。清除文档菜单时将被清空。 
+　　Hkey_users\.Default\so..\mi..\wi..\currentVersion\ex..\menuOrder\startMenu 保留程序菜单排序信息 
+      Hkey_users\.Default\so..\microsoft\windows\currentVersion\explorer\RunMRU 保存“开始 * 运行...“中运行的程序列表信息。清除文档菜单时将被清空。 
+　　Hkey_users\.Default\so..\microsoft\windows\currentVersion\explorer\ecentDocs 保存最近使用的十五个文档的快捷方式(删除掉可解决文档名称重复的毛病)，清除文档菜单时将被清空。 
+　　Hkey_local_machine\software\microsoft\windows\currentVersion\uninstall 保存已安装的Windows应用程序卸载信息。 
+      hkey_users\.default\software\microsoft\windows\currentVersion\applets 保存Windows应用程序的纪录数据。 
+Hkey_local_machine\system\CurrentControlSet\services\class 保存控制面板-增添硬件设备-设备类型目录。 
+　　Hkey_local_machine\system\CurrentControlSet\control\update 立即刷新设置。值为00设置为自动刷新，01设置为手工刷新[在资源管理器中按F5刷新]。 
+HKEY_CURRENT_USER\Control Panel\Desktop 新建串值名MenuShowDelay=0 可使“开始”菜单中子菜单的弹出速度提高。新建串值名MinAnimate，值为1启动动画效果开关窗口，值为0取消动画效果。 
+　　Hkey_local_machine\software\microsoft\windows\currentVersion\run 保存由控制面板设定的计算机启动时运行程序的名称，其图标显示在任务条右边。[启动文件夹程序运行时图标也在任务条右边] 
+hkey_users\.default\software\microsoft\windows\currentVersion\run保存由用户设定的计算机启动时运行程序的名称，其图标显示在任务条右侧。 
+HKEY_CLASS_ROOT/Paint.Pricture/DefaultIcon 默认图片的图标。双击窗口右侧的字符串，在打开的对话框中删除原来的键值，输入%1。重新启动后，在“我的电脑”中打开Windows目录，选择“大图标“，然后你看到的Bmp文件的图标再也不是千篇一律的画板图标了，而是每个Bmp文件的略图。 
+　　Hkey-local-machine\ software\ microsoft\ windows\ currentVersion\ Policies\ Ratings 保存IE4.0中文版“安全”*“分级审查”中设置的口令(数据加密)。 
+　　Hkey-local-machine\ software\ microsoft\ windows\ currentVersion\ explorer\ desktop\nameSpace保存桌面中特殊的图标,如回收站、收件箱、MS Network等。
+
+
+五、如何备份注册表 
+利用注册表编辑器手工备份注册表
+
+
+　　注册表编辑器（Regedit）是操作系统自带的一款注册表工具，通过它就能对注册表进行各种修改。当然，"备份"与"恢复"注册表自然是它的本能了。
+
+
+（1）通过注册表编辑器备份注册表 
+　　由于修改注册表有时会危及系统的安全，因此不管是WINDOWS 98还是WINDOWS 2000甚至WINDOWS XP，都把注册表编辑器"藏"在了一个非常隐蔽的地方，要想"请"它出山，必须通过特殊的手段才行。点击"开始"菜单，选择菜单上的"运行"选项，在弹出的"运行"窗口中输入"Regedit"后，点击"确定"按钮，这样就启动了注册表编辑器。
+
+
+　　点击注册表编辑器的"注册表"菜单，再点击"导出注册表文件"选项，在弹出的对话框中输入文件名"regedit"，将"保存类型"选为"注册表文件"，再将"导出范围"设置为"全部"，接下来选择文件存储位置，最后点击"保存"按钮，就可将系统的注册表保存到硬盘上。
+
+
+　　完成上述步骤后，找到刚才保存备份文件的那个文件夹，就会发现备份好的文件已经放在文件夹中了。
+
+
+（2）在DOS下备份注册表
+
+
+　　当注册表损坏后，WINDOWS（包括"安全模式"）无法进入，此时该怎么办呢？在纯DOS环境下进行注册表的备份、恢复是另外一种补救措施，下面来看看在DOS环境下，怎样来备份、恢复注册表。
+
+
+　　在纯DOS下通过注册表编辑器备份与恢复注册表前面已经讲解了利用注册表编辑器在WINDOWS环境下备份、恢复注册表，其实"Regedit.exe"这个注册表编辑器不仅能在WINDOWS环境中运行，也能在DOS下使用。
+
+
+　　虽然在DOS环境中的注册表编辑器的功能没有在WINDOWS环境中那么强大，但是也有它的独到之处。比如说通过注册表编辑器在WINDOWS中备份了注册表，可系统出了问题之后，无法进入WINDOWS，此时就可以在纯DOS下通过注册表编辑器来恢复注册表。
+
+
+　　应该说在DOS环境中备份注册表的情况还是不多见的，一般在WINDOWS中备份就行了，不过在一些特殊的情况下，这种方式就显得很实用了。
+
+
+　　进入DOS后，再进入C盘的WINDOWS目录，在该目录的提示符下输入"regedit"后按回车键，便能查看"regedit"的使用参数。
+
+
+　　通过"Regedit"备份注册表仍然需要用到"system.dat"和"user.dat"这两个文件，而该程序的具体命令格式是这样的： 
+　 Regedit /L:system /R:user /E filename.reg Regpath 
+参数含义： 
+/L：system指定System.dat文件所在的路径。 
+/R：user指定User.dat文件所在的路径。 
+/E：此参数指定注册表编辑器要进行导出注册表操作，在此参数后面空一格，输入导出注册表的文件名。 
+Regpath：用来指定要导出哪个注册表的分支，如果不指定，则将导出全部注册表分支。在这些参数中，"/L：system"和"/R：user"参数是可选项，如果不使用这两个参数，注册表编辑器则认为是对WINDOWS目录下的"system.dat"和"user.dat"文件进行操作。如果是通过从软盘启动并进入DOS，那么就必须使用"/L"和"/R"参数来指定"system.dat"和"user.dat"文件的具体路径，否则注册表编辑器将无法找到它们。
+
+
+　　比如说，如果通过启动盘进入DOS，则备份注册表的命令是"Regedit /L:C:\windows\/R:C:\windows\/e regedit.reg",该命令的意思是把整个注册表备份到WINDOWS目录下，其文件名为"regedit.reg"。而如果输入的是"regedit /E D:\regedit.reg"这条命令，则是说把整个注册表备份到D盘的根目录下（省略了"/L"和"/R"参数），其文件名为"Regedit.reg"。
+
+
+（3）用注册表检查器备份注册表 
+　　在DOS环境下的注册表检查器Scanreg.exe可以用来备份注册表。
+
+
+命令格式为： 
+Scanreg /backup /restore /comment
+
+
+参数解释： 
+/backup用来立即备份注册表 
+/restore按照备份的时间以及日期显示所有的备份文件 
+/comment在/restore中显示同备份文件有关的部分
+
+
+注意：在显示备份的注册表文件时，压缩备份的文件以.CAB文件列出，CAB文件的后面单词是Started或者是NotStarted，Started表示这个文件能够成功启动Windows，是一个完好的备份文件，NotStarted表示文件没有被用来启动Windows，因此还不能够知道是否是一个完好备份。
+
+
+比如：如果我们要查看所有的备份文件及同备份有关的部分，命令如下：Scanreg /restore /comment
+
+
+六、使用技巧 
+上面介绍的都是概念上的东东，下面让我们实际操作吧 
+1.加快开机及关机速度
+
+
+　　在[开始]-->[运行]-->键入[Regedit]-->[HKEY_CURRENT_USER]-->[Control Panel]-->[Desktop]，将字符串值[HungAppTimeout]的数值数据更改为[200],将字符串值[WaitToKillAppTimeout]的数值数据更改为1000.另外在[HKEY_LOCAL_MACHINE]-->[System]-->[CurrentControlSet]-->[Control]，将字符串值[HungAppTimeout]的数值数据更改为[200]，将字符串值[WaitToKillServiceTimeout]的数值数据更改1000
+
+
+2.自动关闭停止响应程序
+
+
+　　在[开始]-->[运行]-->键入[Regedit]-->[HKEY_CURRENT_USER]-->[Control Panel]-->[Desktop]，将字符串值[AutoEndTasks]的数值数据更改为1，重新启动即可
+
+
+3.清除内存内被不使用的DLL文件
+
+
+　　在[开始]-->[运行]-->键入[Regedit]-->[HKKEY_LOCAL_MACHINE]-->[SOFTWARE]-->[Microsoft]-->[Windows]-->[CurrentVersion]，在[Explorer]增加一个项[AlwaysUnloadDLL]，默认值设为1。注：如由默认值设定为[0]则代表停用此功能
+
+
+4.加快菜单显示速度
+
+
+　　在[开始]-->[运行]-->键入[Regedit]-->[HKEY_CURRENT_USER]-->[Control Panel]-->[Desktop]，将字符串值[MenuShowDelay]的数值数据更改为[0]，调整后如觉得菜单显示速度太快而不适应者可将[MenuShowDelay]的数值数据更改为[200]，重新启动即可
+
+
+5.禁止修改用户文件夹　
+
+
+　　找到HKEY_CURRENT_USERSoftwareMicrosoftWindowsCurrentVersionPoliciesExplorer。如果要锁定“图片收藏”、“我的文档”、“收藏夹”、“我的音乐”这些用户文件夹的物理位置，分别把下面这些键设置成1：DisableMyPicturesDirChange，DisablePersonalDirChange，DisableFavoritesDirChange，DisableMyMusicDirChange
+
+
+6.减小浏览局域网的延迟时间　
+
+
+　　和Windows 2000一样，XP在浏览局域网时也存在烦人的延迟问题，但介绍这个问题的资料却很难找到。如果你浏览一台Win 9x的机器，例如，在网上邻居的地址栏输入“\computername”，XP的机器会在它正在连接的机器上检查“任务计划”。这种搜索过程可能造成多达30秒的延迟。如果你直接打开某个共享资源，例如在网上邻居的地址栏输入“\computernameshare”，就不会有这个延迟过程。要想避免XP搜索“任务计划”的操作，提高浏览网络的速度，你可以删除HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindowsCurrentVersionExplorerRemoteComputerNameSpace{D6277990-4C6A-11CF-8D87-00AA0060F5BF}子键。该键的类型是REG_SZ
+
+
+7.屏蔽系统中的热键　　
+
+
+　　点击“开始”→“运行”，输入Regedit，打开注册表编辑器。然后依次打开到HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer，新建一个双字节值，键名为“NoWindows Keys”，键值为“1”，这样就可以禁止用户利用系统热键来执行一些禁用的命令。如果要恢复，只要将键值设为0或是将此键删除即可
+
+
+8.关闭不用的共享　　
+
+
+　　安全问题一直为大家所关注，为了自己的系统安全能够有保证，某些不必要的共享还是应该关闭的。用记事本编辑如下内容的注册表文件，保存为任意名字的.Reg文件，使用时双击即可关闭那些不必要的共享：　　
+
+
+　　Windows Registry Editor Version 5.00　　
+
+
+　　[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters]　　
+
+
+　　"AutoShareServer"=dword:00000000　　
+
+
+　　"AutoSharewks"=dword:00000000　　
+
+
+　　[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]　　
+
+
+　　"restrictanonymous"=dword:00000001
+
+
+9.让IE支持多线程下载 
+　 一般情况下，大家都使用多线程下载软件如Flashget等下载文件，其实IE也可以支持多线程下载的，只是微软将这个功能给藏了起来。我们把它给挖出来就可以使用了。打开注册表编辑器，在注册表HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings下新建双字节值项“MaxConnectionsPerServer”，它决定了最大同步下载的连线数目，一般设定为5～8个连线数目比较好。另外，对于HTTP 1.0服务器，可以加入名为“MaxConnectionsPer1_0Server”的双字节值项，它也是用来设置最大同步下载的数目，也可以设定为5～8。　
+
+
+10.让WINDOWS XP自动登陆　
+
+
+　　打开：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon，在右边的窗口中的新建字符串"AutoAdminlogon"，并把他们的键值为"1"，并且把“DefaultUserName”的值设置为用户名，并且另外新建一个字符串值“DefaultPassword”，并设其值为用户的密码
+
+
+七、我们来让我们的系统瘦瘦身 
+删除多余的虚拟光驱图标
+
+
+　　当我们在系统中安装了虚拟光驱后，“我的电脑”中就会多出一个光盘图标，即便日后你不再使用虚拟光驱，虚拟光驱图标还会继续保留，实在没有必要。我们动手来删除这个多余的虚拟光驱图标：单击“开始→运行”，输入“regedit”，按下“确定”键后打开注册表编辑器，依次展开HKEY_LOCAL_MACHINE\Enum\SCSI分支，在SCSI子键下通常有两个子键，它们分别对应着虚拟光驱和物理光驱，把SCSI下的子键全部删除，重新启动电脑后虚拟光驱图标就会被删除。
+
+
+删除多余的系统级图标
+
+
+　　系统级图标是指在安装Windows时由系统自动创建的图标，如回收站、收件箱、网上邻居等，其中有些图标对用户来说并无用处，但这些图标无法直接删除。打开注册表编辑器，依次展开HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\
+
+
+　　explorer\Desktop\NameSpace分支，然后删除不需要的子键。关闭注册表编辑器，重新启动电脑后，你会发现桌面上不需要的系统级图标已经消失了。
+
+
+删除“运行”中多余的选项
+
+
+　　如果你多次使用“开始→运行”菜单，会发现它的“打开”窗口被一大堆不再需要的命令弄得凌乱不堪。打开注册表编辑器，依次展开HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion
+
+
+　　\Explorer\RunMRU分支，将右侧窗口的相关键值删除即可。
+
+
+删除“查找”中多余的选项
+
+
+　　依次展开HKEY_USER\.Default\Software\Microsoft\Windows\CurrentVersion
+
+
+　　\Explorer\Doc-FindSpecMRU分支，将右侧窗口中的相关键值删除即可。
+
+
+删除多余的键盘布局
+
+
+　　Windows试图成为世界的宠儿，因此其键盘布局适合于各国各类人的使用习惯。打开注册表编辑器，依次展开HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control
+
+
+　　\KeyboardLayouts分支，我们可以看到该分支下保存了西班牙语(传统)、丹麦语、德语(标准)等多种键盘布局，如果你用不到这些语言的键盘布局，完全可以直接删除这些子键。
+
+
+删除多余的区域设置
+
+
+　　与上述键盘布局相类似的还有Windows的区域设置，在注册表编辑器中展开HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control
+
+
+　　\Nls\Locale分支，简体中文使用者完全可以只保留“00000804”键值，其他可以毫不留情地删除。
+
+
+八、高级篇 
+1、自动清除登录窗口中上次访问者的用户名 
+　　通常情况下，用户在进入WINNT网络之前必须输入自己的用户名称以及口令。但是当你重新启动计算机，登录WINNT时，WINNT会在缺省情况下将上一次访问者的用户名自动显示在登录窗口的“用户名”文本框中。这样一来，有些非法用户可能利用现有的用户名来猜测其口令，一旦猜中的话，将会对整个计算机系统产生极大的安全隐患。为了保证系统不存在任何安全隐患，我们可以通过修改WINNT注册表的方法来也提供了启动时自动以某一个组的用户名称和口令进行访问WINNT，而不需要通过人工设置的方法来自动清除登录窗口中上次访问者的用户名信息。要实现自动清除功能，必须要进行如下配置：　 A、在开始菜单栏中选择运行命令，在随后打开的运行对话框里输入REGEDIT命令，从而打开注册表编辑器。 
+　　B、在打开的注册表编辑器中，依次展开以下的键值：　 [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON] 
+　　C、在编辑器右边的列表框中，选择“DONTDISPLAYLASTUSERNAME”键值名称，如果没有上面的键值，可以利用“编辑”菜单中的“新建”键值命令添加一个，并选择所建数据类型为“REG_SZ”。 
+　　D、选择指定的键值并双击，当出现“字符串编辑器”对话框时，在“字符串”文本框中输入“1”，其中“1”代表起用该功能，“0”代表禁止该功能。 
+　　E、当用户重新启动计算机登录WINNT时，NT登录对话框中的“用户名”文本框中将是空白的。 
+2、为一些非SCSI接口光驱进行手工配置 
+　　如果你想在WINNT上安装一个非SCSI接口的光驱，在WINNT版本较高的计算机中这中类型的光驱可能被自动识别并自动由计算机来完成其安装任务，不巧的是，你的计算机中安装了一个低版本的操作系统，例如安装了WINNT3.5，还没有时间来升级，但现在就着急用光驱呢，那该怎么办才好呢？不急，虽然Windows NT3.5不能自动识别非SCSI接口的光驱，但我们可以通过手工安装的方式来帮你轻松搞定这个小问题，具体工作步骤为： 
+　　A、首先必须将你手中的对应的非SCSI接口的CD-ROM驱动程序从安装盘拷贝到WINNT\SYSTEM32\DRIV ERS目录下。 
+　　B、在WINNT主群组中打开Setup图标。 
+　　C、从OPTION菜单中选择“Add/Remove SCSI Adapters”。　 D、用鼠标单击ADD按钮，为你的非SCSI接口CD-ROM选择对应的驱动程序。 
+　　E、接着单击“INSTALL”按钮进行一些相关参数的配置。　　F、退出Windows NT，重新启动计算机后光驱就会有用了。 
+3、增加NTFS性能 
+　　如果用户想增加NTFS的性能，也可以通过修改注册表的方法来达到目的，具体实现步骤如下： 
+　　A、打开注册表编辑器，并在编辑器中依次展开以下键值：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem 
+　　B、在注册表编辑器中用鼠标单击“编辑”菜单，并在下拉菜单中选择“新建”菜单项，并在其弹出的子菜单中单击“DWORD值”。 
+　　C、 在编辑器右边的列表中输入DWORD值的名称为“NtfsDisableLastAccessUpdate”。 
+　　D、 接着用鼠标双击NtfsDisableLastAccessUpdate键值，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“1”，其中0代表“取消”该项功能，1代表“启用”该项功能。 
+　　E、设置好后，重新启动计算机就会使上述功能有效。 
+4、修复镜像组 
+　　A、当镜像磁盘组中的驱动器发生故障时，系统自动向其余的驱动器发出发送数据请求，留下工作驱动器单独运行。此时，用户需要进入Disk Administrator，选择镜像组，再选择FaultTolerance/Break Mirror，将镜像组分为两个独立部分。 
+　　B、工作的驱动器得到磁盘组所用的驱动器盘符，故障驱动器得到系统的下一个有效盘符。关闭NT Server，更换一个相同型号的硬盘驱动器。 
+　　C、重新启动NT Server，运行Disk Administor，在新驱动器上选择分区和未用空间，选择Fault Tolerance/Establish Mirror即可对新驱动器作镜像。 
+5、自定义启动信息 
+　　每次当WINNT启动时，它都会显示“请按CTRL+ALT+DELETE键来登录”的信息，而如果你希望用户在按完CTRL+ALT+DELETE键后，画面上自动显示用户自己希望所看到的信息，可以通过如下的相关设置来进行： 
+　　A、在开始菜单栏中选择运行命令，在随后打开的运行对话框里输入REGEDIT命令，从而打开注册表编辑器。 
+　　B、在打开的注册表编辑器中，依次展开以下的键值：　 [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON] 
+　　C、在编辑器右边的列表框中，选择“LEGALNOTICECAPTION”键值名称，如果没有上面的键值，可以利用“编辑”菜单中的“新建”键值命令添加一个，并选择所建数据类型为“REG_SZ”。 
+　　D、选择指定的键值并双击，当出现“字符串编辑器”对话框时，在“字符串”文本框中输入用户希望看到的信息窗口的标题内容，例如输入“WINNT网络”。 
+　　E、接着在下面一个“字符串”文本框中输入信息窗口要显示的具体内容，例如输入“欢迎使用WINNT网络”。 
+　　F、重新启动计算机后，再次登录进WINNT网络时，用户将会看到自己在上面设置的内容。
+
+
+6、加速文件管理系统缓存 
+　 大家知道计算机的速度有很大一部分与内存相关，如果内存容量大一点，计算机运行速度就会相应快一点。但是假设在内存一定的情况下，如何来提高计算机的运行速度呢？这就是我们下面通过注册表设置要实现的内容，具体步骤如下： 
+　　A、在开始菜单栏中选择运行命令，在随后打开的运行对话框里输入REGEDIT命令，从而打开注册表编辑器。 
+　　B、在打开的注册表编辑器中，依次展开以下的键值：　 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]。 
+　　C、在编辑器右边的列表框中，选择“IoPageLockLimit”键值名称，如果没有上面的键值，可以利用“编辑”菜单中的“新建”键值命令添加一个，并选择所建数据类型为“DWORD”。 
+　　D、选择指定的键值并双击，当出现“字符串编辑器”对话框时，在“字符串”文本框中输入用户需要的数值，系统默认缓存为512K，其他的参考值如下： 
+　 RAM (MB) IoPageLockLimit　 32　 4096000　 64　 8192000　 128　 16384000　 256+　 65536000 
+　　E、当用户重新启动计算机登录WINNT时，文件管理系统缓存将得到改善。 
+7、增加“关闭系统”按钮 
+　　在NT计算机中，“关闭系统”按钮作为缺省值在登陆对话框中提供，这个任务按钮允许用户不必先登陆即可关闭系统。在NT SERVER中虽然没有这个功能，但可以通过修改注册表，使系统在登陆对话框中增加一个“关闭系统”的按钮，具体操作方法如下：　　 
+A、打开注册表编辑器，并在编辑器中依次展开以下键值：　 [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\WINLOGON]。 
+　　B、在编辑器右边的列表中用鼠标选择“SHUTDOWNWITHOUTLOGON”键值。 
+　　C、接着用鼠标双击“SHUTDOWNWITHOUTLOGON”键值，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“1”，其中0代表取消“关闭系统”按钮，1代表增加“关闭系统”按钮。 
+　　D、退出后重新登录，在登录的界面中会增加一个“关闭系统”的按钮。 
+8、在NT下创建一个镜像集 
+　　A、先用Disk Administerator创建镜像集的第一个分区表，选中该分区，在另一个磁盘驱动器内的磁盘空间的未用区域上进行Ctrl＋鼠标单击操作，以把未用的磁盘区域和第一个分区均选上。 
+　　B、从Disk Ad ministor的Fault Tolerlance(容错)菜单中选中Establish Mirror(建立镜像 )，Disk Administor将在被选自由盘区外创建一个磁盘分区。该分区与原有分区一样大，并包含原分区表上所有数据的备份。 
+　　C、如果要取消镜像集(并非删除镜像集)，即仅仅停止两个分区之间的数据复制，只需从Disk Administor中选择Fault Tolerance/Break Mirror。 
+9、登录局域网超时自动断开 
+　　在登录Windows NT网络时，有可能用户不小心输错了登录参数或其他原因，导致了登录网络可能需要花费好长时间，这种情况是我们不想看到的。为了解决这种问题，我们可以通过注册表，来配置为闲置超时断开，以分钟为单位，具体步骤为： 
+　　A、打开注册表编辑器，并在编辑器中依次展开以下键值： 　[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters] 
+　　B、在编辑器右边的列表中用鼠标选择“AUTODISCONNECT”键值。 
+　　C、接着用鼠标双击“AUTODISCONNECT”键值，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“1”，其中0代表取消自动断开功能，1代表使用自动断开功能。 
+　　D、退出后重新登录网络，上述功能就会生效。 
+10、改变远程访问服务的缺省端口传输速度 
+　　Windows NT远程访问服务为每个RAS串行端口设置两种BPS速度：载波BPS与联接BPS速度，前者是指两个Modem通过电话线传输数据的速度，后者则指Modem与主机串口间的数据传输速度；当远程服务被启动时，计算机首先将其联接BPS速度值存放于\System Root\\System32\RAS\Modem.INF文件中，以MAXC ARRIERBPS参数形式存放，然后将该值保存在RASSERIAL.INF文件中，以后每次进行传输时对串口作初始化，只需改变SERIAL.INI文件，即可改变串口传输速度，具体操作方法如下： 
+　　A、将SERIAL.INI文件用编辑器打开。 
+　　B、将INITIALBPS参数改为自己所希望的数值。 
+　　C、将上述改动保存成一个文件，文件名仍为SERIAL.INI。 
+　　D、打开“开始”菜单，并单击“运行”命令，在运行栏中输入RasAdmin命令。 
+　　E、从服务器菜单中选择“Stop Remote Access Service”，再选择“Start Remote Access Service”，上述设置就会生效。 自动检测慢网登陆 
+　　上面我们曾经说过，在登录NT网络时有可能很慢。同样地，如果Windows NT检测速度有困难，可以取消。具体实现步骤为： 
+　　A、打开注册表编辑器，并在编辑器中依次展开以下键值： 
+　[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon] 
+　　B、在编辑器右边的列表中用鼠标选择“SlowLinkDetectEnabled”键值，如果没有该键值，必须新建一个DWORD值，名称设置为“SlowLinkDetectEnabled”。 
+　　C、接着用鼠标双击“SlowLinkDetectEnabled”键值，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“1”，其中0代表取消自动检测慢网登陆功能，1代表使用自动检测慢网登陆功能。 
+　　D、退出后重新登录网络，上述设置就会起作用。
+
+
+12、加快网络传输速度 
+　　对于拨号用户来说，时间就是金钱，怎样才能节约时间，节省金钱呢？回答是提高网络传输速度。那又如何提高网络传输速度呢？大家知道，网络速度主要是受网络带宽限制的。增加带宽不是拨号用户所能做到的，他们唯一能做的就是把调制解调器的传输速度能够再提高一点。其实拨号用户还可以从计算机本身运行速度出发，尽量能挖掘计算机在网络加速方面最大的潜能。下面我们就通过一些设置来尽量加快网络传输速度，具体设置如下： 
+　 A、在开始菜单栏中选择运行命令，在随后打开的运行对话框里输入REGEDIT命令，从而打开注册表编辑器。 
+　　B、在打开的注册表编辑器中，依次展开以下的键值：　 [HKEY_LOCAL_MACHINE\System\Current Control Set\Services\Class\NetTrans00n ]，其中n表示个别拔号网络连接项号码。 
+　　C、在编辑器右边的列表框中，选择“MaxMTU”键值名称，如果没有上面的键值，可以利用“编辑”菜单中的“新建”键值命令添加一个，并选择所建数据类型为“DWORD”值。 
+　　D、选择指定的键值并双击，当出现“字符串编辑器”对话框时，在“字符串”文本框中输入“576”，576代表最大传输单元值。 
+　　E、接着在编辑器菜单栏中依次选择“编辑”→“新增”→“字符串值”，右边列表窗口就会多出一个新字符串，把它 命名为“MaxSSS”，再双按这个字符串值并把它设定为“536”。 
+　　F、重新返回到编辑器的主操作界面，并依次展开如下键值： [HKEY_LOCAL_MACHINE\System\Current Control Set\Services\VxD\MSTCP]。 
+　　G、按照上述同样的操作方法，在编辑器右边的列表中依次添加字符串值“DefaultRcvWindow”、 “DefaultTTL”，并且把它们的数值分别设置为“2144”，“64”。 
+　　H、当用户重新启动计算机登录WINNT时，上述所有的设置将会生效，这样计算机将会发挥它在网络加速方面最大的能量。
+
+
+13、自动登陆网络 
+　　通常情况下，用户在进入WINNT网络之前必须输入自己的用户名称以及口令。但是WINNT也提供了启动时自动以某一个组的用户名称和口令进行访问WINNT，而不需要通过人工设置的方法来输入登陆网络的参数。要实现自动登陆功能，必须要进行如下配置： 
+　　A、打开注册表编辑器，并在编辑器中依次展开以下键值： 
+　[HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS NT\CURRENT VERSION\WINLOGON] 
+　　B、用鼠标单击右边的“AUTOADMINLOGON”键值名称，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“1”。 
+　　C、接着再用鼠标选择右边的“DEFAULTDOMAINNAME”键值名称，并在随后弹出的文本栏中输入所要登陆的域名名称或所要访问的计算机名称，例如输入“DOMAIN”域或“COM”计算机名称，然后单击“确定”按钮。 
+　　D、按照同样的操作方法，选择右面的“DEFAULTUSERNAME”键值名称，并在“字符串”文本框中输入登陆网络的用户名称，例如输入管理员名称“ADMINISTRATOR”，并单击“确定”按钮。 
+　　E、最后在注册表编辑器中，用鼠标单击“编辑”菜单并在下拉菜单中选择“新建键值”命令，然后在注册表右边的列表中，输入键值名称为“DEFAULTPASSWORD”，键值类型为“REG_SZ”，接着单击“确定”按钮。 
+　　F、 用鼠标双击“DEFAULTPASSWORD”键值，在弹出的对话框中输入用户的密码，在这里我们输入系统管理员的口令作为登陆网络的密码，输入完成后单击“确定”按钮结束设置工作。 
+　　G、 让计算机重新启动，缺省设置的用户将会自动登陆到指定的网络中去。 
+　　如果用户日后不再需要自动登陆功能时，只需要把“AUTOADMINLOGON”的键值改为数值“0”即可。 
+14、禁止光盘的自动运行功能 
+　　大家都很清楚每当光盘放到计算机中时，WINNT就会执行自动运行功能，光盘中的应用程序就会被自动运行，而我们在实际工作中有时不需要这项功能，那么如何屏蔽该功能呢。此时，我们同样可以修改注册表使此功能失效，具体做法如下： 
+　　A、打开注册表编辑器，并在编辑器中依次展开以下键值： 　[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Cdrom] 。 
+　　B、在编辑器右边的列表中用鼠标选择“AUTORUN”键值。 
+　　C、接着用鼠标双击“AUTORUN”键值，编辑器就会弹出一个名为“字符串编辑器”的对话框，在该对话框的文本栏中输入数值“0”，其中0代表“禁用”光盘的自动运行功能，1代表“启用”光盘的自动运行功能。 
+　　D、设置好后，重新启动计算机就会使上述功能有效。 
+15、取消系统检测串口，提高NT系统启动速度 
+　　计算机每次启动都会对计算机的硬件要重新检测一遍，这需要花费一定的时间，也因此就减慢了计算机的启动速度。在这里笔者向大家介绍一下通过一些设置来取消系统检测串口，从而达到提高NT系统启动速度的目的，具体步骤如下： 
+　　A、在开始菜单中，用查找的方法将Boot.INI文件找出来，然后将该文件的“只读”属性屏蔽掉，以便于我们在其中进行一些相关改动。 
+　　B、接着用一个文本编辑器将Boot.INI文件打开，并修改[operating system]段的内容，将其中每一行后加上NoserialMice参数，如下所示： 
+　　修改Boot.INI文件， 
+　　…… 
+　　[operating system] 
+　　multi(0) disk(0) rdisk(0) 
+　　partition(1)\WINNT40="Windows NT 
+　　Workstation Version4.0"/NoSerialMice　 …… 
+　　C、把上述修改的内容保存起来，文件名仍为Boot.INI。 
+　　D、退出Windows NT，重新启动计算机后上述配置就会生效。
+
+XP六条未公开的秘技 
+支持137 GB以上大硬盘
+
+
+　 想要使用137 GB以上大硬盘，必须使用48位LBA模式。首先你的主板BIOS必须支持48Bit LBA，其次WinXP 家用版和专业版必须安装SP1补丁。然后打开注册表，在如下路径“HKEY_LOCAL_MACHINE System CurrentControlSet Services Atapi Parameter”找到“EnableBigLba”选项，将其值由“0”改为“1”。如果该项不存在，可以自建“DWORD值”项目，同样设置.最后重新启动即可.
+
+
+删除共享文档
+
+
+　 如果你不需要共享文件，可以这样移除它：进入HKEY_LOCAL_MACHINE SOFTWARE Microsoft Windows CurrentVersion Explorer My computer Namespace DelegateFolders，删除键值“”。
+
+
+锁定桌面
+
+
+　 想要锁定桌面不被别人肆意修改，可以使用很多工具例如TweakUI，不过其实在注册表里进行小小的改动即可实现：进入HKEY_CURRENT_USER Software Microsoft Windows CurrentVersion Policies Explorer，建立DWORD值“NoDesktop”，将其值修改为“1”即可。
+
+
+停用“上次访问时间标记（Last Access Time Stamp）”
+
+
+　 不想要这项功能，可以这样修改：进入HKEY_LOCAL_MACHINE SYSTEM CurrentControlSet Control File system，新建DWORD值“NtfsDisableLastAccessUpdate”，将其值修改为“1”即可。
+
+
+设置“远程访问连接服务器（RAS）”
+
+
+　 需要的话可以这样修改：进入HKEY_LOCAL_MACHINE SOFTWARE Microsoft Windows NT CurrentVersion Winlogon，新建字符串值“KeepRasConnections”，将其值修改为“1”即可。
+
+
+使用明文密码（Lain Text Password）
+
+
+　 访问UNIX或者LINUX服务器的时候，有时需要明文密码这在XP下很容易实现：找到“HKEY_LOCAL_MACHINE SYSTEM CurrentControlSet Services lanmanworkstation parameter enableplaintextpassword”并将其值设置为“1”即可
+
+
+控制面板 
+在Windows 2000的控制面板中有1 9个标准的应用小程序( a p p l e t )，每一个应用小程序都有 
+影响注册表条目的能力(具有添加硬件和安装软件功能的系统还包括另外一些应用小程序)； 
+添加/删除硬件系统H K E Y _ L O C A L _ M A C H I N E \ H A R D WA R E 
+添加/删除程序系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+管理工具系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+日期/时间系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+显示系统和用户H K E Y _ L O C A L _ M A C H I N E \ S Y S T E M和HKEY _ 
+CURRENT _ USER 
+文件夹选项系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+字体系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+I n t e r n e t选项系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+键盘系统和用户H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E和HKEY _ 
+CURRENT _ USER 
+鼠标系统和用户H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E和HKEY _ 
+C U R R E N T _ U S E R 
+网络和拨号连接系统H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E 
+电话和调制解调器选项系统H K E Y _ L O C A L _ M A C H I N E \ S Y S T E M 
+电源选项系统H K E Y _ L O C A L _ M A C H I N E \ H A R D WA R E 
+打印机系统H K E Y _ L O C A L _ M A C H I N E \ S Y S T E M 
+区域设置系统H K E Y _ L O C A L _ M A C H I N E \ S Y ST E M 
+任务计划系统H K E Y _ L O C A L _ M A C H I N E \ S O FT WA R E 
+声音和多媒体系统和用户H K E Y _ L O C A L _ M A C H I N E \ S O F T WA R E和HKEY _C U R R E N T _ U S E R 
+系统系统和用户H K E Y _ L O C A L _ M A C H I N E \ S OF T WA R E，HKEY _ 
+L O C A L _ M A C H I N E \ S Y S T E M和HKEY_CURRENT_USER
+
+
+以前，对于在Windows 2000或Windows XP上玩CS的人来说，是否开显卡的垂直同步是个两难的选择。不开垂直同步可以得到更高的FPS，但画面老是抖动，打时间长了眼睛很累；开了垂直同步，FPS就肯定超不过60。但我相信还有很多朋友不知道该怎么办，因此把解决办法公布，希望能对大家有所帮助。
+
+
+在Window 2000或XP下，开垂直同步后FPS超不过60的原因是：Window 2000或XP在这种情况下会把游戏中的FPS设定为Windows的缺省值60，再好的配置也没用。
+
+
+解决这个问题的办法很多，可以用第三方程序如PowerStrip等，但这种办法需要外挂程序，可能不安全。最近，我终于找到最根本的解决办法，就是在直接在注册表里把Windows的缺省值改成100（或更高，只要你的显示器支持就可以）。请千万注意：在修改注册表前，一定要确认你的显示器在不同的分辨率下所支持的最高刷新频率。比如，我的电脑在1024*768的分辨率下能达到100Hz的刷新频率，我玩CS也是在这个分辨率下玩，所以，我才敢把Windows的缺省值设为100。另外也请注意，这样修改完注册表后，你电脑桌面的分辨率和刷新频率也会被限定为这个数值。
+
+
+修改注册表的方法如下：
+
+
+Open regedit and find this key: 
+运行regedit命令进入注册表修改界面； 
+进入[HKEY_LOCAL_MACHINEsystemCurentControlSetControlClass]，打开"Class"键，你将看到一大排的键，类似于
+
+
+{4D36E96E-E325-11CE....}
+
+
+如果你选中其中一个键你将可以看到一些键值，如"Default"、"Class"等，并指明设备的种类，如"Modem", "Keyboards"等，逐个打开这些{4D36E96E-E325-11CE....}键，直到看到"Class"的键值是"Monitor"。好的，我们已经找到控制显示器的注册信息了，接下来就是在这里面该缺省值了。
+
+
+打开你刚找到的那个键，里面至少应该有1个键，叫做"0000"，这里也可能有其他的键，如"0001"、"0002"等。如果里面只有个"0000"，那就简单了，你直接在"0000"里按下面的方法修改就可以了。如果有多个键，你就必须逐个找出来哪个键是控制你的显示器的，方法是逐个键地按照下面说的“修改缺省值的操作”进行修改，修改后立即用下面说的“检查缺省值是否修改”的方法检查，如果相符就说明这个键是控制你显示器的，否则就不是。
+
+
+“修改缺省值的操作”方法：
+
+
+打开"0000"或你找到的其他的键，你可以看到里面有个"MODES"键，打开它你将看到一个键显示的是你的显示器的最大分辨率，如"1600,1200"，现在假设你要在1024*768的分辨率下达到100Hz的刷新率，那么操作如下：在"MODES"下增加一个键叫做"1024,768"，在"1024,768"键里增加一个键叫做"Mode1"，键值设为"100-100,100-100"。修改缺省值得操作完毕。
+
+
+“检查缺省值是否修改”的方法：
+
+
+进入"Display properties -> Setting"，看分辨率是否为你设定的值，如果不是那么说明你修改的那个类似于"0000"的键不是现在控制你显示器的键，，如果分辨率是你设定的值(如1024*768)，那么再进"Advanced -> Monitor"里面看显示器的刷新频率是不是也是你设定的值，如果是，选中"Hide all unsupported modes"后你的刷新频率应该只有一个值可以选择，就是你设定的值(如100Hz)。这说明你修改得正确。
+
+
+总结：
+
+
+修改后，你进入游戏后无论游戏是用Direct3D还是OpenGL，你的FPS都可以超过60了。这个修改方法对Windows 2000和Windows XP都有效
+
+
+三、最新Windows XP注册表实用配置技巧 
+1.屏蔽当鼠标移动到标准控制按钮的提示信息
+
+
+当你将鼠标移动到一个标准窗口上的三个控制按钮（最小化、最大化、关闭）上时，它将显示每一项的文本提示。通过注册表可以屏蔽这个功能。打开注册表子键：HKEY_CURRENT_USER＼Control panel＼Desktop＼，创建一个新的键值项或者修改已经存在的键值项“MinMaxclose”（字符串型），并设置其值：0表示屏蔽此功能；1表示激活此功能。
+
+
+2.通过注册表查看系统BIOS信息
+
+
+在注册表里储存着关于系统主板BIOS的有关信息，包括最终日期、版本号和视频BIOS日期等信息。打开注册表子键：HKEY_LOCAL_MACHINE＼Hardware＼Description＼System，其下面的键值项：Systembiosdate、Systembiosversion、Videobiosdate分别记录着这些BIOS信息。
+
+
+3.启动自动最优化磁盘功能
+
+
+在Windows XP系统中，需要时可以自动初始优化磁盘系统的新功能。在注册表中可以控制此功能是否有效。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Dfry＼Bootoptimizefunction，新建字符串型键值项“Enable”，并设置其值：“Y”为此功能有效，“N”反之。
+
+
+4.限制自动登录的数量
+
+
+这个设置可以限制自动登录的次数，一旦限制已经到了额定次数，自动登录功能就会拒绝登录系统。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows Nt＼CurrentVersion＼Winlogon，创建一个新的字符串型或者修改现有的“autologoncount”键值项，并且根据需要设置其值的大小。
+
+
+注意：每次系统重新启动，autologoncount的值将被消耗一个，直到为零。当值为零时，将没有账户可以自动登录，autologoncount和默认密码键值将从注册表中删除且autoadminlogon将被设置为零。
+
+
+5.使用Windows NT/2000的登录界面登录Windows XP
+
+
+Windows XP采用了一个全新的登录界面，全新的登录方法和显示用户的图片信息，让整个过程更加舒心、个性化。然而在某些场合，可能还会用到Windows NT/2000登录界面，可以通过一些组合键来实现此功能：
+
+
+（1）同时按下Ctrl+Alt键。
+
+
+（2）连续按下Del键两次。
+
+
+登录界面将变成Windows NT/2000式的界面，此时，你可以通过点击“取消”按钮来切换到Windows XP界面。
+
+
+6.定义Windows XP时钟服务器 Windows XP有一个新的特色，它可以将系统的时钟与Internet上的时钟服务器进行同步校正，用以下方法你可以修改或添加默认的时钟服务器。打开注册表子键HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows＼CurrentVersion＼DateTime＼Servers，设置此子键的默认值为服务器的IP地址或者域名即可。
+
+
+7.锁定／解除任务栏在桌面上的位置
+
+
+打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼Advanced，新建或者修改双字节值项“TaskbarSizeMove”，并设置其键值：0为锁定；1则为解开锁定。修改完成后，注消或重新启动使其生效。
+
+
+8.改进核心存取系统性能
+
+
+在具有大量RAM存储量的系统中，这个技巧可以强迫Windows核心进程被驻留在存储器里而不是在程序和磁盘交换文件之间来回切换，从而大大提高系统运行效率。打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Control＼Session Manager＼Memory Management，在其下新建一个双字节值项：Disablepagingexecutive，并设置其值：1使此功能被激活并且阻止核心进程进行磁盘页面交换；0则设其为默认值。重新启动计算机使设置生效。
+
+
+9.优化I/O缓冲大小的默认设置
+
+
+此功能可用于改变Windows XP对于I/O缓冲大小的默认设置。打开注册表子键HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Control＼Session Manager＼Memory Management，新建或者编辑双字节值项“IoPageLockLimit”，并设置其值，其值有二进制和十六进制，单位为Beyte。在设置缓冲大小时，请逐渐增大数值，在增大的过程中观察设置的性能，因为盲目的增大也会浪费系统资源。
+
+
+10.屏蔽/打开“分组相似任务栏按钮”功能
+
+
+此功能用于是否将相似的窗口条目集合在一起或作为单个按钮显示在任务栏上。打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼Advanced，新建或者编辑双字节值项“TaskbarGlomming”，并设置其值：0为屏蔽此功能；1为运行此功能。
+
+
+11.自定义激活“分组相似任务栏按钮”的窗口数量
+
+
+在注册表里，可以设置当某个窗口达到一定数量后，才激活“分组相似任务栏按钮”的功能，打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼Advanced，新建或者编辑双字节值项“TaskbarGroupSize”，并设置其值为欲设的窗口数量，一般可为2～10左右。
+
+
+12.设置当IE 6.0发生错误时是否允许错误报告
+
+
+设置是否允许错误报告，主要用于报告IE 6.0出现错误时将错误信息收集并通过Internet发送到微软技术部门，通过下面的方法可以屏蔽此功能。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Internet Explorer＼Main，新建或者编辑双字节值项“IEWatsonDisabled”，并设置其值为：0表示允许出现错误时报告；1表示不报告。
+
+
+13.让IE使用多线程下载网页
+
+
+现在很流行Netants、FlashGet等多线程下载工具，其实IE也可以使用多线程下载网页，这样在设置适当的情况下，可以加快网页下载速度。打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Internet Settings，新建双字节值项“MaxConnectionsPerServer”，此项的作用是决定最大同步下载的连线数目，一般5～8个连线数目比较好。另外，对于HTTP 1.0服务器，可以加入名为“MaxConnectionsPer1_0Server”的双字节值项，其值也是设置最大同步下载的数目。
+
+
+14.设置Windows XP的DOS文件名风格
+
+
+此设置用于控制是否允许在NTFS分区上使用DOS的8.3式的文件，禁止这项功能，将使NTFS分区的性能更高。打开注册表子键：HKEY_LOCAL_MACHINE＼SYSTEM＼CurrentControlSet＼Control＼FileSystem，新建或者编辑双字节值项“NtfsDisable8dot3NameCreation”，并设置其值：0表示不允许；1表示允许。
+
+
+注意：对于一些十六位的安装程序将会自动使这项功能打开。
+
+
+15.屏蔽/打开菜单阴影效果
+
+
+Windows XP的阴影菜单效果确实更加个性化、绚丽，但对于系统性能较低的机器，此功能将消耗系统资源，通过注册表可以屏蔽/打开此功能。打开注册表子键：HKEY_CURRENT_USER＼Control Panel＼Desktop，新建或者编辑已有二进制类型键值项“UserPreferencesMask”，设置其值为：将第二个二位改为“28”表示滚动效果表示屏蔽；改为“3E”打开阴影效果。重新启动计算机后可看到效果。
+
+
+16.打开无须登陆系统功能 此功能用于控制对于便携电脑的用户即便在没有登录时，也有可以使用电脑。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows＼CurrentVersion＼Policies＼System，新建或者编辑已有双字节值项“UndockWithoutLogon”，并设置其值为：0表示不允许有此功能；1表示允许此功能。
+
+
+17.设置“尚未阅读信息”的最大期限
+
+
+Windows XP新功能包括在登录时显示几天内尚未阅读的新信息，我们可以注册表里设置此最大期限。打开注册表子键，如果仅仅应用于当前用户，则打开“HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼UnreadMail”子键，如果应用于所有用户则打开“HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows＼CurrentVersion＼UnreadMail”子键，新建或者编辑已有双字节值项“MessageExpiryDays”，并设置其值为具体的天数。
+
+
+18.隐藏/显示桌面图标
+
+
+新的Windows XP外观更加个性化，桌面似乎也变得更加简洁，刚刚安装的系统桌面上，仅仅只有一个“回收站”图标，多少有点不方便，其实默认情况下其他常用的图标（如我的电脑、网上邻居等）都被设置为隐藏，我们可以通过注册表可以设置他们是否隐藏/显示。打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼HideDesktopIcons＼NewStartPanel，新建下面所列对应的任何一个双字节值项：
+
+
+IE图标：{20D04FE0-3AEA-1069-A2D8-08002B30309D}
+
+
+回收站图标：{871C5380-42A0-1069-A2EA-08002B30309D}
+
+
+网上邻居图标：{208D2C60-3AEA-1069-A2D7-08002B30309D}
+
+
+我的文档图标：{450D8FBA-AD25-11D0-98A8-0800361B1103}
+
+
+我的电脑图标：{645FF040-5081-101B-9F08-00AA002F954E}
+
+
+并设置其值为：1为隐藏相应图标；0为显示相应图标。
+
+
+19.显示/隐藏公共对话框中的“后退”按钮
+
+
+Windows XP中可以调用功能更加强大、界面更加友好的新的公共对话框函数（comdlg32.dll），新的对话框中包含了“后退”这一方便的功能按钮，但如果想隐藏它，也可以通过注册表来设置。打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Policies＼comdlg32，新建或者编辑已有双字节值项“ NoBackButton”，并设置其值为：1为隐藏；0为显示。
+
+
+20.显示/隐藏公共对话框中的“查找范围快速定位区”
+
+
+如上面说到的一样，Windows XP公共对话框中的“查找范围”快速定位区也是可以隐藏/显示的。打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Policies＼comdlg32，新建或者编辑已有双字节值项“ NoPlacesBar”，并设置其值为：1为隐藏；0为显示。
+
+
+21.防止应用程序窗口失去焦点
+
+
+如果当前的窗口被另一个自动运行的程序窗口覆盖，即失去焦点，在以往的Windows操作系统中，特别是Windows 2000中，常常因为窗口失去焦点，致使窗口无法正常被控制。Windows XP中增加了对窗口焦点的操作功能，具体可在注册表中设置。打开注册表子键：HKEY_CURRENT_USER＼Control Panel＼Desktop，新建或者编辑已有双字节值项“ForegroundLockTimeout”，并设置其值：如果是0，则屏蔽锁定当前窗口焦点功能；如果是具体的数字（单位为毫秒），则在等待设定的时间后自动释放被锁定的焦点。
+
+
+然后在上面的子键下新建或者编辑已有双字节值项“ForegroundFlashCount”，并设置其值：如果是0，则闪烁任务栏中的窗口直到单击后才停；如果是具体的数字，则当闪烁指定的次数后自动释放被锁定的焦点。
+
+
+22.激活磁盘DMA66模式
+
+
+激活磁盘系统DMA功能可以节省更多的CPU资源对磁盘进行操作，通过注册表可以控制系统是否打开此功能。打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Control＼Class＼{4D36E96A-E325-11CE-BFC1-08002BE10318}＼0000，新建或者编辑已有双字节值项“EnableUDMA66”，并设置其值：0表示取消此功能；1表示激活此功能。
+
+
+23.锁定IE的下载功能
+
+
+打开注册表子键：HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼ Internet Settings＼Zones＼3，新建或者编辑已有双字节值项“1803”，并设置其值：3表示锁定；0表示不锁定。
+
+
+24.禁止使用“LAST KNOW GOOD”(最后一次成功引导)
+
+
+“LAST KNOW GOOD”（最后一次成功引导）可以在系统瘫痪时恢复到上一次运行正常时的状态，如果出于需要而屏蔽此功能，可以使用注册表来设置。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows NT，新建或编辑已有子键“ReportBootOk”，并设置其值：1为启用此功能；0为屏蔽此功能。
+
+
+25.控制发生错误时是否弹出警告窗口
+
+
+默认情况下，当应用程序发生严重错误被关闭时会弹出警告窗口，并可以看到一些程序错误信息，如果不想看到此警告弹出窗口，可以在注册表里设置。打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Control＼Windows，新建或者编辑已有双字节值项“ErrorMode”，并可设置键值为：0，所有错误都弹出显示“默认”；1，系统错误不显示，应用程序错误显示；2，系统和应用程序同时发生错误则弹出显示。
+
+
+26.控制当系统崩溃时是否记录日制
+
+
+打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Control＼CrashControl，新建或者编辑已有双字节值项“LogEvent”，并设置其值为：0为不记录；1为记录。
+
+
+27.定制Regedit的收藏夹
+
+
+Windows XP新版的Regedit增加了“收藏”功能，但却没有管理收藏功能，你只能创建、删除收藏，而不能修改以及备份这些内容。
+
+
+Regedit的“收藏”信息保存在HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Applets＼Regedit＼Favorites子键下，键值项的名称就是显示在Regedit“收藏夹”里的条目，而键值则是该条目指向的注册表子键路径（比如“我的电脑＼HKEY_CURRENT_USER＼Software＼Microsoft＼Windows”）。可根据自己的需求添加、删除、编辑修改这些项目。
+
+
+28.启用“自动完成”功能
+
+
+自动完成是Internet Explorer的一个体贴功能。此功能的妙处在于，当你输入以前曾经输入过的地址时，它会自动完成输入，省去了反复输入的麻烦，而特别是在地址很长的时候，更能体现它的体贴入微。
+
+
+Windows XP的一些命令输入窗口提供了类似的提示功能，就是在你输入以前曾经输入的内容时，它将其列出以备你选择使用，但并不自动填充完成输入。很明显这一功能比“自动完成”还差那么一点人性化的体贴。打开HKEY_CURRENT_USER＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼AutoComplete子键，如果该子键下没有“Append Completion”键值项，那么新建此键值项（字符串型），并赋值为“YES”，自动完成功能便启用了。
+
+
+29.自定义磁盘图标和卷标
+
+
+通过在磁盘根目录下创建并设置Autorun.inf，可以更改此磁盘的图标，其实，通过注册表的设置，同样可以达到效果，并且还可以自定义磁盘的卷标。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows＼CurrentVersion＼Explorer＼DriveIcons（如果没有DriveIcons子键，请新建），在该子键下新建一个与欲修改磁盘盘符相同名称的子键（比如欲修改C盘，那么新建一个以C为名的子键），然后在其下新建一个用来设置磁盘图标的“DefaultIcon”子键，并设置其默然值为图标文件的路径，比如C:＼Windows＼Welcome.exe或者其他图标文件。
+
+
+用上面一样的方法，再新建一个用来设置卷标的“DefaultLable”（即…C＼DefaultLable），子键，并设置其默然值为欲设的卷标文字，比如My Drive或其他文字。
+
+
+以上操作完成后，重新启动或者打开资源管理器并按F5刷新，使修改生效。
+
+
+30.为CD-ROM和磁盘驱动器建立高级安全机制
+
+
+为CD-ROM和磁盘驱动器及其可移动介质建立高级安全机制，可以只被当前登录的用户访问。具体可以按照如下步骤进行修改。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼WindowsNT＼CurrentVersion＼Winlogon，新建或者编辑已有字符串类型键值项AllocateCDRoms，并设置其值为：1，可以使CD-ROM达到此功能；0，屏蔽此功能。
+
+
+另外在该子键下还有键值项AllocateFloppies，可以使磁盘驱动器达到此效果，具体设置值与上面一样。
+
+
+31.确定上次登录时用户使用的域
+
+
+要控制用来确定成功登录到当前系统上一个用户所用域名的注册表项，可以按照如下步骤进行操作。打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼WindowsNT＼CurrentVersion＼Winlogon，新建或修改已有字符串类型键值项“DefaultDomainName”，其键值包含上一次成功登录时用户所用的域名。
+
+
+32.Windows XP登录口令过期警告
+
+
+要设置用来确定当用户登录且用户的口令已过期时是否显示警告对话框的注册表项，可以打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼WindowsNT＼CurrentVersion＼Winlogon，新建或者修改已有字符串值项“PasswordExpiryWarning”，设置其值为在用户使用即将过期的口令进行登录时显示警告对话框所需的值。
+
+
+33.防止用户配置文件选择对话框超时
+
+
+要设置在连接远程服务器有一段延迟的情况下，决定用户可以有多少时间确定使用本地配置文件还是服务器配置文件的注册表项，可以打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows NT＼CurrentVersion＼Winlogon，新建或者编辑已有字符串值项“ProfileDlgTimeOut”，并设置其值为当连接远程服务器遇到延迟时，允许用户在决定使用本地配置文件还是服务器配置文件时花费的时间（毫秒）。
+
+
+34.使用定制的Shell（外壳程序）
+
+
+要设置用来指定作为Windows XP缺省Shell执行的程序的名称和路径的注册表项，可以打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows NT＼CurrentVersion＼Winlogon，新建或者编辑已有字符串型键值项“Shell”，并设置其值改为想要使用的定制的Shell程序路径和程序文件名。
+
+
+35.通过性能库防止可扩充计数器超时
+
+
+你可能会遇到一个关于系统性能监视器的常见问题是图形或图表没有显示数据，而你知道一个进程正在执行。这是由于几个原因造成，但是最常见的原因是用来跟踪信息的可扩充计数器超时，导致进程启动延迟。你可以通过如下所示的方法修改注册表来更正这个问题，打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows＼CurrentVersion＼Perflib，新建或编辑已有双字节值项“OpenProcedureWaitTime”，并设置其值：缺省值是5000ms（毫秒），即5秒，将这个数值增加到一个合理的数值，并再次试用系统性能监视器直到获取有效数据为止。
+
+
+36.当资源管理器崩溃时强迫计算机重新启动
+
+
+如果操作系统发生故障，Windows XP就会自动重新启动。但是如果资源管理器崩溃（桌面无法显示图标或任务栏），那么你可能就必须使用键盘快捷键来注销，并重新启动资源管理器。要避免出现这种情况，可以打开注册表子键：HKEY_LOCAL_MACHINE＼Software＼Microsoft＼Windows NT＼CurrentVersion＼Winlogon，新建或编辑已有双字节值项“AutoRestartShell”，并设置其值为：1为允许在资源管理器崩溃时自动重启；0为强迫手工注销并重启。然后重新启动计算机，下次资源管理器崩溃时，计算机就会自动重启动，而不必先注销再登录。
+
+
+37.禁用Windows XP的文件高速缓存
+
+
+一个与服务相关的注册表操作是增加信箱的可用缓存以防止丢失信件，认识到这样做可能会对性能造成影响是很重要的，只有当一个很明显的涉及信件丢失的问题无法用其他方法解决时才能这样做，要做到这一点，可以打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Services＼LanmanWorkstation＼Parameters，新建或者编辑已有双字节值项“UtilizeNtCaching”，并设置其值为：1为启用缓存；0，则禁止缓存。
+
+
+38.设置系统临界线程的总数
+
+
+打开注册表子键：HKEY_LOCAL_MACHINE＼System＼CurrentControlSet＼Services＼LanmanWorkstation＼Parameters，新建或者编辑已有双字节值项“CriticalThreads”，并设置其值为一个自己欲修改的值，增加系统可用的临界线程数。 

@@ -1,0 +1,33 @@
+nginx
+	-s stop		#立即停止	
+	   quit 	#正常停止
+	   reload   #重新加载
+	   reopen	#打开日志文件
+	   
+	-V		#看一堆参数
+	-t		#检测配置文件是否正常
+
+events {}		#必包含
+
+listen 80		#监听80端口
+
+server_name e0x1a.cn	#主机地址
+
+root /var/www			#指定根目录
+
+index inext.html		#指定index文件
+
+location / {}
+'='						#完全匹配
+'^~'					#优先前缀
+'~'和'~*'				#正则
+' '						#普通匹配
+
+
+部署
+	sudo apt-get update
+	sudo apt-get install nginx
+	sudo systemctl start nginx
+	sudo systemctl enable nginx
+	sudo systemctl status nginx
+

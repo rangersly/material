@@ -1,0 +1,5 @@
+cmd				//cmd
+dxdiag				//电脑配置
+mrt				//清理恶意软件
+cleanmgr				//清理磁盘
+regedit 				//使用注册表

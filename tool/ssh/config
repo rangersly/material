@@ -1,0 +1,8 @@
+Host iaalai
+ HostName api.iaalai.cn			#连接地址
+ User e0x1a						#连接用户名
+ Port 20022						#连接端口
+ IdentityFile ~/.ssh/id_rsa		#密钥地址
+ IdentitiesOnly yes				#仅使用密钥
+ ServerAliveInterval 60 		#每60s发一个空包保持连接
+ ServerAliveCountMax 3			#3次未响应断开

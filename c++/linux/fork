@@ -1,0 +1,153 @@
+在Linux系统中，`fork` 是一个系统调用，用于创建一个新的进程，这个新进程是调用进程的一个副本。这个新进程被称为子进程，而调用进程被称为父进程。`fork` 调用在父进程中返回子进程的PID（进程标识符），而在子进程中返回0。
+
+以下是使用 `fork` 函数的基本步骤：
+1. **包含头文件**：使用 `fork` 函数之前，需要包含 `<unistd.h>` 头文件。
+2. **调用 fork**：在代码中调用 `fork()` 函数。
+3. **检查返回值**：`fork()` 调用会返回一个整数。如果返回值为正数，表示在父进程中，返回的值是子进程的PID。如果返回值为0，表示在子进程中。如果返回值为-1，表示创建进程失败。
+4. **父进程和子进程的执行流程**：在 `fork()` 调用之后，根据返回值判断当前是在父进程还是子进程，并执行相应的代码。
+
+下面是一个简单的示例代码，展示了如何使用 `fork`：
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    pid_t pid = fork(); // 创建子进程
+
+    if (pid < 0) {
+        // fork失败
+        fprintf(stderr, "Fork failed");
+        return 1;
+    } else if (pid == 0) {
+        // 子进程
+        printf("I'm the child process with PID: %d\n", getpid());
+    } else {
+        // 父进程
+        printf("I'm the parent process with PID: %d, and my child is %d\n", getpid(), pid);
+    }
+
+    return 0;
+}
+```
+
+当使用 `fork` 系统调用创建子进程时，子进程会继承父进程的许多资源。以下是父子进程共享的一些主要资源：
+
+1. **文件描述符**：子进程会继承父进程打开的所有文件描述符。这意味着子进程可以访问父进程打开的文件和设备。
+2. **环境变量**：子进程继承父进程的环境变量，包括语言设置、路径变量等。
+3. **内存空间**：子进程会复制父进程的地址空间，包括代码段、数据段和堆栈。但是，子进程的堆栈是独立的，这意味着局部变量和函数调用栈是分开的。
+4. **信号处理器**：子进程继承父进程的信号处理器设置。
+5. **挂起信号集**：子进程继承父进程的挂起信号集。
+6. **资源限制**：子进程继承父进程的资源限制，如CPU时间、文件大小限制等。
+7. **进程组ID**：子进程继承父进程的进程组ID。
+8. **用户ID和组ID**：子进程继承父进程的用户ID和组ID。
+9. **工作目录**：子进程继承父进程的工作目录。
+10. **根目录**：子进程继承父进程的根目录。
+11. **能力**：子进程继承父进程的文件系统能力。
+12. **内核定时器**：如果父进程有设置内核定时器，子进程也会继承。
+13. **锁**：子进程继承父进程持有的文件锁。
+14. **共享内存段**：如果父进程使用了共享内存，子进程也会继承这些共享内存段。
+15. **网络连接**：子进程继承父进程的网络连接。
+
+然而，有一些资源是独立的，例如：
+- **进程ID**：子进程有自己的唯一进程ID。
+- **线程特定数据**：每个线程有自己的线程特定数据，子进程不会继承父进程的线程特定数据。
+- **CPU寄存器**：除了程序计数器和其他一些寄存器外，子进程的CPU寄存器状态是复制自父进程的，但子进程可以独立修改它们。
+
+
+在 `fork` 之后，通常使用 `exec` 系列函数来替换子进程的映像，这样可以避免共享不必要的资源，并且可以运行一个完全不同的程序。此外，使用 `fork` 时需要注意资源的同步和清理，以避免潜在的资源竞争和泄漏问题。
+下面是一个详细的示例代码，展示了如何在C语言中使用 `fork` 系统调用，并演示了父子进程共享资源的基本概念：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    pid_t pid = fork(); // 创建子进程
+
+    if (pid < 0) {
+        // fork失败
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+        // 子进程
+        // 子进程可以继续使用父进程打开的文件描述符
+        // 例如，这里我们尝试写入标准输出
+        printf("Hello from the child process!\n");
+
+        // 子进程可以修改父进程传递给它的变量的值，但这些修改不会影响父进程
+        int child_value = 42;
+        printf("Child value: %d\n", child_value);
+    } else {
+        // 父进程
+        // 父进程可以等待子进程结束
+        int status;
+        wait(&status); // 等待子进程结束
+
+        // 检查子进程是否正常退出
+        if (WIFEXITED(status)) {
+            printf("Child exited with status %d\n", WEXITSTATUS(status));
+        }
+    }
+
+    // 父进程和子进程都可以访问这个变量，但它们有自己的副本
+    // 这里我们演示父进程的值不会影响子进程
+    int shared_variable = 10;
+    printf("Parent shared variable: %d\n", shared_variable);
+
+    return 0;
+}
+```
+
+在这个示例中：
+
+- 我们首先调用 `fork()` 来创建一个新的子进程。
+- 如果 `fork()` 返回一个负值，表示创建进程失败，我们打印错误消息并退出。
+- 如果 `fork()` 返回0，表示当前是在子进程中。子进程打印自己的PID和PPID（父进程ID），并写入标准输出。
+- 如果 `fork()` 返回一个正值，表示当前是在父进程中。父进程打印自己的PID和PPID，并等待子进程结束。
+- 使用 `wait()` 函数可以让父进程挂起，直到子进程结束。`wait()` 函数还可以获取子进程的退出状态。
+- 我们定义了一个 `shared_variable` 变量，并在父进程和子进程中分别打印它的值。由于子进程的栈是独立的，所以子进程中的修改不会影响父进程中的 `shared_variable`。
+
+
+在使用 `fork` 系统调用创建子进程时，通常会结合其他一些系统调用或库函数来实现特定的功能。以下是一些与 `fork` 相关的常用函数：
+
+1. **exec 系列函数**：
+   - `execl(const char *path, const char *arg0, ..., NULL)`
+   - `execv(const char *path, char *const argv[])`
+   - `execle(const char *path, const char *arg0, ..., NULL, char *const envp[])`
+   - `execve(const char *path, char *const argv[], char *const envp[])`
+   - `execlp(const char *file, const char *arg0, ..., NULL)`
+   - `execvp(const char *file, char *const argv[])`
+   这些函数用于在子进程中执行一个新的程序，替换当前的进程映像。
+
+2. **wait 和 waitpid 函数**：
+   - `wait(int *status)`
+   - `waitpid(pid_t pid, int *status, int options)`
+这些函数用于父进程等待子进程结束。`wait` 函数等待任何一个子进程结束，而 `waitpid` 可以指定等待特定的子进程。
+
+3. **_exit 和 exit 函数**：
+   - `_exit(int status)`
+   - `exit(int status)`
+这两个函数用于终止进程。`_exit` 立即终止进程，不进行任何清理工作；`exit` 在终止进程前会执行一些清理工作，如关闭标准I/O流、刷新缓冲区等。
+
+4. **getpid 和 getppid 函数**：
+   - `pid_t getpid(void)`
+   - `pid_t getppid(void)`
+`getpid` 返回调用进程的PID，`getppid` 返回调用进程的父进程PID。
+
+8. **signal 和 sigaction 函数**：
+   - `int signal(int signum, void (*handler)(int))`
+   - `int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)`
+这些函数用于设置信号处理器，处理进程接收到的信号。
+
+9. **kill 函数**：
+   - `int kill(pid_t pid, int sig)`
+`kill` 函数用于向指定的进程发送信号。
+
+10. **setsid 函数**：
+    - `pid_t setsid(void)`
+`setsid` 用于创建一个新的会话，并使调用进程成为该会话的领头进程。
+
+这些函数在进程管理、信号处理、资源管理等方面起着重要作用，与 `fork` 结合使用可以实现复杂的进程间操作和通信。

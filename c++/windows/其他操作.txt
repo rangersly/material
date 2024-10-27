@@ -1,0 +1,35 @@
+continue; //跳过下面的步骤，开始下一次循环。
+
+system("color 04");//调用#include <windows.h>头文件
+/*
+0=黑色       8=灰色
+1=蓝色       9=淡蓝色
+2=绿色       A=淡绿色
+3=浅绿色     B=淡浅绿色
+4=红色       C=淡红色
+5=紫色       D=淡紫色
+6=黄色       E=淡黄色
+7=白色       F=亮白色
+*/
+system("mode con cols=30 lines=20");//调整显示框大小 cols:宽 lines:长
+
+system("pause");//冻结屏幕：暂停。
+
+system("mkdir F:\\hello");//在F盘创建一个名为hello的文件。C盘默认为桌面。
+//桌面地址：C:\Users\Administrator\desktop
+
+system("title yourname");//设置程序名
+
+a=clock();测量从程序开始到目前的时间，并把值给a。（单位毫秒级）
+
+#include <windows.h>                        //把光标移动到指定坐标
+#include <time.h> 
+void GoToxy(int x,int y)  //光标移动函数，X表示横坐标，Y表示纵坐标。
+{
+	COORD  coord;         //使用头文件自带的坐标结构
+	coord.X=x;            //这里将int类型值传给short,不过程序中涉及的坐标值均不会超过short范围
+	coord.Y=y;
+	HANDLE a=GetStdHandle(STD_OUTPUT_HANDLE);  //获得标准输出句柄
+	SetConsoleCursorPosition(a,coord);         //以标准输出的句柄为参数设置控制台光标坐标
+}
+
