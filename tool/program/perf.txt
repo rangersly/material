@@ -1,0 +1,5 @@
+#4 perf
+	性能剖析工具
+	可分析程序运行期间发生的系统硬件事件
+	sudo perf record ./a.out
+	sudo perf report -i perf.data

@@ -1,4 +1,3 @@
-头函数库
 #include<bits/stdc++.h>//万能头，包括大部分头文件。
 #include <ctype.h>//字符处理
 #include <cctype> 

@@ -1,8 +1,3 @@
-#1
-nohup	命令挂机(退出登陆后依然执行)
-	nohup [command] &
-
-#2 screen
 `screen` 是一个功能强大的命令行工具，主要用于 Unix 和类 Unix 操作系统中，它允许用户开启多个独立的会话（称为"窗口"），在这些会话之间可以自由切换而不会中断已经运行的程序。以下是 `screen` 的一些主要功能和使用方法：
 ### 主要功能：
 1. **多会话管理**：可以同时运行多个独立的 shell 会话。
@@ -42,30 +37,3 @@ nohup	命令挂机(退出登陆后依然执行)
    - 退出所有窗口并结束会话：在 screen 会话中按 `Ctrl-a` 然后按 `\`。
 10. **锁定当前会话**：
     在 screen 会话中按 `Ctrl-a` 然后按 `x`。
-    
-#3 smartctl
-	查看硬盘状态参数
-	-a	全部参数
-	-H	是否正常
-
-#4 perf
-	性能剖析工具
-	可分析程序运行期间发生的系统硬件事件
-	sudo perf record ./a.out
-	sudo perf report -i perf.data
-
-#5 ulimit
-	查看和修改进程运行资源限制	
-	-H/S		# 设置/显示 软/硬 限制
-	-a			# 显示所有
-	-t			# cpu time
-	-f			# file size
-	-s			# stack size
-	-c			# core file size
-	-m			# memory size
-	-l			# lock memory size
-	-p			# user processes
-	-n 			# open file
-
-	#ulimit -Ht 3600
-

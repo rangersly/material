@@ -1,0 +1,14 @@
+#5 ulimit
+	查看和修改进程运行资源限制	
+	-H/S		# 设置/显示 软/硬 限制
+	-a			# 显示所有
+	-t			# cpu time
+	-f			# file size
+	-s			# stack size
+	-c			# core file size
+	-m			# memory size
+	-l			# lock memory size
+	-p			# user processes
+	-n 			# open file
+
+	#ulimit -Ht 3600
