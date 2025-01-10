@@ -4,6 +4,8 @@ g++ -o test test.o				#链接
 
 g++ -O1/-O2/-O3			// 优化选项
 
+g++ -S -o - -fverbose-asm xxx.cpp > xxx.s	// 输出带注释的汇编
+
 
 #静态库制作:
 	g++ -c -o libtest.a {test.cpp 源代码文件清单}

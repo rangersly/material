@@ -102,5 +102,4 @@ void stream_fio() {
 		ios::end
 */
 
-
 }

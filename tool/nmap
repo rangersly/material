@@ -1,0 +1,20 @@
+# 一般探测步骤
+# 	1.主机发现
+#	2.端口扫描
+
+
+nmap -p- [目标]		# 扫描全部TCP端口
+nmap -p [端口]		# 扫描指定TCP端口
+
+nmap -sT			# 使用TCP扫描 , 完成握手流程
+nmap -sU			# 使用UDP扫描
+nmap -sS			# 不完成整个握手过程
+nmap -sUV			# UDP + 版本探测 确认目标主机状态
+nmap -sUV --top-ports 100	# 扫描常用的100端口
+
+# UDP 由于探测不稳定性高,采用多次探测，因此速度慢
+
+nmap -sn [目标]		# ping  可用'-' 进行范围探测,内网ARP,外网ICMP包(会被windows server拦截)
+nmap -sn 192.168.0.1-100
+nmap -Pn [目标]		# 可以绕过防火墙(慢) 不用Ping
+

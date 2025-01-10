@@ -1,2 +1,0 @@
-nohup	命令挂机(退出登陆后依然执行)
-	nohup [command] &
