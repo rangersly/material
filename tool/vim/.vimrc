@@ -24,15 +24,17 @@ nnoremap <space>v :vsp<space>
 nnoremap <space>d <c-w>w
 nnoremap <space>w :w<cr>
 nnoremap <space>q :q<cr>
+nnoremap <space>fq :q!<cr>
 nnoremap <space>tt :tabedit<space>
-nnoremap <space>to :tabonly<cr>
+nnoremap <space>tm :vert term<cr>
 inoremap jf <esc>
-inoremap jq <esc>:wq<cr>
-inoremap jw <c-x><c-n>
 inoremap jl <c-x><c-l>
 cnoremap jf <c-c> 
+"inoremap jq <esc>:wq<cr>
+"inoremap jw <c-x><c-n>
+"nnoremap <space>to :tabonly<cr>
 
-augroup numbertoggle 智能切换绝对行号和相对行号
+augroup numbertoggle 	"智能切换绝对行号和相对行号
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
