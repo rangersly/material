@@ -87,5 +87,5 @@
 
 ## 神奇转换函数
 ```cpp	
-	string to_ strinf(任何类型);		//将好多类型转换成string
+	string to_strinf(任何类型);		//将好多类型转换成string
 ```

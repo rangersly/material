@@ -6,6 +6,7 @@
  - [c fio](# c fio)
  - [cpp stdio](# cpp stdio)
  - [cpp fio](# cpp fio)
+ - [关闭缓冲区读取](# ../linux/ncurses.c)
 
 
 ##	c stdio
