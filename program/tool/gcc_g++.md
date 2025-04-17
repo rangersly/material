@@ -47,13 +47,13 @@
 
 
 ## 制作库文件
-> 静态库制作:
+### 静态库制作:
 	g++ -c -o libtest.a {test.cpp 源代码文件清单}
 //	g++ -c test.cpp
 //	ar -crv libtest.a test.o
 
 
-> 动态库制作
+### 动态库制作
 	g++ -fPIC -shared -o libtest.so {test.cpp 源代码文件清单} 
 //	g++ -fPIC -c test.cpp
 //	g++ -shared -o libtest.so tset.o
@@ -61,9 +61,18 @@
 		1 + .so 放到 /usr/lib 或 /lib
 		2 + 路径放到/etc/ld.so.conf 运行ldconfd 重建/etc/ld.so.cache
 
-> 库使用
+### 库使用
 	g++ -o main -l库名 -L库路径 -I头文件路径
 	// g++ -o main -ltest -L/home/e0x1a/test
 
-	如果是动态库，需要指定 LD_LIBRARY_PATH 环境变量 	//待查
-		用 echo $LD_LIBRARY_PATH 查看
+#### `-rpath 是 GNU 链接器的一个选项，它会在可执行文件中嵌入运行时库搜索路径`
+`gcc -o myapp myapp.c -L../libs -lmylib -Wl,--enable-new-dtags,-rpath,'$ORIGIN/../libs'`
+```
+-Wl,-rpath,/path/to/libs：
+    -Wl 告诉 GCC 将后面的参数传递给链接器
+    -rpath 是链接器选项
+    /path/to/libs 是要嵌入的运行时搜索路径
+```
+
+	如果是动态库，需要指定 `LD_LIBRARY_PATH` 环境变量 	//待查
+		用 `echo $LD_LIBRARY_PATH` 查看
