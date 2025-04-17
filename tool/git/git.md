@@ -3,6 +3,7 @@ git    config    --global  credential.helper store
         /\         /\      user.name  "  "
 	    ||		   ||	   user.email "  "
 配置git环境  配置整个环境  
+git config --global core.editor "vim"      # 设置全局编辑器为vim
 
 
 工作树  --  暂存区  --  本地仓库  --  远端仓库

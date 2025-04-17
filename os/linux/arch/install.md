@@ -54,14 +54,30 @@ mount --mkdir /dev/sdX1 /mnt/boot
 
 `pacstrap -K /mnt xxx`
 + base linux linux-firmware
++ grub efibootmgr
 + vim base-devel networkmanager archlinuxcn-keyring
 ---
 以下是可以等系统启动后安装的
 + sof-firmware 
 + yay
-`pacman -S git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
+  1. /etc/pacman.conf
+  ```
+  [archlinuxcn]
+  Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+  ```
+  2. 
+  `pacman -S git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
+  3. archlinuxcn
+  ```bash
+  sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+  sudo pacman -Sy archlinuxcn-keyring
+  sudo pacman -Syyu  # 更新源
+  sudo pacman -S yay  # 直接安装 Yay
+  ```
 + man
-+ fcitx5-im fcitx5-rime  # 输入法
++ gdisk
++ bash-completion
++ fcitx5-im fcitx5-rime fcitx5-chinese-addons  # 输入法
 + alsa-utils  # 声卡驱动
 + 其他固件
 
@@ -87,7 +103,6 @@ vim /etc/hostname
 passwd 
 
 **安装引导**
-pacman -S grub
 grub-install --target=i386-pc /dev/sdX
 grub-mkconfig -o /boot/grub/grub.cfg
 
@@ -118,6 +133,10 @@ pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji   # 安装字体
 pacman -S plasma
 systemctl enable sddm
 
+#### 使用原版输入法
+在设置 -> 输入法 -> 添加输入法 -> 取消勾选"仅显示当前语言" -> 双拼
+
+#### 雾凇
 cd ~/.local/share/fcitx5/rime   # 配置输入法
 git clone https://github.com/iDvel/rime-ice.git
 cp -r ./rime-ice/* .
