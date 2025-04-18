@@ -20,13 +20,6 @@ export LC_ALL=en_US.UTF-8
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
-# 包管理器别称（Arch Linux特有）
-alias pacup='sudo pacman -Syu'          # 更新系统
-alias pacin='sudo pacman -S'            # 安装包
-alias pacrm='sudo pacman -Rns'          # 删除包（含依赖）
-alias pacsearch='pacman -Ss'            # 搜索包
-alias aurin='yay -S'                    # 安装AUR包（需安装yay）
-
 # 彩色输出
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -89,6 +82,15 @@ alias reload='source ~/.bashrc'
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
 
+# 启用补全功能
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 # 终端启动时显示消息
 echo -e "\e[1;34m$(date +'%A, %B %d %Y %H:%M:%S')\e[0m"
-echo -e "\e[1;32mWelcome to Arch Linux, \e[1;35m$USER!\e[0m"
+echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
