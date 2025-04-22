@@ -70,6 +70,7 @@
   - [ping](#)
   - [curl](#)
   - [wget](#)
+  - [NetworkManager](# networkmanager)
 - [系统](#)
   - [systemctl](#)
   - [dmidecode](#)
@@ -434,6 +435,15 @@ nohup [command] &
 ### curl
 
 ### wget
+
+### networkmanager
+- 连接无线网络
+  1. `nmcli device status`  检查网卡是否启用
+  2. `nmcli device wifi on` 启用wifi射频
+  3. `nmcli device wifi rescan` 刷新列表
+  4. `nmcli device wifi list`  列出所有可用wifi
+  5. `nmcli device wifi connect <SSID> password "password"
+  6. `nmcli connection show`  验证连接
 
 ## 系统
 ### systemctl
