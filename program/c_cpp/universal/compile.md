@@ -5,6 +5,7 @@
   - [预定义宏](#预定义宏)
 - [ifdef](#ifdef)
 - [ifndef](#ifndef)
+- [undef](#undef) : 若要修改一个宏,先移除再定义
 - [endif](#endif)
 - [pragma](#pragma)
 - [error](#error)
