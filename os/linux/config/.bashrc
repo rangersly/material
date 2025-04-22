@@ -75,9 +75,11 @@ extract() {
     fi
 }
 
-# 快速编辑bashrc并重载
-alias editrc='vim ~/.bashrc'
+# 快速重载
 alias reload='source ~/.bashrc'
+
+# 快速查看电池信息
+alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
