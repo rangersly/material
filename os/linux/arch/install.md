@@ -74,7 +74,7 @@ mount --mkdir /dev/sdX1 /mnt/boot
   sudo pacman -Syyu  # 更新源
   sudo pacman -S yay  # 直接安装 Yay
   ```
-+ man
++ man man-pages
 + gdisk
 + bash-completion
 + fcitx5-im fcitx5-rime fcitx5-chinese-addons  # 输入法
