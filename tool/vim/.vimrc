@@ -90,7 +90,7 @@ set laststatus=2
 
 " 设置状态栏内容
 set statusline=
-set statusline+=%f\                     " 文件名
+set statusline+=%F\                     " 文件名
 set statusline+=%h%m%r%w               " 文件状态标志
 set statusline+=[%{&ff}/%Y]            " 文件类型
 set statusline+=%=                     " 右对齐
