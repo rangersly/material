@@ -1,8 +1,8 @@
 # USB
 
-- ![usb speed](../../pic/usb.png)
-- ![usb sign](../../pic/usb3.png)
-- ![雷电](../../pic/usb2.png)
+![usb speed](../../pic/usb.png)
+![usb sign](../../pic/usb3.png)
+![雷电](../../pic/usb2.png)
 
 ---
 

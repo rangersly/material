@@ -3,6 +3,7 @@
 ## 目录
 - [define](#define)
   - [预定义宏](#预定义宏)
+  - [defined](# defined)
 - [ifdef](#ifdef)
 - [ifndef](#ifndef)
 - [undef](#undef) : 若要修改一个宏,先移除再定义
@@ -12,6 +13,9 @@
 - [warning](#warning)
 
 ## define
+
+---
+
 ### 预定义宏
 1. 平台相关
   + `__STDC__` 如果编译器遵循ANSI C标准，则定义为1
@@ -37,6 +41,14 @@
 4. 其他
   + `__func__` `__FUNCTION__` 当前函数的名称
   + `__PRETTY_FUNCTION__` 在C++中，包含当前函数的完整声明
+
+---
+
+### defined
+
+如果一个宏被定义,则 `defined(<MACRO_NAME>)` 返回真
+
+---
 
 ## pragma
 

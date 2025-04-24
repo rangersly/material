@@ -31,11 +31,64 @@ alias ll='ls -alFh --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
+# PS1提示符
+
 # Git状态集成（需安装git）
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+# 在 ~/.bashrc 中添加以下内容
+
+# 首先确保 parse_git_branch 函数存在（用于显示 Git 分支）
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# 设置自定义提示符
+ PROMPT_COMMAND='__prompt_command'
+ __prompt_command() {
+     local EXIT="$?"
+ 
+     # 颜色定义
+     local Reset='\[\033[00m\]'
+     local TimeColor='\[\033[03;33m\]'  # 青色时间
+     local UserColor='\[\033[01;32m\]'  # 绿色用户
+     local HostColor='\[\033[01;32m\]'  # 绿色主机
+     local PathColor='\[\033[01;34m\]'  # 蓝色路径
+     local GitColor='\[\033[01;31m\]'   # 红色 Git 分支
+     local ExitColor='\[\033[01;33m\]'  # 黄色退出状态
+ 
+     # 获取当前时间
+     local TIME=$(date +"%H:%M:%S")
+ 
+     # 处理路径：长路径时只保留每级目录首字母
+     local DIR=${PWD/#$HOME/\~}
+     if [ ${#DIR} -gt 25 ]; then
+         DIR=$(echo $DIR | awk -F '/' '{
+             if (length($0) > 20) {
+                 for (i=1; i<=NF; i++) {
+                     if (i == NF) printf "/%s", $i;
+                     else if (length($i) > 0) printf "/%.2s", $i;
+                 }
+             }
+             else print $0;
+         }')
+     fi
+ 
+     # 构建提示符
+     PS1="${TimeColor}[${TIME}] ${UserColor}\u${HostColor}@\h${Reset}:"
+     PS1+="${PathColor}${DIR}${GitColor}$(parse_git_branch)${Reset}"
+ 
+     # 添加上一个命令的退出状态（非零时显示）
+     if [ $EXIT != 0 ]; then
+         PS1+="${ExitColor}[${EXIT}]${Reset}"
+     fi
+ 
+     PS1+="\$ ${Reset}"
+ }
+ 
+# 如果 PROMPT_COMMAND 设置失败，回退到原始提示符
 # 自定义PS1提示符（带颜色和Git分支）
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 
@@ -52,28 +105,6 @@ alias ~='cd ~'
 
 # 网络相关
 alias myip='curl ifconfig.me'           # 获取公网IP
-
-# 解压快捷方式
-extract() {
-    if [ -f "$1" ]; then
-        case "$1" in
-            *.tar.bz2) tar xvjf "$1" ;;
-            *.tar.gz)  tar xvzf "$1" ;;
-            *.bz2)     bunzip2 "$1" ;;
-            *.rar)     unrar x "$1" ;;
-            *.gz)      gunzip "$1" ;;
-            *.tar)     tar xvf "$1" ;;
-            *.tbz2)    tar xvjf "$1" ;;
-            *.tgz)     tar xvzf "$1" ;;
-            *.zip)     unzip "$1" ;;
-            *.Z)      uncompress "$1" ;;
-            *.7z)      7z x "$1" ;;
-            *)        echo "不支持的文件格式: $1" ;;
-        esac
-    else
-        echo "文件不存在: $1"
-    fi
-}
 
 # 快速重载
 alias reload='source ~/.bashrc'
