@@ -2,7 +2,7 @@ syntax on
 set number          "显示行号
 "set rnu				"相对行号
 set ts=4        
-"set expandtab       "tab to space
+set expandtab       "tab to space
 set autoindent      "自动缩进
 set encoding=utf-8  "使用utf-8字符编码
 set fileencoding=utf-8
@@ -84,3 +84,36 @@ augroup numbertoggle 	"智能切换绝对行号和相对行号
 augroup END
 
 
+
+" 总是显示状态栏
+set laststatus=2
+
+" 设置状态栏内容
+set statusline=
+set statusline+=%f\                     " 文件名
+set statusline+=%h%m%r%w               " 文件状态标志
+set statusline+=[%{&ff}/%Y]            " 文件类型
+set statusline+=%=                     " 右对齐
+set statusline+=%l/%L\                 " 行号信息
+set statusline+=%c%V\                  " 列号
+set statusline+=%{&fileencoding?&fileencoding:&encoding} " 添加当前编码
+set statusline+=\ %{FileSize()}        " 添加文件大小
+set statusline+=\ %P\                  " 文件进度百分比
+
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if bytes <= 0
+    return ''
+  endif
+  if bytes < 1024
+    return bytes . 'B'
+  elseif bytes < 1024 * 1024
+    return printf('%.1f', bytes/1024.0) . 'K'
+  else
+    return printf('%.1f', bytes/1024.0/1024.0) . 'M'
+  endif
+endfunction
+
+" 设置状态栏颜色
+highlight StatusLine ctermfg=159 ctermbg=24 guifg=#d7ffff guibg=#005f87
+highlight StatusLineNC ctermfg=152 ctermbg=238 guifg=#d0d0d0 guibg=#444444
