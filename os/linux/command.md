@@ -4,118 +4,118 @@
 
 ## 目录
 
-- [文件操作](#)
-- [打包压缩](#)
-- [磁盘](#)
-- [用户](#)
-- [进程](#)
-- [网络](#)
-- [系统](#)
-- [其他](#)
+- [文件操作](#文件操作)
+- [打包压缩](#打包压缩)
+- [磁盘](#磁盘)
+- [用户](#用户)
+- [进程](#进程)
+- [网络](#网络)
+- [系统](#系统)
+- [其他](#其他)
 
 ---
 
 ## 文件操作
 
-- [cd](#)
-- [ls](#)
-- [cat](#)
-- [less](#)
-- [od](#):查看二进制文件
-- [grep](#)
-- [wc](#)
-- [mkdir](#)
-- [touch](#)
-- [mv](#)
-- [cp](#)
-- [rm](#)
-- [chown](#)
-- [chmod](#)
-- [file](#)
-- [umark](#)
-- [ln](#)
-- [diff](#)
-- [patch](#)
-- [rsync](#):同步命令
-- [find](#)
-- [locate](#):高效文件查找
-- [whereis](#)
-- [which](#):查找命令
-- [whoami](#)
-- [uname](#):系统内核版本等信息
+- [cd](#cd)
+- [ls](#ls)
+- [cat](#cat)
+- [less](#less)
+- [od](#od):查看二进制文件
+- [grep](#grep)
+- [wc](#wc)
+- [mkdir](#mkdir)
+- [touch](#touch)
+- [mv](#mv)
+- [cp](#cp)
+- [rm](#rm)
+- [chown](#chown)
+- [chmod](#chmod)
+- [file](#file)
+- [umark](#umark)
+- [ln](#ln)
+- [diff](#diff)
+- [patch](#patch)
+- [rsync](#rsync):同步命令
+- [find](#find)
+- [locate](#locate):高效文件查找
+- [whereis](#whereis)
+- [which](#which):查找命令
+- [whoami](#whoami)
+- [uname](#uname):系统内核版本等信息
 
 ---
 
 ## 打包压缩
 
-- [gzip](#)
-- [bzip2](#)
-- [xz](#)
-- [tar](#)
-- [dd](#)
+- [gzip](#gzip)
+- [bzip2](#bzip2)
+- [xz](#xz)
+- [tar](#tar)
+- [dd](#dd)
 
 ---
 
 ## 磁盘
 
 - [iostat](#iostat) : 监测磁盘活动
-- [mount](#)
-- [umount](#)
-- [df](#)
-- [sync](#)
-- [smartctl](#):查看smart参数
-- [parted](#)
+- [mount](#mount)
+- [umount](#umount)
+- [df](#df)
+- [sync](#sync)
+- [smartctl](#smartctl):查看smart参数
+- [parted](#parted)
 
 ---
 
 ##  用户
 
-- [sudo](#)
-- [useradd](#)
-- [groupadd](#)
-- [passwd](#)
-- [userdel](#)
-- [usermod](#)
-- [id](#)
-- [newgrp](#):切换有效用户组
-- [last](# last) : 查看用户登陆记录
+- [sudo](#sudo)
+- [useradd](#useradd)
+- [groupadd](#groupadd)
+- [passwd](#passwd)
+- [userdel](#userdel)
+- [usermod](#usermod)
+- [id](#id)
+- [newgrp](#newgrp):切换有效用户组
+- [last](#last) : 查看用户登陆记录
 
 ---
 
 ## 进程
 
-- [ps](#)
+- [ps](#ps)
 - [uptime](#uptime)
 - [vmstat](#vmstat)
-- [top](#)
-- [btop](#)
-- [lsop](#):查看占用文件的进程
-- [kill](#)
-- [bg](#) : 暂停的jobs 放到后台运行
-- [fg](#) : 后台拉回前台
-- [jobs](#)
-- [ulimit](#)
+- [top](#top)
+- [btop](#btop)
+- [lsop](#lsop):查看占用文件的进程
+- [kill](#kill)
+- [bg](#bg) : 暂停的jobs 放到后台运行
+- [fg](#fg) : 后台拉回前台
+- [jobs](#jobs)
+- [ulimit](#ulimit)
 
 ---
 
 ## 网络
 
-- [ip](#) : many net tool
-- [ss](#) : 端口
-- [ping](#)
-- [curl](# curl)
-- [wget](#)
-- [NetworkManager](# networkmanager)
+- [ip](#ip) : many net tool
+- [ss](#ss) : 端口
+- [ping](#ping)
+- [curl](#curl)
+- [wget](#wget)
+- [NetworkManager](#networkmanager)
 
 ---
 
 ## 系统
 
-- [systemctl](#)
-- [dmidecode](#)
-- [dpkg](#)
-- [apt](#)
-- [编解码工具](#)
+- [systemctl](#systemctl)
+- [dmidecode](#dmidecode)
+- [dpkg](#dpkg)
+- [apt](#apt)
+- [编解码工具](#编解码工具)
 
 ---
 
