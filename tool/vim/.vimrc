@@ -60,7 +60,7 @@ inoremap · `
 
 "自动补全
 inoremap jl <c-x><c-l>
-inoremap jbf <c-x><c-f>
+inoremap jnf <c-x><c-f>
 inoremap jk <c-x><c-k>
 
 " 启用字典补全（Ctrl-X Ctrl-K）
