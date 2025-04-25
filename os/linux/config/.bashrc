@@ -125,5 +125,4 @@ if ! shopt -oq posix; then
 fi
 
 # 终端启动时显示消息
-echo -e "\e[1;34m$(date +'%A, %B %d %Y %H:%M:%S')\e[0m"
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"

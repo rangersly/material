@@ -2,7 +2,7 @@
 
 ---
 
-## 目录
+## INDEX
 
 - [文件操作](#文件操作)
 - [打包压缩](#打包压缩)
@@ -43,6 +43,10 @@
 - [which](#which):查找命令
 - [whoami](#whoami)
 - [uname](#uname):系统内核版本等信息
+- [objdump](../../program/tool/objdump)
+
+
+- [INDEX](#INDEX)
 
 ---
 
@@ -53,6 +57,9 @@
 - [xz](#xz)
 - [tar](#tar)
 - [dd](#dd)
+
+
+- [INDEX](#INDEX)
 
 ---
 
@@ -65,6 +72,9 @@
 - [sync](#sync)
 - [smartctl](#smartctl):查看smart参数
 - [parted](#parted)
+
+
+- [INDEX](#INDEX)
 
 ---
 
@@ -79,6 +89,9 @@
 - [id](#id)
 - [newgrp](#newgrp):切换有效用户组
 - [last](#last) : 查看用户登陆记录
+
+
+- [INDEX](#INDEX)
 
 ---
 
@@ -96,6 +109,9 @@
 - [jobs](#jobs)
 - [ulimit](#ulimit)
 
+
+- [INDEX](#INDEX)
+
 ---
 
 ## 网络
@@ -107,19 +123,29 @@
 - [wget](#wget)
 - [NetworkManager](#networkmanager)
 
+
+- [INDEX](#INDEX)
+
 ---
 
 ## 系统
 
 - [systemctl](#systemctl)
+- [perf](../../program/tool/perf.md)
 - [dmidecode](#dmidecode)
 - [dpkg](#dpkg)
 - [apt](#apt)
 - [编解码工具](#编解码工具)
 
+
+- [INDEX](#INDEX)
+
 ---
 
 ## 其他
+
+
+- [INDEX](#INDEX)
 
 ---
 
