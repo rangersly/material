@@ -41,6 +41,7 @@ nnoremap <space>tt :tabedit<space>
 nnoremap <space>tm :vert term<cr>
 
 "操作优化
+nnoremap gf <c-w>f<c-w>T
 nnoremap gm $
 nnoremap <space>r :reg<cr>
 inoremap jf <esc>
@@ -69,9 +70,7 @@ inoremap jk <c-x><c-k>
 
 " 启用字典补全（Ctrl-X Ctrl-K）
 set complete+=k
-
 " 加载字典补全功能
-
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
