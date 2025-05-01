@@ -33,14 +33,16 @@ ___注:未进行长度指定的函数有溢出风险 例如:strcpy___
 
 ## **std-mem**
 
-- 内存操作函数与str系的最大不同是不检测EOF
-```c
-	memset(buf1, 0, sizeof(buf1));//覆写内存块
+__内存操作函数不检测EOF,不同于str类函数__
+- `memset(buf1, 0, sizeof(buf1))`
+  - 覆写内存块
 
-	memcpy(buf1, "hello", 5);	//复制内存块,不处理内存重叠
+- `memcpy(buf1, "hello", 5)`
+  - 复制内存块,不处理内存重叠
 
-	memmove(buf1 + 1, buf1, 4);	//移动5个字节到前一个位置,可处理重叠
-```
+- `memmove(buf1 + 1, buf1, 4)`
+  - 移动5个字节到前一个位置,可处理重叠
+
 - `int memcmp(const void *ptr1, const void *ptr2, size_t num);`
   - 比较函数,返回0表示相等
 

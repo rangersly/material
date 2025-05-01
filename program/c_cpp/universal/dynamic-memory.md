@@ -8,6 +8,7 @@
   - [malloc](# malloc)
   - [calloc](# calloc)
   - [realloc](# realloc)
+  - [aligned-alloc](#aligned-alloc)
   - [free](#) : 传入动态分配的指针地址,记得释放完赋NULL
 - [CPP](# CPP)
   - [new](# new)
@@ -50,3 +51,10 @@
   - 如果ptr为NULL，等同于malloc
   - 可能返回新的指针地址（内存块可能被移动到新位置）
   - 如果`new_size`为0且ptr不为NULL，等同于free
+
+---
+
+### **aligned-alloc**
+
+- `void* aligned_alloc(size_t alignment, size_t size)`
+  - 分配对齐内存(要求 `size` 是 `alignment` 的整数倍)
