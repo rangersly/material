@@ -20,6 +20,10 @@ set ts=4
 set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
 
+"把 - 和 _ 也看作单词的一部分
+set iskeyword+=-
+set iskeyword+=_
+
 "缓冲区操作
 nnoremap <space>b :buffers<cr>:b<space>
 nnoremap <space>e :b#<cr>
