@@ -28,6 +28,7 @@
   - [Unicode支持(C11) uchar](#uchar)
 - [CPP](#CPP)
   - [STL](../STL/)
+- [POSIX](#unistd)
 - [SELF](#SELF)
   - [offsetof](./self/offsetof.h)
   - [string hash](./self/string_hash.c)
@@ -676,5 +677,45 @@ struct tm {
   - **精确的位宽控制**
   - **更好的跨平台兼容性**
   - **更安全的数值操作**
+
+---
+
+## **unistd**
+- 进程控制
+  - [fork](../linux/fork.cpp)
+  - [exec](../linux/exec.cpp)
+  - `unsigned int sleep(unsigned int seconds);`
+
+- 文件操作
+  - `ssize_t read(int fildes, void *buf, size_t nbyte);`
+    - 共享偏移量
+  - `ssize_t pread(int fildes, void *buf, size_t nbyte, off_t offset);`
+    - 指定偏移量,线程安全
+  - `ssize_t write(int fildes, const void *buf, size_t nbyte);`
+  - `ssize_t pwrite(int fildes, const void *buf, size_t nbyte);`
+  - `int clos(int fildes);`
+
+- 管道操作
+  - `int pipe(int fildes[2]);`
+    - 创建匿名管道
+    - [0]读
+    - [1]写
+    - 0 成功  -1 失败
+
+- `uid_t getuid(void);`
+  - 获取用户真实uid
+
+- 目录操作
+  - `int chdir(const char *path);`
+    - 切换工作目录
+    - 0 成功  -1 失败
+  - `char *getcwd(char buf[.size], size_t size);`
+
+- 其他
+  - `int dup(int fildes);`
+  - `int dup2(int fildes, int fildes2);`
+    - 复制文件描述符
+  - `int isatty(int fd);`
+    - 检查文件描述符是否关联到终端
 
 ---
