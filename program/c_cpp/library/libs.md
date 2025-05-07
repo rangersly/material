@@ -33,6 +33,7 @@
   - [offsetof](./self/offsetof.h)
   - [string hash](./self/string_hash.c)
   - [thread pool](./self/thread-pool.cpp)
+  - [BIT](./self/bit.h)
 
 ---
 
