@@ -4,7 +4,6 @@
 - [extern](#extern)
 - [noexcept](#noexcept)
 - [重载](#)
-- [often](#often)
 
 ## extern
 
@@ -28,20 +27,3 @@ noexcept 的一个重要用途是优化性能，特别是在移动语义中。�
 + const左值：选择const T&。
 + 右值：优先选择T&&, else const T&
 + 字面量或临时对象：选择T&&。
-
-## often
-
-```
-abs(x);		//求x的绝对值	e.g.abs(-5)=5
-fabs()		//实数绝对值
-exp(x);		//求x的自然指数e^x	e.g.exp(1)=2.718282
-floor(x);	//向下取整
-ceil(x);	//向上取整
-log(x);		//求实数x的自然数对数 	e.g.log(1)=0
-pow(x,y);	//计算x^y,输出为双精度实数		e.g.pow(2,3)=8
-sqrt(x);	//求x的平方根	e.g.sqrt(25)=5
-strlen(str);获取字符数组长度(只能用在字符数组）。
-max(a,b)	//两数中最大
-min(a,b)	//两数中最小
-swap(a,b)	//交换两个类型相同的变量
-```

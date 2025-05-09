@@ -3,7 +3,7 @@
 ## 目录
 - [define](#define)
   - [预定义宏](#预定义宏)
-  - [defined](# defined)
+  - [defined](#defined)
 - [ifdef](#ifdef)
 - [ifndef](#ifndef)
 - [undef](#undef) : 若要修改一个宏,先移除再定义
@@ -51,5 +51,6 @@
 ---
 
 ## pragma
+由编译器定义的预处理指令,若不支持则无操作
 
 `#pragma once`  确保头文件只被包含一次

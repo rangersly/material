@@ -1,20 +1,20 @@
 # c with cpp io
 
 
-# 目录
+# INDEX
 
-- [标准IO流](# IOstream)
-- [C](# C)
-  - [格式化IO](# 格式化IO)
-  - [字符IO](# charIO)
-  - [Cstring](# Cstring)
-  - [C二进制IO](# Cbin)
-  - [C文件操作](# C-FILE)
-  - [error](# c-error)
-- [cpp stdio](# cpp stdio)
-- [cpp fio](# cpp fio)
-- [关闭缓冲区读取](# ../linux/ncurses.c)
-- [ANSI](# ./ansi.md)
+- [标准IO流](#IOstream)
+- [C](#C)
+  - [格式化IO](#格式化IO)
+  - [字符IO](#charIO)
+  - [Cstring](#Cstring)
+  - [C二进制IO](#Cbin)
+  - [C文件操作](#C-FILE)
+  - [error](#c-error)
+- [cpp stdio](#cpp stdio)
+- [cpp fio](#cpp fio)
+- [关闭缓冲区读取](#../linux/ncurses.c)
+- [ANSI](#./ansi.md)
 
 ---
 

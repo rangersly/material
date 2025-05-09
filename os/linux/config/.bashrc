@@ -4,8 +4,8 @@
 [[ $- != *i* ]] && return
 
 # 历史记录配置
-HISTSIZE=5000                   # 内存中保存的历史记录数量
-HISTFILESIZE=5000              # 历史文件最大行数
+HISTSIZE=10000                   # 内存中保存的历史记录数量
+HISTFILESIZE=10000              # 历史文件最大行数
 HISTCONTROL=ignoreboth          # 忽略重复命令和空格开头的命令
 shopt -s histappend             # 追加历史而不是覆盖
 
@@ -27,9 +27,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # 更详细的ls别称
-alias ll='ls -alFh --group-directories-first'
+alias l='ls -alFh --group-directories-first'
 alias la='ls -A'
-alias l='ls -CF'
+# alias l='ls -CF'
 
 # PS1提示符
 
@@ -64,12 +64,12 @@ parse_git_branch() {
  
      # 处理路径：长路径时只保留每级目录首字母
      local DIR=${PWD/#$HOME/\~}
-     if [ ${#DIR} -gt 25 ]; then
+     if [ ${#DIR} -gt 30 ]; then
          DIR=$(echo $DIR | awk -F '/' '{
-             if (length($0) > 20) {
+             if (length($0) > 30) {
                  for (i=1; i<=NF; i++) {
-                     if (i == NF) printf "/%s", $i;
-                     else if (length($i) > 0) printf "/%.2s", $i;
+                     if (i == NF) printf "%s", $i;
+                     else printf "%.3s/", $i;
                  }
              }
              else print $0;
@@ -93,14 +93,13 @@ parse_git_branch() {
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 
 # 安全操作确认
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+alias rr='rm -i'
+#alias cp='cp -i'
+#alias mv='mv -i'
 
 # 快速导航
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
 alias ~='cd ~'
 
 # 网络相关
