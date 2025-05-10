@@ -2,7 +2,7 @@
 使用 -g 生成调试文件，不可以加 -O 选项
 
 ## 目录
-- [基础使用](#基础使用)
+- [基础使用](#base)
   - [run](#run)
   - [set](#set)
   - [mem](#mem)
@@ -10,7 +10,7 @@
   - [info](#info)
 - [core](#core)
 
-## 基础使用
+## base
 `l n`         列出源码
 `b n`         在第n行打断点
 `break main if var_name > 10`  满足条件时打断点

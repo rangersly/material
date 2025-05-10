@@ -2,8 +2,8 @@
 从系统熵池进行获取
 
 ## index
-- [random-urandom](# random-urandom)
-- [note](# note)
+- [random-urandom](#random-urandom)
+- [note](#note)
 
 ## random-urandom
 /dev/random 和 /dev/urandom 的区别

@@ -2,7 +2,7 @@
 
 ---
 
-## INDEX
+## index
 
 - [文件操作](#文件操作)
 - [打包压缩](#打包压缩)
@@ -46,7 +46,7 @@
 - [objdump](../../program/tool/objdump)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -59,7 +59,7 @@
 - [dd](#dd)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -74,7 +74,7 @@
 - [parted](#parted)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -91,7 +91,7 @@
 - [last](#last) : 查看用户登陆记录
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -110,7 +110,7 @@
 - [ulimit](#ulimit)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -124,7 +124,7 @@
 - [NetworkManager](#networkmanager)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
@@ -138,14 +138,14 @@
 - [编解码工具](#编解码工具)
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 
 ## 其他
 
 
-- [INDEX](#INDEX)
+- [index](#index)
 
 ---
 

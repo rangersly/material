@@ -2,12 +2,12 @@
 
 ## 目录
 
-- [NULL and nullptr](#NULL-nullptr)
-- [cpp智能指针](#cpp智能指针)
+- [NULL and nullptr](#null-nullptr)
+- [cpp智能指针](#cpp-pointer)
   - [注意事项](#注意事项)
   - [some example](#some-example)
 
-## NULL-nullptr
+## null-nullptr
 
 在C和CPP中,NULL并不相同
 
@@ -25,7 +25,7 @@
 
 因此cpp中应使用nullptr,否则函数重载中会出现选择错误问题
 
-## cpp智能指针
+## cpp-pointer
 
 1. `std::unique_ptr`
 

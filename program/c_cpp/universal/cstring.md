@@ -3,7 +3,7 @@
 
 ---
 
-## INDEX
+## index
 
 - [字符串库函数](#std-string)
 - [内存操作标准库函数](#std-mem)

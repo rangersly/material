@@ -5,12 +5,12 @@
   - [修改控制台字体](#修改控制台字体)
   - [验证引导](#验证引导)
   - [验证网络和更改系统时间](#验证网络和更改系统时间)
-  - [硬盘分区](#硬盘分区)
+  - [硬盘分区](#disk)
   - [安装基础软件包](#安装基础软件包)
-  - [生成fstab](#生成fstab)
+  - [生成fstab](#fstab)
   - [chroot配置](#chroot)
 - [新系统](#新系统)
-  - [换源](#换源)
+  - [换源](#mirrors)
   - [普通用户](#普通用户)
   - [KDE](#kde)
 
@@ -30,7 +30,7 @@
 `ip addr`
 `timedatectl`
 
-### 硬盘分区
+### disk 
 
 ```bash
 parted /dev/sdX  # 进入parted交互界面
@@ -81,7 +81,7 @@ mount --mkdir /dev/sdX1 /mnt/boot
 + alsa-utils  # 声卡驱动
 + 其他固件
 
-### 生成fstab
+### fstab
 
 `genfstab -U /mnt > /mnt/etc/fstab`
 
@@ -113,7 +113,7 @@ reboot
 
 ## 新系统
 
-### 换源
+### mirrors
 - `/etc/pacman.d/mirrorlist`
 ```
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch

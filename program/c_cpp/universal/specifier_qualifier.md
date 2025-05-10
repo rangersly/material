@@ -1,12 +1,12 @@
 # 说明符
 
-## 目录
+## index
 - [static](#static)
 - [extern](#extern):引用声明
 - [mutable](#mutable)
-- [thread local](#`thread_local`)
+- [thread local](#thread-local)
 - [const](#const)
-  -[const with point](# const-with-point)
+  -[const with point](#const-with-point)
 - [volatile](#volatile):强制读内存
 - [restrict](#restrict) : 指示编译器优化指针(C99)
 

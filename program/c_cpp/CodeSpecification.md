@@ -1,8 +1,8 @@
 # MY CODE SPECIFICATION
 
-## INDEX
-- [Naming](# naming)
-- [Code](# code)
+## index
+- [Naming](#naming)
+- [Code](#code)
 
 ---
 

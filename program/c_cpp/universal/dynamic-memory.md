@@ -2,17 +2,17 @@
 
 ---
 
-## INDEX
+## index
 
-- [C](# C)
-  - [malloc](# malloc)
-  - [calloc](# calloc)
-  - [realloc](# realloc)
+- [C](#c)
+  - [malloc](#malloc)
+  - [calloc](#calloc)
+  - [realloc](#realloc)
   - [aligned-alloc](#aligned-alloc)
   - [free](#) : 传入动态分配的指针地址,记得释放完赋NULL
-- [CPP](# CPP)
-  - [new](# new)
-  - [delete](# delete)
+- [CPP](#cpp)
+  - [new](#new)
+  - [delete](#delete)
 
 ---
 

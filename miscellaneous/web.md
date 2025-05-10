@@ -1,9 +1,9 @@
 # website
-+ [game](# game)
-+ [live](# live)
-+ [program](# program)
-+ [study](# study)
-+ [tool](# tool)
++ [game](#game)
++ [live](#live)
++ [program](#program)
++ [study](#study)
++ [tool](#tool)
 
 ##	game
 - indienova.com		# 冰与火之舞

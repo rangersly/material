@@ -1,12 +1,12 @@
 # python基础合集
 
-## 目录
+## index
 
 - [程序之始](#run)
-- [IO](#IO)
+- [IO](#io)
   - [格式化输出](#)
 - [字符串](#string)
-- [DEBUG](#Debug)
+- [DEBUG](#debug)
 - [变量](#)
   - [数值类型](#)
 
@@ -14,7 +14,7 @@
 
 `if __name__ == '__main__'` 判断程序是否在主函数内(区别与模块等)
 
-## IO
+## io
 
 `print(values, sep, end)` 值, 分割符, 结尾符
 > `print("hello", sep=',', end='_')`
@@ -66,7 +66,7 @@ s.swapcase()        # 转换大小写
 eval('12+3')        # 计算值 返回15
 ```
 
-## Debug
+## debug
 
 1. pdb
 `import pdb; pdb.set_trace()` 程序运行到这行代码时会进入调试模式

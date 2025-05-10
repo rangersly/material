@@ -2,8 +2,8 @@
 
 ## 目录
 - [非修改性算法](#)
-  - [find](#)
-  - [conut](#)
+  - [find](#find)
+  - [conut](#conut)
   - [二分查找](#binary-search)
 - [修改性算法](#)
   - [copy](#)

@@ -1,6 +1,6 @@
 # c-cpp function
 
-## 目录
+## index
 - [extern](#extern)
 - [noexcept](#noexcept)
 - [重载](#)

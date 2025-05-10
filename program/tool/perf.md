@@ -1,4 +1,4 @@
-#	perf 功能强大的linux性能分析工具
+# perf 功能强大的linux性能分析工具
   
 `perf [command] [options] [arguments]`  
 子命令   额外选项   要分析的程序或命令

@@ -1,4 +1,5 @@
-objdump
+# objdump
+
 	-f		显示文件头
 	-h		显示段(section)信息
     -x      文件头和信息

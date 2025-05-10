@@ -1,24 +1,24 @@
-# c with cpp io
+# c with cpp IO
 
 
 # INDEX
 
-- [标准IO流](#IOstream)
-- [C](#C)
-  - [格式化IO](#格式化IO)
-  - [字符IO](#charIO)
-  - [Cstring](#Cstring)
-  - [C二进制IO](#Cbin)
-  - [C文件操作](#C-FILE)
+- [标准IO流](#iostream)
+- [C](#c)
+  - [格式化IO](#format-io)
+  - [字符IO](#char-io)
+  - [Cstring](#cstring)
+  - [C二进制IO](#cbin)
+  - [C文件操作](#c-file)
   - [error](#c-error)
-- [cpp stdio](#cpp stdio)
-- [cpp fio](#cpp fio)
+- [cpp stdio](#cpp-stdio)
+- [cpp fio](#cpp-fio)
 - [关闭缓冲区读取](#../linux/ncurses.c)
 - [ANSI](#./ansi.md)
 
 ---
 
-## **IOstream**
+## **iostream**
 
 + stdin
 + stdout
@@ -26,13 +26,13 @@
 
 ---
 
-## **C**
+## **c**
 
 `#include <stdio.h>`
 
 ---
 
-### 格式化IO
+### **format-io**
 
 - scanf        格式化输入函数
 - printf       格式化输出函数
@@ -48,7 +48,7 @@ __控制符__
 
 ---
 
-### charIO
+### char-io
 
 + IN
 |function prototype        |remark                               |
@@ -67,7 +67,7 @@ __控制符__
 
 ---
 
-### Cstring
+### **cstring**
 
 |function prototype                                       |remark                          |
 |---------------------------------------------------------|--------------------------------|
@@ -76,14 +76,16 @@ __控制符__
 
 ---
 
-### Cbin
+### cbin
 
 `size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);`
  + size   读写的块大小
  + nmemb  读写的块数量
 `size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);`
 
-### C-FILE
+---
+
+### c-file
 
 - `FILE *fp` 文件指针
 - `FILE *fopen(const char *pathname, const char *mode);` 错误返回NULL
@@ -133,7 +135,7 @@ __控制符__
 
 ---
 
-## cpp stdio
+## cpp-stdio
 
 >    头文件
 #include <iostream>
@@ -155,7 +157,7 @@ __控制符__
 ```
 ________________________________________________
 
-##    file IO
+## cpp-fio 
 
 >    头文件
 #include <fstream>

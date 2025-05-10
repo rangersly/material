@@ -2,9 +2,9 @@
 
 ---
 
-## INDEX
+## index
 
-- [C](#C)
+- [C](#c)
   - [输入/输出 stdio](#stdio)
   - [资源管理和系统交互 stdlib](#stdlib)
   - [字符串处理 string](#string)
@@ -26,10 +26,10 @@
   - [多线程支持(C11) threads](#threads)
   - [原子操作(C11) stdatomic](#stdatomic)
   - [Unicode支持(C11) uchar](#uchar)
-- [CPP](#CPP)
+- [CPP](#cpp)
   - [STL](../STL/)
 - [POSIX](#unistd)
-- [SELF](#SELF)
+- [SELF](#self)
   - [offsetof](./self/offsetof.h)
   - [string hash](./self/string_hash.c)
   - [thread pool](./self/thread-pool.cpp)
