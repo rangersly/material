@@ -20,16 +20,6 @@ export LC_ALL=en_US.UTF-8
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
-# 彩色输出
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# 更详细的ls别称
-alias l='ls -alFh --group-directories-first'
-alias la='ls -A'
-# alias l='ls -CF'
 
 # PS1提示符
 
@@ -92,6 +82,17 @@ parse_git_branch() {
 # 自定义PS1提示符（带颜色和Git分支）
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 
+# 彩色输出
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# ls别称
+alias l='ls -alFh --group-directories-first'
+alias ll='ls -A'
+# alias l='ls -CF'
+
 # 安全操作确认
 alias rr='rm -i'
 #alias cp='cp -i'
@@ -107,6 +108,9 @@ alias myip='curl ifconfig.me'           # 获取公网IP
 
 # 快速重载
 alias reload='source ~/.bashrc'
+
+# 快速使用 systemctl
+alias sscl='sudo systemctl'
 
 # 快速查看电池信息
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
@@ -125,3 +129,4 @@ fi
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
+echo -e "\e[1;34mversion:1.0\e[0m"
