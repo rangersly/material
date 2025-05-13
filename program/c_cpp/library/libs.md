@@ -7,7 +7,7 @@
 - [C](#c)
   - [输入/输出 stdio](#stdio)
   - [资源管理和系统交互 stdlib](#stdlib)
-  - [字符串处理 string](#string)
+  - [字符串处理 string](../universal/cstring.md)
   - [数学函数 math](#math)
   - [字符处理 ctype](#ctype)
   - [时间/日期 time](#time)
@@ -106,11 +106,6 @@
 
 ---
 
-## **string**
-
-- [包含于这里](../universal/c_string.md)
-
----
 
 ## **math**
 

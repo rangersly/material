@@ -19,6 +19,8 @@ set expandtab       "tab to space
 set ts=4        
 set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
+" 在编写makefile文件时使用tab
+autocmd FileType make setlocal noexpandtab  " 仅对 Makefile 禁用 Tab 转空格
 
 "把 - 和 _ 也看作单词的一部分
 set iskeyword+=-
