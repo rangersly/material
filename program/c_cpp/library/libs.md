@@ -5,7 +5,7 @@
 ## index
 
 - [C](#c)
-  - [输入/输出 stdio](#stdio)
+  - [输入/输出 stdio](../universal/io.md)
   - [资源管理和系统交互 stdlib](#stdlib)
   - [字符串处理 string](../universal/cstring.md)
   - [数学函数 math](#math)
@@ -34,12 +34,7 @@
   - [string hash](./self/string_hash.c)
   - [thread pool](./self/thread-pool.cpp)
   - [BIT](./self/bit.h)
-
----
-
-## **stdio**
-
-大部分内容已经完善,请参阅这里[IO](../universal/io.md)
+  - [LOG](./self/log/log.h)
 
 ---
 

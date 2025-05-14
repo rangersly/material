@@ -22,6 +22,7 @@
   - [使用循环](#使用循环)
   - [执行外部命令](#执行外部命令)
   - [](#)
+- [EXAMPLE](#example)
 
 ---
 
@@ -470,4 +471,34 @@ ABS_PATH = $(abspath $(FILE))
 FILE = ../file.c
 
 REAL_PATH = $(realpath $(FILE))
+```
+
+---
+
+## **example**
+
+1. 通用模板
+
+```makefile
+# 定义编译器和编译选项
+CC = gcc
+CFLAGS = -c
+LDFLAGS =
+
+# 定义目标可执行文件名
+TARGET = main
+
+# 获取所有.c文件对应的.o文件
+OBJS = $(patsubst %.c, %.o, $(wildcard *.c))
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -f *.o *.out $(TARGET)
 ```
