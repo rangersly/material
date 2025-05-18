@@ -5,9 +5,9 @@
 ## index
 
 - [C](#c)
-  - [输入/输出 stdio](../universal/io.md)
+  - [输入/输出 stdio](./io.md)
   - [资源管理和系统交互 stdlib](#stdlib)
-  - [字符串处理 string](../universal/cstring.md)
+  - [字符串处理 string](./cstring.md)
   - [数学函数 math](#math)
   - [字符处理 ctype](#ctype)
   - [时间/日期 time](#time)
@@ -30,11 +30,12 @@
   - [STL](../STL/)
 - [POSIX](#unistd)
 - [SELF](#self)
-  - [offsetof](./self/offsetof.h)
-  - [string hash](./self/string_hash.c)
-  - [thread pool](./self/thread-pool.cpp)
-  - [BIT](./self/bit.h)
-  - [LOG](./self/log/log.h)
+  - [offsetof](../mylib/offsetof.h) : 计算结构体成员相对结构体首地址的偏移度
+  - [string hash](../mylib/string_hash.c)
+  - [thread pool](../mylib/thread-pool.cpp)
+  - [BIT](../mylib/bit.h)
+  - [LOG](../mylib/log/log.h)
+  - [dbtools](../mylib/dbtools.h)
 
 ---
 
@@ -42,7 +43,7 @@
 
 ### 动态内存管理
 
-- [看这里哦](../universal/dynamic-memory.md)
+- [看这里哦](./dynamic-memory.md)
 
 ### 程序终止与控制
 

@@ -11,12 +11,12 @@
 
 using namespace std;
 
-inline int read()//快读int
-{
-	int data=0;char ch;
-	while(1){ch=getchar();if(ch<'0' || ch>'9'){if(data!=0)break;}else data=data*10+(int)(ch-48);}
-	return data;
-}
+/* 使用宏进行快读,使用时尽量注意,不要使用表达式作为参数 */
+#define FAST_READ(data) do{
+	data=0; char ch;
+    do{ch = getchar();}while(ch<'0' || ch>'9');
+    do{data = data * 10 + (ch - '0'); ch = getchar();} while(ch > '0' && ch < '9');
+} while(0);
 
 int main()
 {

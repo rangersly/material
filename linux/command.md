@@ -43,7 +43,8 @@
 - [which](#which):查找命令
 - [whoami](#whoami)
 - [uname](#uname):系统内核版本等信息
-- [objdump](../../program/tool/objdump)
+- [objdump](../program/tool/objdump.md) : 可自行文件反汇编
+- [readelf](../program/tool/readelf.md) : 观察elf文件结构
 
 
 - [index](#index)
@@ -122,7 +123,7 @@
 - [curl](#curl)
 - [wget](#wget)
 - [NetworkManager](#networkmanager)
-
+- [nmap](#nmap)
 
 - [index](#index)
 
