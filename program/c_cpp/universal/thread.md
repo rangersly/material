@@ -112,7 +112,7 @@ int main() {
 ```
 
 ## 线程池
-通过 `std::thread` 和任务队列来实现一个简单的[线程池](../library/thread-pool.cpp)
+通过 `std::thread` 和任务队列来实现一个简单的[线程池](../mylib//thread-pool.cpp)
 
 //	thread类
 //	1.

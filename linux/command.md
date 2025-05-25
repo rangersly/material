@@ -136,7 +136,6 @@
 - [dmidecode](#dmidecode)
 - [dpkg](#dpkg)
 - [apt](#apt)
-- [编解码工具](#编解码工具)
 
 
 - [index](#index)
@@ -145,6 +144,8 @@
 
 ## 其他
 
+- [编解码工具](#编解码工具)
+- [高精度计算器](#bc)
 
 - [index](#index)
 
@@ -678,3 +679,63 @@ curl -# -O https://example.com/largefile.zip
    +  `--base16`
    +  `--base2msbf`  二进制
  +  `echo -n 你好|iconv -t ucs-2be|xxd-ps|sed 's/..../\\u&/g`  unicode码
+
+---
+
+### **bc**
+`bc`支持高精度数学运算、变量、函数、条件语句等编程功能
+
+- **基本用法**
+  - **交互模式**：终端输入 `bc` 后回车，进入交互界面。
+  - **非交互模式**：直接计算表达式：  
+    ```bash
+    echo "5 + 3" | bc
+    ```
+
+- **设置精度**
+  - 通过内置变量 `scale` 控制小数位数
+  ```bash
+  echo "scale=3; 10/3" | bc  # 输出 3.333
+  ```
+
+- **进制转换**
+  - **输入进制**：用 `ibase` 设置输入数字的进制。
+  - **输出进制**：用 `obase` 设置输出结果的进制。
+  ```bash
+  echo "ibase=2; 1101" | bc   # 二进制 1101 → 十进制 13
+  echo "obase=16; 255" | bc   # 十进制 255 → 十六进制 FF
+  ```
+
+- **变量和函数**
+```bash
+a=5
+b=a*2  # b=10
+```
+
+```bash
+define square(x) {
+  return x*x
+}
+square(4)  # 输出 16
+```
+
+- **数学库函数**
+启动时添加 `-l` 参数启用数学库
+
+- **支持的函数**
+  - `s(x)`：正弦（弧度）
+  - `c(x)`：余弦（弧度）
+  - `a(x)`：反正切（结果弧度）
+  - `l(x)`：自然对数
+  - `e(x)`：指数函数（e^x）
+  - `sqrt(x)`：平方根
+  - `j(n, x)`：贝塞尔函数
+
+- **example**
+  - 计算Pi
+  `echo "scale=1000; a=1; b=1/sqrt(2); t=1/4; p=1; for (i=0; i<10; i++) { a1=(a+b)/2; b1=sqrt(a*b); t1=t - p*(a - a1)^2; p1=2*p; a=a1; b=b1; t=t1; p=p1 }; (a+b)^2/(4*t)" | bc -l`
+  `echo "scale=100; 4*a(1)" | bc -l`
+
+
+- **退出**
+输入 `quit` 或按 `Ctrl+D` 退出交互模式。
