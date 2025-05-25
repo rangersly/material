@@ -55,31 +55,23 @@ mount --mkdir /dev/sdX1 /mnt/boot
 `pacstrap -K /mnt xxx`
 + base linux linux-firmware
 + grub efibootmgr
-+ vim base-devel networkmanager archlinuxcn-keyring
++ vim base-devel networkmanager
+
 ---
-以下是可以等系统启动后安装的
-+ sof-firmware 
+
 + yay
   1. /etc/pacman.conf
   ```
   [archlinuxcn]
   Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
   ```
-  2. 
-  `pacman -S git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si`
-  3. archlinuxcn
+  2. archlinuxcn
   ```bash
   sudo pacman-key --lsign-key "farseerfc@archlinux.org"
   sudo pacman -Sy archlinuxcn-keyring
   sudo pacman -Syyu  # 更新源
   sudo pacman -S yay  # 直接安装 Yay
   ```
-+ man man-pages
-+ gdisk
-+ bash-completion
-+ fcitx5-im fcitx5-rime fcitx5-chinese-addons  # 输入法
-+ alsa-utils  # 声卡驱动
-+ 其他固件
 
 ### fstab
 
@@ -100,10 +92,13 @@ vim /etc/locale.conf
 vim /etc/hostname
 > [hostname]
 
+sudo systemctl enable NetworkManager
+
 passwd 
 
-**安装引导**
-grub-install --target=i386-pc /dev/sdX
+# 安装引导
+grub-install --target=i386-pc /dev/sdX   # BIOS 
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB  # UEFI
 grub-mkconfig -o /boot/grub/grub.cfg
 
 umount -R /mnt
@@ -126,19 +121,13 @@ Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
 `useradd -m -G wheel username`
 `vim /etc/sudoers`
 
-### kde
 
+### 配置中文双拼输入法
+
+```bash
+# 配置好后记得设置全局脚本
+#!/usr/bin/env sh
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5
 ```
-pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji   # 安装字体
-pacman -S plasma
-systemctl enable sddm
-
-#### 使用原版输入法
-在设置 -> 输入法 -> 添加输入法 -> 取消勾选"仅显示当前语言" -> 双拼
-
-#### 雾凇
-cd ~/.local/share/fcitx5/rime   # 配置输入法
-git clone https://github.com/iDvel/rime-ice.git
-cp -r ./rime-ice/* .
-
-sudo usermod -a -G uucp $USER   # 允许用户使用串口
