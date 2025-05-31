@@ -29,13 +29,14 @@
 - [CPP](#cpp)
   - [STL](../STL/)
 - [POSIX](#unistd)
-- [SELF](#self)
-  - [offsetof](../mylib/offsetof.h) : 计算结构体成员相对结构体首地址的偏移度
-  - [string hash](../mylib/string_hash.c)
-  - [thread pool](../mylib/thread-pool.cpp)
-  - [BIT](../mylib/bit.h)
-  - [LOG](../mylib/log/log.h)
-  - [dbtools](../mylib/dbtools.h)
+- [OTHER]()
+- [SELF]()
+  - [offsetof](../libs/offsetof.h) : 计算结构体成员相对结构体首地址的偏移度
+  - [string hash](../libs/string_hash.c)
+  - [thread pool](../libs/thread-pool.cpp) : 简易线程池
+  - [BIT](../libs/bit.h) : 有关位运算的函数封装
+  - [LOG](../libs/log/log.h) : 简单日志系统
+  - [dbtools](../libs/dbtools.h) : DEBUG工具集
 
 ---
 

@@ -12,7 +12,6 @@
 - [新系统](#新系统)
   - [换源](#mirrors)
   - [普通用户](#普通用户)
-  - [KDE](#kde)
 
 ## 基础安装
 
@@ -55,23 +54,10 @@ mount --mkdir /dev/sdX1 /mnt/boot
 `pacstrap -K /mnt xxx`
 + base linux linux-firmware
 + grub efibootmgr
-+ vim base-devel networkmanager
++ vim networkmanager
 
 ---
 
-+ yay
-  1. /etc/pacman.conf
-  ```
-  [archlinuxcn]
-  Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
-  ```
-  2. archlinuxcn
-  ```bash
-  sudo pacman-key --lsign-key "farseerfc@archlinux.org"
-  sudo pacman -Sy archlinuxcn-keyring
-  sudo pacman -Syyu  # 更新源
-  sudo pacman -S yay  # 直接安装 Yay
-  ```
 
 ### fstab
 
@@ -114,6 +100,12 @@ reboot
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch
 Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+```
+
+- `/etc/pacman.conf`
+```
+[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ```
 
 ### 普通用户

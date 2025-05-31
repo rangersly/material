@@ -8,7 +8,7 @@ set fileencoding=utf-8
 set nocompatible    "?
 "set guifont=consolas:h14
 set wrap            "自动折行
-set cursorline      "光标行高亮
+"set cursorline      "光标行高亮
 set hlsearch        "高亮显示搜索结果
 set incsearch       "搜索模式下，每输入一个字符，就跳到对应结果
 set ignorecase      "忽略搜索大小写

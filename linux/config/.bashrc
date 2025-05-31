@@ -13,10 +13,6 @@ shopt -s histappend             # 追加历史而不是覆盖
 export EDITOR=vim
 export VISUAL=vim
 
-# 设置语言（解决可能的中文乱码）
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
@@ -89,7 +85,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # ls别称
-alias l='ls -alFh --group-directories-first'
+alias l='ls -aslFh --group-directories-first'
 alias ll='ls -A'
 # alias l='ls -CF'
 

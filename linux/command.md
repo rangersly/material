@@ -136,6 +136,7 @@
 - [dmidecode](#dmidecode)
 - [dpkg](#dpkg)
 - [apt](#apt)
+- [timeshift](#timeshift) : 备份工具
 
 
 - [index](#index)
@@ -686,8 +687,8 @@ curl -# -O https://example.com/largefile.zip
 `bc`支持高精度数学运算、变量、函数、条件语句等编程功能
 
 - **基本用法**
-  - **交互模式**：终端输入 `bc` 后回车，进入交互界面。
-  - **非交互模式**：直接计算表达式：  
+  - **交互模式**：终端输入 `bc` 后回车
+  - **非交互模式**：直接计算表达式
     ```bash
     echo "5 + 3" | bc
     ```
@@ -701,6 +702,7 @@ curl -# -O https://example.com/largefile.zip
 - **进制转换**
   - **输入进制**：用 `ibase` 设置输入数字的进制。
   - **输出进制**：用 `obase` 设置输出结果的进制。
+  - **调整输入进制一定要注意先后顺序**
   ```bash
   echo "ibase=2; 1101" | bc   # 二进制 1101 → 十进制 13
   echo "obase=16; 255" | bc   # 十进制 255 → 十六进制 FF
@@ -711,7 +713,6 @@ curl -# -O https://example.com/largefile.zip
 a=5
 b=a*2  # b=10
 ```
-
 ```bash
 define square(x) {
   return x*x
@@ -734,8 +735,45 @@ square(4)  # 输出 16
 - **example**
   - 计算Pi
   `echo "scale=1000; a=1; b=1/sqrt(2); t=1/4; p=1; for (i=0; i<10; i++) { a1=(a+b)/2; b1=sqrt(a*b); t1=t - p*(a - a1)^2; p1=2*p; a=a1; b=b1; t=t1; p=p1 }; (a+b)^2/(4*t)" | bc -l`
-  `echo "scale=100; 4*a(1)" | bc -l`
-
+  `echo "scale=1000; 4*a(1)" | bc -l`
 
 - **退出**
 输入 `quit` 或按 `Ctrl+D` 退出交互模式。
+
+---
+
+### **timeshift**
+- 系统恢复步骤
+
+1. 挂载原系统根目录与重要分区到`/mnt`
+
+2. 挂载timeshift存储位置(如果在独立分区)
+```
+mkdir /mnt/timeshift
+mount /dev/sda1 /mnt/timeshift  # 挂载快照分区到临时目录
+```
+
+3. chroot到原系统
+
+4. 执行恢复
+
+`timeshift --restore --snapshot '2024-05-20_12-00-00' --target /  --yes`
+
+- `--snapshot` 指定快照名称
+- `--target /` 恢复到根分区
+- `--yes` 跳过确认
+
+5. 修复引导
+```bash
+# 针对 Arch Linux
+mkinitcpio -P
+grub-install /dev/nvme0n1    # 安装 GRUB 到磁盘（非分区）
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+6. 退出重启
+```bash
+exit      # 退出 chroot
+umount -R /mnt  # 卸载所有分区
+reboot
+```
