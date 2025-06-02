@@ -124,6 +124,7 @@
 - [wget](#wget)
 - [NetworkManager](#networkmanager)
 - [nmap](#nmap)
+- [iperf3](#iperf) : 网络性能测试工具
 
 - [index](#index)
 
@@ -777,3 +778,25 @@ exit      # 退出 chroot
 umount -R /mnt  # 卸载所有分区
 reboot
 ```
+
+---
+
+### **iperf**
+
+- 通用参数
+  - `-p` : 指定端口
+  - `-i` : 报告间隔时间(s)
+  - `-V` : 详细日志
+
+- 客户端参数
+  - `-c` : 指定服务端IP
+  - `-u` : UDP
+  - `-R` : 反向传输(服务器发,客户端收)
+  - `-P` : 并发连接数
+  - `-b` : UDP目标带宽
+
+- 服务端参数
+  - `-s` : 启动服务器
+  - `-B` : 绑定指定IP
+
+---
