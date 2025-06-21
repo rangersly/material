@@ -94,6 +94,24 @@ alias rr='rm -i'
 #alias cp='cp -i'
 #alias mv='mv -i'
 
+# rsync封装函数
+function cpr() {
+    if [ $# -lt 2 ]; then
+        echo "Usage: cpr source... destination"
+        return 1
+    fi
+
+    # 获取最后一个参数（目标路径）
+    local destination="${@: -1}"
+    # 获取除最后一个参数外的所有参数（源文件/目录）
+    local sources=("${@:1:$#-1}")
+
+    # 执行 rsync 命令
+    rsync -ahP --info=progress2 \
+    --super \
+    "${sources[@]}" "$destination"
+}
+
 # 快速导航
 alias ..='cd ..'
 alias ...='cd ../..'
