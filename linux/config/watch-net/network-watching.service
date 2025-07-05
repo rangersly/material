@@ -1,0 +1,13 @@
+[Unit]
+Description=Network Watchdog Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/network_watching.sh
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target

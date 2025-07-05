@@ -2,15 +2,17 @@
 
 ---
 
-## index
+## 目录
 
 - [文件操作](#文件操作)
 - [打包压缩](#打包压缩)
+- [权限管理](#权限管理)
 - [磁盘](#磁盘)
 - [用户](#用户)
 - [进程](#进程)
 - [网络](#网络)
 - [系统](#系统)
+- [开发](#开发)
 - [其他](#其他)
 
 ---
@@ -20,34 +22,18 @@
 - [cd](#cd)
 - [ls](#ls)
 - [cat](#cat)
-- [less](#less)
 - [od](#od):查看二进制文件
 - [grep](#grep)
-- [wc](#wc)
-- [mkdir](#mkdir)
-- [touch](#touch)
-- [mv](#mv)
-- [cp](#cp)
-- [rm](#rm)
-- [chown](#chown)
-- [chmod](#chmod)
 - [file](#file)
-- [umark](#umark)
+- [wc](#wc):统计文件中行数等信息
 - [ln](#ln)
-- [diff](#diff)
+- [diff](#diff):文件差异对比
 - [patch](#patch)
 - [rsync](#rsync):同步命令
 - [find](#find)
 - [locate](#locate):高效文件查找
 - [whereis](#whereis)
-- [which](#which):查找命令
-- [whoami](#whoami)
-- [uname](#uname):系统内核版本等信息
-- [objdump](../program/tool/objdump.md) : 可自行文件反汇编
-- [readelf](../program/tool/readelf.md) : 观察elf文件结构
-
-
-- [index](#index)
+- [tee](#tee):数据分流
 
 ---
 
@@ -59,8 +45,13 @@
 - [tar](#tar)
 - [dd](#dd)
 
+---
 
-- [index](#index)
+## 权限管理
+
+- [chown](#chown)
+- [chmod](#chmod)
+- [umark](#umark)
 
 ---
 
@@ -70,12 +61,10 @@
 - [mount](#mount)
 - [umount](#umount)
 - [df](#df)
+- [du](#du):分析文件占用大小
 - [sync](#sync)
 - [smartctl](#smartctl):查看smart参数
 - [parted](#parted)
-
-
-- [index](#index)
 
 ---
 
@@ -87,12 +76,11 @@
 - [passwd](#passwd)
 - [userdel](#userdel)
 - [usermod](#usermod)
-- [id](#id)
+- [id](#id):身份信息
 - [newgrp](#newgrp):切换有效用户组
 - [last](#last) : 查看用户登陆记录
-
-
-- [index](#index)
+- [which](#which):查找命令
+- [whoami](#whoami)
 
 ---
 
@@ -110,9 +98,6 @@
 - [jobs](#jobs)
 - [ulimit](#ulimit)
 
-
-- [index](#index)
-
 ---
 
 ## 网络
@@ -126,8 +111,6 @@
 - [nmap](#nmap)
 - [iperf3](#iperf) : 网络性能测试工具
 
-- [index](#index)
-
 ---
 
 ## 系统
@@ -138,9 +121,14 @@
 - [dpkg](#dpkg)
 - [apt](#apt)
 - [timeshift](#timeshift) : 备份工具
+- [uname](#uname):系统内核版本等信息
 
+---
 
-- [index](#index)
+## 开发
+
+- [objdump](../program/tool/objdump.md) : 可自行文件反汇编
+- [readelf](../program/tool/readelf.md) : 观察elf文件结构
 
 ---
 
@@ -148,8 +136,6 @@
 
 - [编解码工具](#编解码工具)
 - [高精度计算器](#bc)
-
-- [index](#index)
 
 ---
 
@@ -169,8 +155,6 @@
 ###    cat
     +    -n                # 显示行号
 
-###    less
-
 ###    od
     +    -t             # 类型 a, d, f, o, x
 
@@ -186,10 +170,6 @@
     +    -l    行数
     +    -m    字符
     +    -w    word
-
-### mkdir
-
-### touch
 
 ###    mv
     +    -i            # 覆盖时警告
@@ -460,32 +440,65 @@ nohup [command] &
     在 screen 会话中按 `Ctrl-a` 然后按 `x`。
 
 ### ulimit
-        查看和修改进程运行资源限制    
-        -H/S        # 设置/显示 软/硬 限制
-        -a            # 显示所有
-        -t            # cpu time
-        -f            # file size
-        -s            # stack size
-        -c            # core file size
-        -m            # memory size
-        -l            # lock memory size
-    -p            # user processes
-    -n             # open file
+- 查看和修改进程运行资源限制    
+- `-H/S`        # 设置/显示 软/硬 限制
+- `-a`          # 显示所有
+- `-t`          # cpu time
+- `-f`          # file size
+- `-s`          # stack size
+- `-c`          # core file size
+- `-m`          # memory size
+- `-l`          # lock memory size
+- `-p`          # user processes
+- `-n`          # open file
 
-    #ulimit -Ht 3600
-
+---
 
 ### ip
-    +    ip neigh [OPTIONS] [COMMAND]
-    +    ip neigh add [IP] lladdr [MAC] dev [eth0]         添加表项
-    +    ip neigh del [IP] dev [eth0]                     删除表项
-    +    ip neigh flush all                                清空
-    _________________________________
-    REACHABLE：表示邻居设备可达。
-    STALE：表示邻居设备的条目已过期，但之前是可达的。
-    DELAY：表示正在等待确认邻居设备是否可达。
-    PROBE：表示正在积极探测邻居设备是否可达
-    _________________________________
+**作为一个统一的接口管理网络**
++ **全局选项**
+  + `-s` - 更多信息
+  + `-d` - 更详细
+  + `-4` - 仅IPv4
+  + `-6`
+  + `-o` - 单行
+
++ **link - 网络接口(链路层)**
+  + `show` - 显示所有接口
+  + `set <dev> up/down` - 开启或关闭接口
+  + `set <dev> address <MAC>` - 设置MAC地址(down)
+  
++ **address - IP地址**
+  + `ip a` - 显示所有接口地址
+  + `add <IP> dev <devname>` - 添加IP地址
+  + `del <IP> dev <devname>`
+  + `flush dev <devname>` - 清空
+
++ **route - 路由表**
+  + `ip r` - 显示所有路由表
+  + `get <IP>` -获取指定IP的路由
+
++ **neigh - ARP/NDISC缓存**
+  + `ip n`
+  + `add [IP] lladdr [MAC] dev [eth0]` - 添加表项
+  + `del [IP] dev [eth0]` - 删除表项
+  + `flush all` - 清空
+```
+REACHABLE：表示邻居设备可达。
+STALE：表示邻居设备的条目已过期，但之前是可达的。
+DELAY：表示正在等待确认邻居设备是否可达。
+PROBE：表示正在积极探测邻居设备是否可达
+```
+
++ **rule - 策略路由规则**
+
++ **tunnel - IP隧道**
+
++ **maddress - 多播地址**
+
++ **monitor - 网络事件**
+  + `all` - 所有事件
+
 
 ### ss
     +    -t        # tcp
@@ -798,5 +811,15 @@ reboot
 - 服务端参数
   - `-s` : 启动服务器
   - `-B` : 绑定指定IP
+
+---
+
+### **tee**
+
+接收来自前一个命令通过管道送来的输出,输出到stdout和多个文件中
+
++ `-a` - 将数据追加到文件末尾
+
+**特性:可处理`>`符号无法做到的权限问题**
 
 ---
