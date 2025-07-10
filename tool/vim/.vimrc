@@ -1,6 +1,6 @@
 syntax on  
 set number          "显示行号
-"set rnu				"相对行号
+"set rnu            "相对行号
 set autoindent      "自动缩进
 set encoding=utf-8  "使用utf-8字符编码
 set fileencoding=utf-8
@@ -19,8 +19,13 @@ set expandtab       "tab to space
 set ts=4        
 set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
+set smarttab
 " 在编写makefile文件时使用tab
 autocmd FileType make setlocal noexpandtab  " 仅对 Makefile 禁用 Tab 转空格
+autocmd FileType c set ts=8
+autocmd FileType c set softtabstop=8
+autocmd FileType c set shiftwidth=8
+
 
 "把 - 和 _ 也看作单词的一部分
 set iskeyword+=-
