@@ -1,68 +1,74 @@
-syntax on  
-set number          "显示行号
-"set rnu            "相对行号
-set autoindent      "自动缩进
+" 编码
 set encoding=utf-8  "使用utf-8字符编码
 set fileencoding=utf-8
-"set cindent
-set nocompatible    "?
-"set guifont=consolas:h14
-set wrap            "自动折行
-"set cursorline      "光标行高亮
-set hlsearch        "高亮显示搜索结果
-set incsearch       "搜索模式下，每输入一个字符，就跳到对应结果
-set ignorecase      "忽略搜索大小写
-set tags=./tags;,tags "表示从当前文件所在的目录开始查找 tags 文件，如果没有，则向上递归查找
 
-"Tab and Space 
-set expandtab       "tab to space
+
+" 优化设置
+syntax on  
+set number          " 显示行号
+set autoindent      " 自动缩进
+set nocompatible    " 关闭与Vi的兼容,以支持Vim的特性
+set wrap            " 自动折行
+"set cursorline     " 光标行高亮
+set hlsearch        " 高亮显示搜索结果
+set incsearch       " 搜索模式下，每输入一个字符，就跳到对应结果
+set ignorecase      " 忽略搜索大小写
+set iskeyword+=_,-    " 把 - 和 _ 也看作单词的一部分
+set tags=./tags;,tags "从当前文件目录开始查找 tags 文件，没有则向上递归查找
+
+
+" 格式设置
+set expandtab       " tab to space
 set ts=4        
 set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
 set smarttab
+" Tab转4空格
+nnoremap <space>pq :%s/\t/    /g<cr>:wq<cr>
 " 在编写makefile文件时使用tab
-autocmd FileType make setlocal noexpandtab  " 仅对 Makefile 禁用 Tab 转空格
+autocmd FileType make setlocal noexpandtab
+" c语言使用特殊8格Tab
 autocmd FileType c set ts=8
 autocmd FileType c set softtabstop=8
 autocmd FileType c set shiftwidth=8
 
 
-"把 - 和 _ 也看作单词的一部分
-set iskeyword+=-
-set iskeyword+=_
 
-"缓冲区操作
+" 缓冲区操作
 nnoremap <space>b :buffers<cr>:b<space>
 nnoremap <space>e :b#<cr>
 nnoremap <space>n :bnext<cr>
 
-"页面分割操作
+
+" 页面分割操作
 nnoremap <space>s :split<space>
 nnoremap <space>v :vsp<space>
 nnoremap <space>d <c-w>w
 
-"保存
+
+" 保存退出
 nnoremap <space>w :w<cr>
 nnoremap <space>q :q<cr>
-nnoremap <space>fq :q!<cr>
-nnoremap <space>pq :%s/\t/    /g<cr>:wq<cr>
+nnoremap <space>f :q!<cr>
 
-"多标签页
+
+" 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt :tabedit<space>
 nnoremap <space>tm :vert term<cr>
 
-"操作优化
+" 操作优化
 nnoremap gf <c-w>f<c-w>T
 nnoremap gm $
+vnoremap gm $
 nnoremap <space>r :reg<cr>
 inoremap jf <esc>
 cnoremap jf <c-c> 
-vnoremap gm $
+
+
+" 中文符号转英文符号
 inoremap ！ !
 inoremap （ (
 inoremap ） )
-inoremap 【 [
-inoremap 】 ]
 inoremap ； ;
 inoremap ： :
 inoremap ‘ '
@@ -70,12 +76,9 @@ inoremap “ "
 inoremap ， ,
 inoremap 。 .
 inoremap ？ ?
-inoremap 《 <
-inoremap 》 >
 inoremap · `
 
 "自动补全
-inoremap jl <c-x><c-l>
 inoremap jnf <c-x><c-f>
 inoremap jk <c-x><c-k>
 
@@ -85,10 +88,6 @@ set complete+=k
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
-"autocmd FileType python setlocal dictionary+=~/.vim/dict/python.dict
-"autocmd FileType javascript setlocal dictionary+=~/.vim/dict/javascript.dict
-"autocmd FileType html setlocal dictionary+=~/.vim/dict/html.dict
-"autocmd FileType css setlocal dictionary+=~/.vim/dict/css.dict
 
 
 augroup numbertoggle 	"智能切换绝对行号和相对行号
@@ -98,10 +97,8 @@ augroup numbertoggle 	"智能切换绝对行号和相对行号
 augroup END
 
 
-
 " 总是显示状态栏
 set laststatus=2
-
 " 设置状态栏内容
 set statusline=
 set statusline+=%F\                     " 文件名
