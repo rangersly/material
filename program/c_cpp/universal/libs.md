@@ -4,37 +4,28 @@
 
 ## index
 
-- [C](#c)
-  - [输入/输出 stdio](./io.md)
-  - [资源管理和系统交互 stdlib](#stdlib)
-  - [字符串处理 string](./cstring.md)
-  - [数学函数 math](#math)
-  - [字符处理 ctype](#ctype)
-  - [时间/日期 time](#time)
-  - [错误处理 errno](#errno)
-  - [断言 assert](#assert)
-  - [可变参数处理 stdarg](#stdarg)
-  - [信号处理 signal](#signal)
-  - [标准定义stddef](#stddef)
-  - [整数范围 limits](#limits)
-  - [浮点数特性 float](#float)
-  - [布尔类型(C99) stdbool](#stdbool)
-  - [固定大小整数(C99) stdint](#stdint)
-  - [复数运算(C99) complex](#complex)
-  - [泛型数学(C99) tgmath](#tgmath) : 类型泛型数学宏
-  - [浮点环境(C99) fenv](#fenv)
-  - [多线程支持(C11) threads](#threads)
-  - [原子操作(C11) stdatomic](#stdatomic)
-  - [Unicode支持(C11) uchar](#uchar)
-- [CPP](#cpp)
-  - [STL](../STL/)
+- [输入/输出 stdio](./io.md)
+- [资源管理和系统交互 stdlib](#stdlib)
+- [字符串处理 string](#cstring)
+- [数学函数 math](#math)
+- [字符处理 ctype](#ctype)
+- [时间/日期 time](#time)
+- [错误处理 errno](#errno)
+- [断言 assert](#assert)
+- [可变参数处理 stdarg](#stdarg)
+- [信号处理 signal](#signal)
+- [标准定义stddef](#stddef)
+- [整数范围 limits](#limits)
+- [浮点数特性 float](#float)
+- [布尔类型(C99) stdbool](#stdbool)
+- [固定大小整数(C99) stdint](#stdint)
+- [复数运算(C99) complex](#complex)
+- [泛型数学(C99) tgmath](#tgmath) : 类型泛型数学宏
+- [浮点环境(C99) fenv](#fenv)
+- [多线程支持(C11) threads](#threads)
+- [原子操作(C11) stdatomic](#stdatomic)
+- [Unicode支持(C11) uchar](#uchar)
 - [POSIX](#unistd)
-- [OTHER]()
-- [SELF]()
-  - [offsetof](../libs/offsetof.h) : 计算结构体成员相对结构体首地址的偏移度
-  - [string hash](../libs/string_hash.c)
-  - [thread pool](../libs/thread-pool.cpp) : 简易线程池
-  - [BIT](../libs/bit.h) : 有关位运算的函数封装
 
 ---
 
@@ -692,5 +683,27 @@ struct tm {
     - 复制文件描述符
   - `int isatty(int fd);`
     - 检查文件描述符是否关联到终端
+
+---
+
+## **cstring**
+
+```c
+strcpy(buf1, "hello");		// 用后面的字符串覆盖前面的字符串
+strncpy(buf1, "hello", 5);	// 增加指定长度
+strcat(buf1, "hello");		// 连接字符串
+strncat(buf1, "hello", 5);
+strcmp(buf1, "hello");		// 比较字符串,相等返回0
+strlen(buf1);				// 返回长度，不包括'\0'
+strstr(buf1, "hello");		// 返回第一次出现子串的指针
+strtok(buf1, " ");			// 分割字符串，返回分割过的字符串
+```
+
+__内存操作函数不检测EOF,不同于str类函数__
+
+- `memset(buf1, 0, sizeof(buf1))`:覆写内存块
+- `memcpy(buf1, "hello", 5)`:复制内存块,不处理内存重叠
+- `memmove(buf1 + 1, buf1, 4)`:移动5个字节到前一个位置,可处理重叠
+- `int memcmp(const void *ptr1, const void *ptr2, size_t num);`:比较函数,返回0表示相等
 
 ---
