@@ -4,7 +4,7 @@
 
 ## index
 
-- [输入/输出 stdio](./io.md)
+- [输入/输出 stdio](#stdio)
 - [资源管理和系统交互 stdlib](#stdlib)
 - [字符串处理 string](#cstring)
 - [数学函数 math](#math)
@@ -27,6 +27,109 @@
 - [Unicode支持(C11) uchar](#uchar)
 - [POSIX](#unistd)
 
+---
+
+## **stdio**
+
+- **核心概念**
+  - 流(数据源/目标的抽象)
+  - `FILE*` 文件指针
+  - 预定义流
+    - `stdin`:标准输入
+    - `stdout`:标准输出
+    - `stderr`:标准错误
+  - 文件操作模式
+  |模式|描述|文件存在|文件不存在|
+  |----|----|--------|----------|
+  |`"r"`|读|打开|失败|
+  |`"w"`|写|清空|创建|
+  |`"a"`|追加|尾部写入|创建|
+  |`"r+"`|读写|打开|失败|
+  |`"w+"`|读写|清空|创建|
+  |`"a+"`|读写追加|尾部写入|创建|
+  |`"b"`|搭配其他选项表二进制|||
+
+- **文件操作函数**
+  - 打开/关闭
+```
+FILE *fopen(const char *filename, const char *mode);
+int fclose(FILE *stream);
+```
+  - 临时文件
+```
+FILE *tmpfile(void);  // 创建临时文件,wb+模式
+char *tmpnam(char *s);// 生成唯一临时文件名
+```
+  - 删除/重命名
+```
+int remove(const char *filename);   // 删除文件
+int rename(const char *oldname, const char *newname);   // 重命名
+```
+  - **文件定位**
+```
+fseek(FILE *stream, long offset, int whence);  // 移动指针
+long ftell(FILE *stream);                      // 获取当前位置
+void rewind(FILE *stream);                     // 重置到文件开头
+
+// 参数 whence：
+//  SEEK_SET(文件头) SEEK_CUR(当前位置) SEEK_END(文件尾)
+```
+  - **获取文件描述符**
+```
+// #include<unistd.h>
+int fileno(FILE *stream);
+```
+
+- **输入输出函数**
+  - 字符I/O
+```
+int fgetc(FILE *stream);         // 读取字符(函数)
+int getc(FILE *stream);          // 同fgetc(宏)
+int getchar(void);               // getc(stdin)
+
+int fputc(int c, FILE *stream);  // 写入字符
+int putc(int c, FILE *stream);   // 同fputc
+int putchar(int c);              // putc(c, stdout)
+```
+  - 行I/O
+```
+char *fgets(char *s, int size, FILE *stream);  // 读取一行(保留换行符) != NULL
+int fputs(const char *s, FILE *stream);        // 写入(不添加换行符)
+```
+  - 格式化I/O
+```
+printf("Value: %d\n", x);              // 输出到stdout
+fprintf(file, "Value: %f", y);         // 输出到文件
+snprintf(buf, size, "Sum: %d", a+b);   // 解析到字符串(限制长度)
+
+scanf("%d", &num);                     // 从stdin读取
+fscanf(file, "%s %d", str, &id);       // 从文件读取
+sscanf(buffer, "%d,%f", &x, &y);       // 从字符串解析
+```
+  - 二进制I/O(块读写)
+```
+size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+```
+
+- **错误处理**
+```
+void perror(const char *s); // 打印系统错误信息(配合<errno.h>使用)
+int feof(FILE *stream);    // 检测文件结束标志(返回非0表示到达结尾)
+int ferror(FILE *stream);  // 检测文件流错误标志(返回非0表示错误)
+void clearerr(FILE *stream); // 清除错误/EOF标志
+```
+
+- **缓冲**
+  - 全缓冲(文件默认)
+  - 行缓冲(终端默认)
+  - 无缓冲(stderr)
+  - `setbuf(FILE *stream, char *buffer);`:自定义缓冲区
+  - `BUFSIZ`:系统级缓冲区大小常量
+```
+fflush(FILE *stream);  // 强制刷新输出缓冲区
+// 若 stream 为 NULL，刷新所有输出流
+```
 ---
 
 ## **stdlib**

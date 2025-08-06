@@ -3,16 +3,12 @@
 ---
 
 ## index
-
 - [C](#c)
   - [malloc](#malloc)
   - [calloc](#calloc)
   - [realloc](#realloc)
   - [aligned-alloc](#aligned-alloc)
   - [free](#) : 传入动态分配的指针地址,记得释放完赋NULL
-- [CPP](#cpp)
-  - [new](#new)
-  - [delete](#delete)
 
 ---
 
