@@ -51,66 +51,66 @@
 
 - **文件操作函数**
   - 打开/关闭
-```
-FILE *fopen(const char *filename, const char *mode);
-int fclose(FILE *stream);
-```
+  ```
+  FILE *fopen(const char *filename, const char *mode);
+  int fclose(FILE *stream);
+  ```
   - 临时文件
-```
-FILE *tmpfile(void);  // 创建临时文件,wb+模式
-char *tmpnam(char *s);// 生成唯一临时文件名
-```
+  ```
+  FILE *tmpfile(void);  // 创建临时文件,wb+模式
+  char *tmpnam(char *s);// 生成唯一临时文件名
+  ```
   - 删除/重命名
-```
-int remove(const char *filename);   // 删除文件
-int rename(const char *oldname, const char *newname);   // 重命名
-```
+  ```
+  int remove(const char *filename);   // 删除文件
+  int rename(const char *oldname, const char *newname);   // 重命名
+  ```
   - **文件定位**
-```
-fseek(FILE *stream, long offset, int whence);  // 移动指针
-long ftell(FILE *stream);                      // 获取当前位置
-void rewind(FILE *stream);                     // 重置到文件开头
-
-// 参数 whence：
-//  SEEK_SET(文件头) SEEK_CUR(当前位置) SEEK_END(文件尾)
-```
+  ```
+  fseek(FILE *stream, long offset, int whence);  // 移动指针
+  long ftell(FILE *stream);                      // 获取当前位置
+  void rewind(FILE *stream);                     // 重置到文件开头
+  
+  // 参数 whence：
+  //  SEEK_SET(文件头) SEEK_CUR(当前位置) SEEK_END(文件尾)
+  ```
   - **获取文件描述符**
-```
-// #include<unistd.h>
-int fileno(FILE *stream);
-```
+  ```
+  // #include<unistd.h>
+  int fileno(FILE *stream);
+  ```
 
 - **输入输出函数**
   - 字符I/O
-```
-int fgetc(FILE *stream);         // 读取字符(函数)
-int getc(FILE *stream);          // 同fgetc(宏)
-int getchar(void);               // getc(stdin)
-
-int fputc(int c, FILE *stream);  // 写入字符
-int putc(int c, FILE *stream);   // 同fputc
-int putchar(int c);              // putc(c, stdout)
-```
+  ```
+  int fgetc(FILE *stream);         // 读取字符(函数)
+  int getc(FILE *stream);          // 同fgetc(宏)
+  int getchar(void);               // getc(stdin)
+  
+  int fputc(int c, FILE *stream);  // 写入字符
+  int putc(int c, FILE *stream);   // 同fputc
+  int putchar(int c);              // putc(c, stdout)
+  ```
   - 行I/O
-```
-char *fgets(char *s, int size, FILE *stream);  // 读取一行(保留换行符) != NULL
-int fputs(const char *s, FILE *stream);        // 写入(不添加换行符)
-```
+  ```
+  char *fgets(char *s, int size, FILE *stream);  // 读取一行(保留换行符) != NULL
+  int fputs(const char *s, FILE *stream);        // 写入(不添加换行符)
+  ```
   - 格式化I/O
-```
-printf("Value: %d\n", x);              // 输出到stdout
-fprintf(file, "Value: %f", y);         // 输出到文件
-snprintf(buf, size, "Sum: %d", a+b);   // 解析到字符串(限制长度)
-
-scanf("%d", &num);                     // 从stdin读取
-fscanf(file, "%s %d", str, &id);       // 从文件读取
-sscanf(buffer, "%d,%f", &x, &y);       // 从字符串解析
-```
+  ```
+  printf("Value: %d\n", x);              // 输出到stdout
+  fprintf(file, "Value: %f", y);         // 输出到文件
+  snprintf(buf, size, "Sum: %d", a+b);   // 解析到字符串(限制长度)
+  
+  scanf("%d", &num);                     // 从stdin读取
+  fscanf(file, "%s %d", str, &id);       // 从文件读取
+  sscanf(buffer, "%d,%f", &x, &y);       // 从字符串解析
+  ```
   - 二进制I/O(块读写)
-```
-size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
-size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
-```
+  ```
+  size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+  size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+  ```
 
 - **错误处理**
 ```
@@ -130,68 +130,57 @@ void clearerr(FILE *stream); // 清除错误/EOF标志
 fflush(FILE *stream);  // 强制刷新输出缓冲区
 // 若 stream 为 NULL，刷新所有输出流
 ```
+
 ---
 
 ## **stdlib**
 
-### 动态内存管理
+- **动态内存管理**
 
-- [看这里哦](./dynamic-memory.md)
+[看这里哦](./dynamic-memory.md)
 
-### 程序终止与控制
+- **程序终止与控制**
+  - `void exit(int status)`
+    - 正常终止程序并调用atexit里注册的函数
+    - 参数(返回码)设置为(`EXIT_SUCCESS`或`EXIT_FAILURE`)
+  - `void abort(void)`
+    - 异常终止程序,不执行清理操作,直接终止进程(触发 SIGABRT 信号)
+  - `int atexit(void (*func)(void))`
+    - 注册程序终止时执行的函数(按注册的逆序调用)
 
-- `void exit(int status)`
-  - 正常终止程序并调用atexit里注册的函数
-  - 参数(返回码)设置为(`EXIT_SUCCESS`或`EXIT_FAILURE`)
+- **系统交互**
+  - `int system(const char* command)`
+    - 执行操作系统命令
+    - 返回命令执行的状态码
+  - `char* getenv(const char* name)`
+    - 获取环境变量值
+    - 返回的字符串不可修改
 
-- `void abort(void)`
-  - 异常终止程序,不执行清理操作,直接终止进程(触发 SIGABRT 信号)
+- **随机数生成**
+  - `int rand(void)`
+    - 生成伪随机数
+    - 范围 `0` 到 `RAND_MAX`
+  - `void srand(unsigned int seed)`
+    - 设置随机数种子,通常用 `time(NULL)` 初始化
 
-- `int atexit(void (*func)(void))`
-  - 注册程序终止时执行的函数(按注册的逆序调用)
+- **搜索与排序**
+  - `void qsort(void* base, size_t nmemb, size_t size,
+            int (*compar)(const void*, const void*));`
+    - 快速排序数组
+  - `void* bsearch(const void* key, const void* base,
+               size_t nmemb, size_t size,
+               int (*compar)(const void*, const void*));`
+    - 在已排序数组中二分查找元素
+    - 找到返回元素地址,否则返回 `NULL`
 
-### 系统交互
-
-- `int system(const char* command)`
-  - 执行操作系统命令
-  - 返回命令执行的状态码
-
-- `char* getenv(const char* name)`
-  - 获取环境变量值
-  - 返回的字符串不可修改
-
-### 随机数生成
-
-- `int rand(void)`
-  - 生成伪随机数
-  - 范围 `0` 到 `RAND_MAX`
-
-- `void srand(unsigned int seed)`
-  - 设置随机数种子,通常用 `time(NULL)` 初始化
-
-### 搜索与排序 
-
-- `void qsort(void* base, size_t nmemb, size_t size,
-          int (*compar)(const void*, const void*));`
-  - 快速排序数组
-
-- `void* bsearch(const void* key, const void* base,
-             size_t nmemb, size_t size,
-             int (*compar)(const void*, const void*));`
-  - 在已排序数组中二分查找元素
-  - 找到返回元素地址,否则返回 `NULL`
-
-### 数值转换
-    
-- `atoi`,`atof`,`atol`
-  - 将字符串转换为整数、浮点数、长整数
-  - 无法检测错误
-
-- `strtol`,`strtod`
-  - 更安全的字符串转换,可检测错误和进制
-
-- `abs`,`labs`,`llabs`
-  - 返回 整数/长整数/长长整数 的绝对值
+- **数值转换**
+  - `atoi`,`atof`,`atol`
+    - 将字符串转换为整数、浮点数、长整数
+    - 无法检测错误
+  - `strtol`,`strtod`
+    - 更安全的字符串转换,可检测错误和进制
+  - `abs`,`labs`,`llabs`
+    - 返回 整数/长整数/长长整数 的绝对值
 
 ---
 
