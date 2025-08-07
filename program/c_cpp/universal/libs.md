@@ -51,20 +51,20 @@
 
 - **文件操作函数**
   - 打开/关闭
-```
-FILE *fopen(const char *filename, const char *mode);
-int fclose(FILE *stream);
-```
+  ```
+  FILE *fopen(const char *filename, const char *mode);
+  int fclose(FILE *stream);
+  ```
   - 临时文件
-```
-FILE *tmpfile(void);  // 创建临时文件,wb+模式
-char *tmpnam(char *s);// 生成唯一临时文件名
-```
+  ```
+  FILE *tmpfile(void);  // 创建临时文件,wb+模式
+  char *tmpnam(char *s);// 生成唯一临时文件名
+  ```
   - 删除/重命名
-```
-int remove(const char *filename);   // 删除文件
-int rename(const char *oldname, const char *newname);   // 重命名
-```
+  ```
+  int remove(const char *filename);   // 删除文件
+  int rename(const char *oldname, const char *newname);   // 重命名
+  ```
   - **文件定位**
 ```
 fseek(FILE *stream, long offset, int whence);  // 移动指针
