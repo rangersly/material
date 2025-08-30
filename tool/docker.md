@@ -12,7 +12,7 @@
   - [基本命令](#docker-command)
   - [数据管理](#)
   - [高级用法](#)
-- [docker-compose](#docker-compose)
+- [docker compose](#docker-compose)
   - [COMMAND](#docker-compose-command)
   - [YAML](#docker-compose-yml)
 - [daemon.json](#)
@@ -186,19 +186,19 @@ USER myuser
 
 ### docker-compose-command
 
-- `docker-compose build`            构建镜像
-- `docker-compose up -d`            启动在后台运行
-- `docker-compose up -d --build`    重建并运行
-- `docker-compose down`             停止并删除容器
-- `docker-compose logs -f <server>` 查看服务日志
-- `docker-compose ps`               查看运行状态
-- `docker-compose exec`             进入容器执行命令
-- `docker-compose pull`             拉取最新镜像 
-- `docker-compose config`           检查配置语法是否正确
-- `docker-compose stop`             停止容器
-- `docker-compose start`            启动停止的容器
-- `docker-compose restart`          stop + start 
-- `docker-compose pause`            挂起,不释放资源
+- `docker compose build`            构建镜像
+- `docker compose up -d`            启动在后台运行
+- `docker compose up -d --build`    重建并运行
+- `docker compose down`             停止并删除容器
+- `docker compose logs -f <server>` 查看服务日志
+- `docker compose ps`               查看运行状态
+- `docker compose exec`             进入容器执行命令
+- `docker compose pull`             拉取最新镜像 
+- `docker compose config`           检查配置语法是否正确
+- `docker compose stop`             停止容器
+- `docker compose start`            启动停止的容器
+- `docker compose restart`          stop + start 
+- `docker compose pause`            挂起,不释放资源
 
 
 ---
@@ -206,8 +206,6 @@ USER myuser
 ### docker-compose-yml
 
 ```yaml
-version: '3.8'              # 指定 Compose 版本（与 Docker 版本兼容性相关）
-
 services:
   myapp:                    # 服务名称（容器间通过此名称通信）
     image: nginx:latest     # 使用镜像
