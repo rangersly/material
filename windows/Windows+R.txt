@@ -1,6 +1,10 @@
 cmd				//cmd
-dxdiag				//µçÄÔÅäÖÃ
-mrt				//ÇåÀí¶ñÒâÈí¼ş
-cleanmgr				//ÇåÀí´ÅÅÌ
-regedit 				//Ê¹ÓÃ×¢²á±í
+dxdiag				//ç”µè„‘é…ç½®
+mrt				//æ¸…ç†æ¶æ„è½¯ä»¶
+cleanmgr				//æ¸…ç†ç£ç›˜
+regedit 				//ä½¿ç”¨æ³¨å†Œè¡¨
+wt        //windows powershell
+msconfig        //ç³»ç»Ÿé…ç½®
+explorer.exe    //èµ„æºç®¡ç†å™¨
 shell:RecycleBinFolder	
+
