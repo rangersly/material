@@ -32,6 +32,34 @@ ALT+SHIFT+BACKSPACE　　 重做上一步怀废 牟僮?br>
 
 Windows键+M　　　　　　 最小化所有被打开的窗口。
 
+Windows键+Q/S          弹出Windows搜索
+
+Windows键+T            选择任务栏应用程序
+
+Windows键+U            辅助功能
+
+Windows键+I            Windows设置
+
+Windows键+P            投影
+
+Windows键+A            快捷面板(win11) 通知面板(win10)
+
+Windows键+G            Xbox游戏菜单
+
+Windows键+H            语音输入
+
+Windows键+L            锁屏
+
+Windows键+Z            窗口分屏
+
+Windows键+V            剪贴板(需要启用, 默认关闭)
+
+Windows键+B            任务栏右侧应用程序
+
+Windows键+N            打开通知
+
+Windows键+M            最小化当前桌面的所有窗口
+
 Windows键+E　　　　　　 打开资源管理器
 
 Windows键+R　　　　　　 打开“运行”对话框
@@ -51,3 +79,4 @@ ALT+ESC　　　　　　　　 切换当前程序
 ALT+ENTER　　　　　　　 将windows下运行的MSDOS窗口在窗口和全屏幕状态间切换
 
 PRINT SCREEN　　　　　　将当前屏幕以图象方式拷贝到剪贴板
+
