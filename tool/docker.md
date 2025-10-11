@@ -16,6 +16,7 @@
   - [COMMAND](#docker-compose-command)
   - [YAML](#docker-compose-yml)
 - [daemon.json](#)
+- [解决防火墙导致错误](#display-iptables)
 
 ---
 
@@ -266,3 +267,17 @@ networks:           # 定义网络
   ]
 }
 ```
+
+---
+
+## **display-iptables**
+
+因为配置防火墙会导致docker防火墙的一些问题,故关闭docker防火墙
+
+```/etc/docker/daemon.json
+{
+  "iptables": false
+}
+```
+
+---
