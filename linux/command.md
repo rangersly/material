@@ -34,6 +34,7 @@
 - [locate](#locate):高效文件查找
 - [whereis](#whereis)
 - [tee](#tee):数据分流
+- [tail](#tail):显示文件的末尾内容
 
 ---
 
@@ -198,13 +199,13 @@
     +    -R            # 同时更改所有子目录
 ```bash
     SUID    4
-        执行二进制文件时，权限提升为文件所有者
+        执行二进制文件时,权限提升为文件所有者
         
     SGID    2
-        在此权限下的目录进入后，有效用户组变为所有组
+        在此权限下的目录进入后,有效用户组变为所有组
 
     SBIT    1
-        在此权限下的文件夹里创建文件，仅有root与属主有权操作
+        在此权限下的文件夹里创建文件,仅有root与属主有权操作
 ```
 
 ### file
@@ -234,17 +235,17 @@
 ```
 
 ### rsync
-    +    -a（archive）：归档模式,用于完整同步
-    +    -v（verbose）：详细模式，显示同步过程中的详细信息。
-    +    -u（update）：仅在目标文件不存在或源文件更新时才同步。
-    +    -z（compress）：在传输过程中压缩文件数据。
-    +    --delete：删除目标目录中多余的文件，使目标目录与源目录保持一致
-    +    -e（rsh）：指定远程连接时使用的工具（如 ssh）。
-    +    --exclude：指定排除的文件或目录模式。
-    +    --include：指定包含的文件或目录模式。
-    +    -P --progress：显示同步进度。
-    +    --bwlimit : 限速，用于单个大文件，避免占用过多带宽
-    +    --dry-run：模拟同步操作，不实际执行，用于测试同步命令的效果。
+    +    -a(archive):归档模式,用于完整同步
+    +    -v(verbose):详细模式,显示同步过程中的详细信息.
+    +    -u(update):仅在目标文件不存在或源文件更新时才同步.
+    +    -z(compress):在传输过程中压缩文件数据.
+    +    --delete:删除目标目录中多余的文件,使目标目录与源目录保持一致
+    +    -e(rsh):指定远程连接时使用的工具(如 ssh).
+    +    --exclude:指定排除的文件或目录模式.
+    +    --include:指定包含的文件或目录模式.
+    +    -P --progress:显示同步进度.
+    +    --bwlimit : 限速,用于单个大文件,避免占用过多带宽
+    +    --dry-run:模拟同步操作,不实际执行,用于测试同步命令的效果.
     1.    本地同步
         `rsync -avP /path/to/source/ /path/to/destination/`
     2.    从本地同步到远程
@@ -253,12 +254,12 @@
         `rsync -av --delete /path/to/source/ /path/to/destination/`
     4.  排除某些文件或目录
         `rsync -av --exclude 'temp/*' --exclude '*.log' /path/to/source/ /path/to/destination/`
-        --exclude 'temp/*'：排除 temp 目录下的所有文件。
-        --exclude '*.log'：排除所有 .log 文件。
+        --exclude 'temp/*':排除 temp 目录下的所有文件.
+        --exclude '*.log':排除所有 .log 文件.
     5.  包含某些文件或目录
         `rsync -av --include 'data/*' --exclude '*' /path/to/source/ /path/to/destination/`
-        --include 'data/*'：仅包含 data 目录下的文件。
-        --exclude '*'：排除其他所有文件。
+        --include 'data/*':仅包含 data 目录下的文件.
+        --exclude '*':排除其他所有文件.
     6.  模拟同步操作
         `rsync -av --dry-run /path/to/source/ /path/to/destination/`
 
@@ -427,19 +428,19 @@ __用户所有组是passwd和groups的并集__
 ### nohup    命令挂机(退出登陆后依然执行)
 nohup [command] &
 `screen` 主要用于用户开启多个独立的会话(称为"窗口")在这些会话之间可以自由切换而不会中断已经运行的程序
-1. **启动一个新的 screen 会话**：
+1. **启动一个新的 screen 会话**:
    screen
-2. **列出当前的 screen 会话**：
+2. **列出当前的 screen 会话**:
    screen -ls
-3. **重新连接到一个已存在的会话**：
+3. **重新连接到一个已存在的会话**:
    screen -r [会话ID或名称]
-4. **分离当前会话**：
-   在 screen 会话中按 `Ctrl-a` 然后按 `d`。
-9. **退出 screen 会话**：
-   - 关闭当前窗口：在 screen 会话中按 `Ctrl-a` 然后按 `k`。
-   - 退出所有窗口并结束会话：在 screen 会话中按 `Ctrl-a` 然后按 `\`。
-10. **锁定当前会话**：
-    在 screen 会话中按 `Ctrl-a` 然后按 `x`。
+4. **分离当前会话**:
+   在 screen 会话中按 `Ctrl-a` 然后按 `d`.
+9. **退出 screen 会话**:
+   - 关闭当前窗口:在 screen 会话中按 `Ctrl-a` 然后按 `k`.
+   - 退出所有窗口并结束会话:在 screen 会话中按 `Ctrl-a` 然后按 `\`.
+10. **锁定当前会话**:
+    在 screen 会话中按 `Ctrl-a` 然后按 `x`.
 
 ### ulimit
 - 查看和修改进程运行资源限制    
@@ -486,10 +487,10 @@ nohup [command] &
   + `del [IP] dev [eth0]` - 删除表项
   + `flush all` - 清空
 ```
-REACHABLE：表示邻居设备可达。
-STALE：表示邻居设备的条目已过期，但之前是可达的。
-DELAY：表示正在等待确认邻居设备是否可达。
-PROBE：表示正在积极探测邻居设备是否可达
+REACHABLE:表示邻居设备可达.
+STALE:表示邻居设备的条目已过期,但之前是可达的.
+DELAY:表示正在等待确认邻居设备是否可达.
+PROBE:表示正在积极探测邻居设备是否可达
 ```
 
 + **rule - 策略路由规则**
@@ -517,10 +518,10 @@ PROBE：表示正在积极探测邻居设备是否可达
 
 ### **curl**
 
-curl是一个强大的命令行工具，用于传输数据，支持多种协议（HTTP、HTTPS、FTP、FTPS、SCP、SFTP、TFTP、LDAP、DICT、TELNET等）。它被广泛用于测试API、下载文件、上传数据等场景。
+curl是一个强大的命令行工具,用于传输数据,支持多种协议(HTTP、HTTPS、FTP、FTPS、SCP、SFTP、TFTP、LDAP、DICT、TELNET等).它被广泛用于测试API、下载文件、上传数据等场景.
 
 
-- `-X` 或 `--request`: 指定HTTP请求方法（GET, POST, PUT, DELETE等）
+- `-X` 或 `--request`: 指定HTTP请求方法(GET, POST, PUT, DELETE等)
   ```bash
   curl -X POST https://example.com/api
   ```
@@ -535,14 +536,14 @@ curl是一个强大的命令行工具，用于传输数据，支持多种协议�
   curl -d "name=John&age=30" https://example.com/api
   ```
 
-- `--data-raw`: 发送原始数据（不处理特殊字符）
+- `--data-raw`: 发送原始数据(不处理特殊字符)
 - `--data-binary`: 发送二进制数据
 - `--data-urlencode`: URL编码发送的数据
   ```bash
   curl --data-urlencode "name=John Doe" https://example.com/api
   ```
 
-- `-F` 或 `--form`: 发送multipart/form-data（文件上传）
+- `-F` 或 `--form`: 发送multipart/form-data(文件上传)
   ```bash
   curl -F "file=@photo.jpg" https://example.com/upload
   ```
@@ -550,7 +551,7 @@ curl是一个强大的命令行工具，用于传输数据，支持多种协议�
 - `-i` 或 `--include`: 输出包含响应头
 - `-I` 或 `--head`: 只获取响应头
 - `-v` 或 `--verbose`: 显示详细操作信息
-- `-s` 或 `--silent`: 静默模式（不显示进度或错误信息）
+- `-s` 或 `--silent`: 静默模式(不显示进度或错误信息)
 - `-o` 或 `--output`: 将输出写入文件
   ```bash
   curl -o output.html https://example.com
@@ -575,10 +576,10 @@ curl是一个强大的命令行工具，用于传输数据，支持多种协议�
   curl -x http://proxy.example.com:8080 https://example.com
   ```
 
-- `--connect-timeout`: 连接超时时间（秒）
-- `-m` 或 `--max-time`: 最大请求时间（秒）
+- `--connect-timeout`: 连接超时时间(秒)
+- `-m` 或 `--max-time`: 最大请求时间(秒)
 - `--retry`: 失败重试次数
-- `--retry-delay`: 重试间隔时间（秒）
+- `--retry-delay`: 重试间隔时间(秒)
 
 
 - `-k` 或 `--insecure`: 允许不安全的SSL连接
@@ -703,8 +704,8 @@ curl -# -O https://example.com/largefile.zip
 `bc`支持高精度数学运算、变量、函数、条件语句等编程功能
 
 - **基本用法**
-  - **交互模式**：终端输入 `bc` 后回车
-  - **非交互模式**：直接计算表达式
+  - **交互模式**:终端输入 `bc` 后回车
+  - **非交互模式**:直接计算表达式
     ```bash
     echo "5 + 3" | bc
     ```
@@ -716,8 +717,8 @@ curl -# -O https://example.com/largefile.zip
   ```
 
 - **进制转换**
-  - **输入进制**：用 `ibase` 设置输入数字的进制。
-  - **输出进制**：用 `obase` 设置输出结果的进制。
+  - **输入进制**:用 `ibase` 设置输入数字的进制.
+  - **输出进制**:用 `obase` 设置输出结果的进制.
   - **调整输入进制一定要注意先后顺序**
   ```bash
   echo "ibase=2; 1101" | bc   # 二进制 1101 → 十进制 13
@@ -740,13 +741,13 @@ square(4)  # 输出 16
 启动时添加 `-l` 参数启用数学库
 
 - **支持的函数**
-  - `s(x)`：正弦（弧度）
-  - `c(x)`：余弦（弧度）
-  - `a(x)`：反正切（结果弧度）
-  - `l(x)`：自然对数
-  - `e(x)`：指数函数（e^x）
-  - `sqrt(x)`：平方根
-  - `j(n, x)`：贝塞尔函数
+  - `s(x)`:正弦(弧度)
+  - `c(x)`:余弦(弧度)
+  - `a(x)`:反正切(结果弧度)
+  - `l(x)`:自然对数
+  - `e(x)`:指数函数(e^x)
+  - `sqrt(x)`:平方根
+  - `j(n, x)`:贝塞尔函数
 
 - **example**
   - 计算Pi
@@ -754,7 +755,7 @@ square(4)  # 输出 16
   `echo "scale=1000; 4*a(1)" | bc -l`
 
 - **退出**
-输入 `quit` 或按 `Ctrl+D` 退出交互模式。
+输入 `quit` 或按 `Ctrl+D` 退出交互模式.
 
 ---
 
@@ -783,7 +784,7 @@ mount /dev/sda1 /mnt/timeshift  # 挂载快照分区到临时目录
 ```bash
 # 针对 Arch Linux
 mkinitcpio -P
-grub-install /dev/nvme0n1    # 安装 GRUB 到磁盘（非分区）
+grub-install /dev/nvme0n1    # 安装 GRUB 到磁盘(非分区)
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
@@ -870,3 +871,33 @@ reboot
   - `-R`
   - `-V`:详细输出
   - `-a`:所有文件(包含隐藏)
+
+---
+
+### tail
+
+用于显示文件的末尾内容,它默认显示文件的最后 10 行,但可以通过选项进行高度自定义
+
+- **常用功能说明**
+
+1. **显示指定行**
+  ```
+  # 显示最后五行
+  tail -5 filename.txt
+
+  # 从20行到末尾
+  tail -n +20 filename.txt
+  ```
+
+2. **实时监控文件变化**
+  ```
+  tail -F filname.log
+  ```
+
+3. **显示文件名**
+  ```
+  # 总是显示文件名标题
+  tail -v filename.txt
+  ```
+
+---
