@@ -22,6 +22,8 @@
 
 ## **docker**
 
+定期使用`docker system prune`清理垃圾,保持环境整洁
+
 ---
 
 ### **install**
