@@ -113,6 +113,7 @@
 - [NetworkManager](#networkmanager)
 - [nmap](#nmap)
 - [iperf3](#iperf) : 网络性能测试工具
+- [ufw](#ufw) : 防火墙配置工具
 
 ---
 
@@ -899,5 +900,25 @@ reboot
   # 总是显示文件名标题
   tail -v filename.txt
   ```
+
+---
+
+### ufw
+
+Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
+
+- **基础命令**
+  - `status verbose` : 列出详细规则
+  - `enable` : 启动UFW
+  - `disable` : 彻底关闭UFW
+  - `reset` : 完全重置,删除所有规则
+  - `allow 22/tcp` : 允许22端口连接
+    - `allow from 192.168.0.0/24` : 允许特定IP
+    - `allow from 192.168.0.0/24 to any port 22` : 允许特定IP
+  - `deny 21/tcp` : 拒绝端口访问
+    - `deny log 23/tcp` : 拒绝并记录日志(通常在`/var/log/ufw.log`)
+  - `delete allow 8080/tcp` : 删除规则(`delete`后接原始规则)
+  - `default deny incoming` : 默认拒绝所有传入(outcoming为传出)
+  - `logging on` : 启用日志
 
 ---
