@@ -1,6 +1,6 @@
 # ~/.bashrc
 
-# 如果未交互运行则退出（避免非交互式shell加载）
+# 如果未交互运行则退出(避免非交互式shell加载)
 [[ $- != *i* ]] && return
 
 # 历史记录配置
@@ -19,14 +19,12 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 # PS1提示符
 
-# Git状态集成（需安装git）
+# Git状态集成(需安装git)
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-# 在 ~/.bashrc 中添加以下内容
-
-# 首先确保 parse_git_branch 函数存在（用于显示 Git 分支）
+# 用于显示 Git 分支
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -48,11 +46,11 @@ parse_git_branch() {
      # 获取当前时间
      local TIME=$(date +"%H:%M:%S")
  
-     # 处理路径：长路径时只保留每级目录首字母
+     # 处理路径:长路径时只保留每级目录首字母
      local DIR=${PWD/#$HOME/\~}
-     if [ ${#DIR} -gt 30 ]; then
+     if [ ${#DIR} -gt 50 ]; then
          DIR=$(echo $DIR | awk -F '/' '{
-             if (length($0) > 30) {
+             if (length($0) > 50) {
                  for (i=1; i<=NF; i++) {
                      if (i == NF) printf "%s", $i;
                      else printf "%.3s/", $i;
@@ -66,17 +64,16 @@ parse_git_branch() {
      PS1="${TimeColor}[${TIME}] ${UserColor}\u${HostColor}@\h${Reset}:"
      PS1+="${PathColor}${DIR}${GitColor}$(parse_git_branch)${Reset}"
  
-     # 添加上一个命令的退出状态（非零时显示）
+     # 添加上一个命令的退出状态(非零时显示)
      if [ $EXIT != 0 ]; then
          PS1+="${ExitColor}[${EXIT}]${Reset}"
      fi
  
-     PS1+="\$ ${Reset}"
+     PS1+="\n${GitColor}> ${Reset}"
  }
  
-# 如果 PROMPT_COMMAND 设置失败，回退到原始提示符
-# 自定义PS1提示符（带颜色和Git分支）
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+# 如果 PROMPT_COMMAND 设置失败,回退到原始提示符
+# PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 
 # 彩色输出
 alias ls='ls --color=auto'
@@ -85,14 +82,11 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # ls别称
-alias l='ls -aslFh --group-directories-first'
-alias ll='ls -A'
-# alias l='ls -CF'
+alias l='ls -slFh --group-directories-first'
+alias ll='ls -aslFh --group-directories-first'
 
 # 安全操作确认
 alias rr='rm -i'
-#alias cp='cp -i'
-#alias mv='mv -i'
 
 # rsync封装函数
 function cpr() {
@@ -101,15 +95,34 @@ function cpr() {
         return 1
     fi
 
-    # 获取最后一个参数（目标路径）
+    # 获取最后一个参数(目标路径)
     local destination="${@: -1}"
-    # 获取除最后一个参数外的所有参数（源文件/目录）
+    # 获取除最后一个参数外的所有参数(源文件/目录)
     local sources=("${@:1:$#-1}")
 
     # 执行 rsync 命令
     rsync -ahP --info=progress2 \
     --super \
-    "${sources[@]}" "$destination"
+    "${sources[@]}" "$destination" 2>/dev/null
+
+     local exit_code=$?
+
+    # 如果失败且是权限问题,询问是否使用sudo
+    if [ $exit_code -ne 0 ]; then
+        echo "Copy error, exit code : $exit_code"
+        # 询问是否使用sudo
+        read -p "Do you use sudo to retry?[y/N] " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo "Use sudo retry..."
+            sudo rsync -ahP --info=progress2 \
+                --super \
+                "${sources[@]}" "$destination"
+            return $?
+        fi
+    fi
+
+    return $exit_code
 }
 
 # 快速导航
