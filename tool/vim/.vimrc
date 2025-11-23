@@ -24,33 +24,24 @@ set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
 set smarttab
 " Tab转4空格
-nnoremap <space>pq :%s/\t/    /g<cr>:wq<cr>
+nnoremap <leader>p :%s/\t/    /g<cr>:wq<cr>
 " 在编写makefile文件时使用tab
 autocmd FileType make setlocal noexpandtab
-" c语言使用特殊8格Tab
-autocmd FileType c set ts=8
-autocmd FileType c set softtabstop=8
-autocmd FileType c set shiftwidth=8
-
 
 
 " 缓冲区操作
 nnoremap <space>b :buffers<cr>:b<space>
 nnoremap <space>e :b#<cr>
-nnoremap <space>n :bnext<cr>
-
 
 " 页面分割操作
-nnoremap <space>s :split<space>
+nnoremap <space>s :split<space>     
 nnoremap <space>v :vsp<space>
 nnoremap <space>d <c-w>w
-
 
 " 保存退出
 nnoremap <space>w :w<cr>
 nnoremap <space>q :q<cr>
 nnoremap <space>f :q!<cr>
-
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt :tabedit<space>
@@ -58,8 +49,6 @@ nnoremap <space>tm :vert term<cr>
 
 " 操作优化
 nnoremap gf <c-w>f<c-w>T
-nnoremap gm $
-vnoremap gm $
 nnoremap <space>r :reg<cr>
 inoremap jf <esc>
 cnoremap jf <c-c> 
@@ -69,14 +58,11 @@ cnoremap jf <c-c>
 inoremap ！ !
 inoremap （ (
 inoremap ） )
-inoremap ； ;
-inoremap ： :
 inoremap ‘ '
 inoremap “ "
 inoremap ， ,
 inoremap 。 .
 inoremap ？ ?
-inoremap · `
 
 " 修复版中文符号转换函数
 function! ConvertChinesePunctuationEnhanced() range
@@ -127,9 +113,7 @@ endfunction
 
 " 映射快捷键
 nnoremap <leader>cs :call ConvertChinesePunctuationEnhanced()<CR>
-vnoremap <leader>cs :call ConvertChinesePunctuationEnhanced()<CR>
 
-" ----------------------------------
 
 "自动补全
 inoremap jnf <c-x><c-f>
