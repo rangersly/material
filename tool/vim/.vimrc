@@ -4,7 +4,7 @@ set fileencoding=utf-8
 
 
 " 优化设置
-syntax on  
+syntax on
 set number          " 显示行号
 set autoindent      " 自动缩进
 set nocompatible    " 关闭与Vi的兼容,以支持Vim的特性
@@ -19,7 +19,7 @@ set tags=./tags;,tags "从当前文件目录开始查找 tags 文件，没有则
 
 " 格式设置
 set expandtab       " tab to space
-set ts=4        
+set ts=4
 set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
 set smarttab
@@ -28,13 +28,15 @@ nnoremap <leader>p :%s/\t/    /g<cr>:wq<cr>
 " 在编写makefile文件时使用tab
 autocmd FileType make setlocal noexpandtab
 
+" 去除行末空白字符
+nnoremap <Leader>cw :%s/\s\+$//e<CR>
 
 " 缓冲区操作
 nnoremap <space>b :buffers<cr>:b<space>
 nnoremap <space>e :b#<cr>
 
 " 页面分割操作
-nnoremap <space>s :split<space>     
+nnoremap <space>s :split<space>
 nnoremap <space>v :vsp<space>
 nnoremap <space>d <c-w>w
 
@@ -51,7 +53,7 @@ nnoremap <space>tm :vert term<cr>
 nnoremap gf <c-w>f<c-w>T
 nnoremap <space>r :reg<cr>
 inoremap jf <esc>
-cnoremap jf <c-c> 
+cnoremap jf <c-c>
 
 
 " 中文符号转英文符号
@@ -69,10 +71,10 @@ function! ConvertChinesePunctuationEnhanced() range
     " 保存光标位置
     let save_cursor = getpos(".")
     let save_view = winsaveview()
-    
+
     " 判断是否在可视化模式下调用
     let visual_mode = (a:firstline != a:lastline) || (mode() =~# '[vV]')
-    
+
     " 确定操作范围
     if visual_mode
         " 可视化模式：使用传递的范围
@@ -83,7 +85,7 @@ function! ConvertChinesePunctuationEnhanced() range
         let range = '%'
         let range_desc = '整个文件'
     endif
-    
+
     " 执行符号转换
     execute 'silent! ' . range . 's/，/,/ge'
     execute 'silent! ' . range . 's/。/./ge'
@@ -103,11 +105,11 @@ function! ConvertChinesePunctuationEnhanced() range
     execute 'silent! ' . range . 's/》/>/ge'
     execute 'silent! ' . range . 's/……/.../ge'
     execute 'silent! ' . range . 's/——/--/ge'
-    
+
     " 恢复状态
     call setpos('.', save_cursor)
     call winrestview(save_view)
-    
+
     echo "已转换" . range_desc . "的中文符号为英文符号"
 endfunction
 

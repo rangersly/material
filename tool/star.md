@@ -49,7 +49,7 @@
 - [C++ 手册](https://cppreference.cn/w/)
 - [鸟哥linux私房菜](https://linux.vbird.org/)
 - [维修手册 iFixit](https://zh.ifixit.com/Guide)
-- [阿里云](https://cn.aliyun.com/)	
+- [阿里云](https://cn.aliyun.com/)
 
 ---
 
@@ -72,7 +72,7 @@
 - [工信部申诉受理中心](https://ythzxfw.miit.gov.cn/index)
 - [中国庭审公开网](https://tingshen.court.gov.cn/)
 - [中国关键词](http://keywords.china.org.cn/index.htm)
-- [图吧工具箱](www.tbtool.cn)	
+- [图吧工具箱](www.tbtool.cn)
 
 ---
 
@@ -104,4 +104,5 @@
 - [qBitEE](https://github.com/c0re100/qBittorrent-Enhanced-Edition)
 - [手机物理实验工具](https://github.com/phyphox/phyphox-android)
 - [DDNS](https://github.com/jeessy2/ddns-go)
+- [替代原版图片查看器](https://github.com/d2phap/ImageGlass)
 
