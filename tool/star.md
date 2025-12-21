@@ -15,10 +15,11 @@
   - [工具](#w-tool)
   - [学习](#w-study)
 - [项目]()
-  - [编程](p-code)
-  - [游戏](p-game)
-  - [工具](p-tool)
-
+  - [编程](#p-code)
+  - [游戏](#p-game)
+  - [工具](#p-tool)
+- [app]()
+  - [游戏](#a-game)
 
 ---
 
@@ -105,4 +106,10 @@
 - [手机物理实验工具](https://github.com/phyphox/phyphox-android)
 - [DDNS](https://github.com/jeessy2/ddns-go)
 - [替代原版图片查看器](https://github.com/d2phap/ImageGlass)
+- [immich云图库](https://github.com/immich-app/immich)
 
+---
+
+## a-game
+
+- [游戏音效增强](https://cn.steelseries.com/gg)
