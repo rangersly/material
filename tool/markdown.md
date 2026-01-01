@@ -11,6 +11,9 @@
 - ***粗斜体***
 
 - [ ] 可勾选任务列表
+
+---
+
 这是一个代码行 `#这里面按代码解释` 可以插入大部分行 
 
 ```cpp
@@ -22,8 +25,9 @@ int main() {
 ```
 
 |表格|表头|
-|---|---|
+|:---|---:|
 |表格内容|表格内容|
+|左对齐|右对齐|
 
 ![插入图片](https://i1.hdslb.com/bfs/face/a74d98393bda85f613a997944993539655d0324d.jpg@120w_120h_1c.avif)
 
@@ -35,24 +39,29 @@ int main() {
 
 [^READ]:脚注
 
+> 引用块
+> > 也可嵌套
+
 > [!WARNING]
 > 警告段落
 
 > [!NOTE]
 > 笔记段落
 
-`owner/repo#456` github功能,自动链接 Issue/PR/Commit
+- `owner/repo#456` github功能,自动链接 Issue/PR/Commit
 
-`@username` 用户和团队提及
+- `@username` 用户和团队提及
 
 <details>
 <summary>
 可折叠内容
 </summary>
+这里面什么都没有
 </details>
 
 ```mermaid
 graph TD
-    A[stdin] --> B[xargs]
-    B --> C[command]
+    A[stdin] --> B[command]
+    B --> C[xargs]
+    B --> C[git]
 ```
