@@ -63,5 +63,5 @@ int main() {
 graph TD
     A[stdin] --> B[command]
     B --> C[xargs]
-    B --> C[git]
+    B --> D[git]
 ```
