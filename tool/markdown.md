@@ -12,7 +12,7 @@
 - 特殊标注
   - ~~删除线~~
   - <u>下划线</u>
-  - [^READ]:脚注
+  - 脚注[^READ]:this
 
 ## 代码插入
 
@@ -60,7 +60,7 @@ int main() {
 
 ```mermaid
 graph TD
-    A(mermaid图表) --> B<github可渲染>
+    A(mermaid图表) --> B{github可渲染}
     B --> C[多种形式]
     B --> D[好诶]
 ```
