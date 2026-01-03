@@ -12,7 +12,6 @@
 - 特殊标注
   - ~~删除线~~
   - <u>下划线</u>
-  - 脚注[^READ]:this
 
 ## 代码插入
 
@@ -37,7 +36,7 @@ int main() {
 
 ![插入图片](https://i1.hdslb.com/bfs/face/a74d98393bda85f613a997944993539655d0324d.jpg@120w_120h_1c.avif)
 
-[这是一个链接](链接地址)
+[这是一个链接](../README.md)
     
 ## 引用
 > [!WARNING]
