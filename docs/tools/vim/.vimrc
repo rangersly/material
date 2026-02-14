@@ -14,7 +14,6 @@ set hlsearch        " 高亮显示搜索结果
 set incsearch       " 搜索模式下，每输入一个字符，就跳到对应结果
 set ignorecase      " 忽略搜索大小写
 set iskeyword+=_,-    " 把 - 和 _ 也看作单词的一部分
-set tags=./tags;,tags "从当前文件目录开始查找 tags 文件，没有则向上递归查找
 
 
 " 格式设置
@@ -41,9 +40,8 @@ nnoremap <space>v :vsp<space>
 nnoremap <space>d <c-w>w
 
 " 保存退出
-nnoremap <space>w :w<cr>
-nnoremap <space>q :q<cr>
-nnoremap <space>f :q!<cr>
+nnoremap <space>q :wq<cr>
+nnoremap <space>f :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt :tabedit<space>
@@ -52,7 +50,7 @@ nnoremap <space>tm :vert term<cr>
 " 操作优化
 nnoremap gf <c-w>f<c-w>T
 nnoremap <space>r :reg<cr>
-inoremap jf <esc>
+inoremap jf <esc>:w<cr>
 cnoremap jf <c-c>
 
 
@@ -114,16 +112,29 @@ function! ConvertChinesePunctuationEnhanced() range
 endfunction
 
 " 映射快捷键
-nnoremap <leader>cs :call ConvertChinesePunctuationEnhanced()<CR>
+nnoremap <leader>cc :call ConvertChinesePunctuationEnhanced()<CR>
 
 
 "自动补全
-inoremap jnf <c-x><c-f>
-inoremap jk <c-x><c-k>
+set complete=.,w,b,k,d,i
+" 补全时忽略大小写
+set infercase
+" 设置补全延迟（毫秒）
+set updatetime=300
+" 延迟重绘屏幕,在宏、脚本、函数执行期间不更新屏幕,执行完一次性更新
+set lazyredraw
+" 允许递归扫描 include 目录
+set path=.,/usr/include,**
+
+" 设置补全菜单行为
+set completeopt=menuone,noselect,noinsert  " 单行菜单、不自动选择、不自动插入
+set shortmess+=c  " 减少补全提示的干扰信息
+set pumheight=15  " 补全菜单最大高度
+
+" 文件名补全
+inoremap jn <c-x><c-f>
 
 " 启用字典补全（Ctrl-X Ctrl-K）
-set complete+=k
-" 加载字典补全功能
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
@@ -148,7 +159,6 @@ set statusline+=%l/%L\                 " 行号信息
 set statusline+=%c%V\                  " 列号
 set statusline+=%{&fileencoding?&fileencoding:&encoding} " 添加当前编码
 set statusline+=\ %{FileSize()}        " 添加文件大小
-set statusline+=\ %P\                  " 文件进度百分比
 
 function! FileSize()
   let bytes = getfsize(expand('%:p'))
