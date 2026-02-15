@@ -5,7 +5,8 @@
 
 
 
-
+- **文件**
+  - [打包压缩](#打包压缩)
 - [文件操作](#文件操作)
 - [打包压缩](#打包压缩)
 - [权限管理](#权限管理)
@@ -317,11 +318,12 @@
     +    tar -cvjf shell.tar.bz2 shell/
 
 ### dd
-    +    if        # input file/device
-    +    of        # output file/device
-    +    bs        # one black size
-    +    count     # count
-	+    `oflag=sync`  sync
+
+- `if`    input file/device
+- `of`    output file/device
+- `bs`    one black size
+- `count` count
+- `oflag=sync`  sync
     
 
 ### mount
