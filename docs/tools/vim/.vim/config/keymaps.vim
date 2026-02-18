@@ -21,8 +21,8 @@ nnoremap <space>w :wq<cr>
 nnoremap <space>q :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
-nnoremap <space>tt :tabedit<space>
-nnoremap <space>tm :vert term<cr>
+nnoremap <space>tt <c-w>T
+nnoremap <space>tb :tabedit #
 
 " 操作优化
 nnoremap gf <c-w>f<c-w>T
