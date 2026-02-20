@@ -6,9 +6,9 @@
 - [tmux](./tools/tmux.md)
 - [dd](#dd)
 
-- **文件**
-  - [打包压缩](#打包压缩)
-  - [文件属性](#文件属性)
+- [打包压缩](#打包压缩)
+- [文件属性](#文件属性)
+- [查看编辑文件](#查看编辑文件)
 - [文件操作](#文件操作)
 - [权限管理](#权限管理)
 - [磁盘](#磁盘)
@@ -21,26 +21,28 @@
 
 ## 文件操作
 
+- [grep](#grep) : 查找指定内容
+- **ln** : 加-s是符号链接(快捷方式)
+- [patch](#patch) : 补丁
+- [rsync](#rsync) : 文件同步命令,更好用的cp
+- [find](#find) : 文件查找
+- [tee](#tee):数据分流
+
+## 查看编辑文件
+
 - [cat](#cat) : 输出文件内容
 - [od](#od) : 查看二进制文件内容
-- [grep](#grep) : 查找指定内容
-- [ln](#ln)
 - [diff](#diff):文件差异对比
-- [patch](#patch)
-- [rsync](#rsync):同步命令
-- [find](#find)
-- [locate](#locate):高效文件查找
-- [whereis](#whereis)
-- [tee](#tee):数据分流
+- **locate** : 高效文件查找
 - [tail](#tail):显示文件的末尾内容
 - [vim](./tools/vim/vim.md) : 文件内容编辑工具
 
 ## 打包压缩
 
-- [gzip](#gzip)
-- [bzip2](#bzip2)
-- [xz](#xz)
-- [tar](#tar)
+- [gzip](#gzip) : 最通用普遍的压缩
+- [bzip2](#gzip) : 效果稍好,较慢
+- [xz](#xz) : 现代化的压缩工具
+- [tar](#tar) : 打包工具,将许多文件合而为一(方便压缩)
 
 ## 文件属性
 
@@ -50,7 +52,7 @@
 
 ## 权限管理
 
-- [chown](#chown)
+- **chown** : 更改文件所有者
 - [chmod](#chmod)
 - [umark](#umark)
 - [acl](#acl):访问控制列表
@@ -170,14 +172,14 @@
 |`-B <n>`|前n行|
 |`-n`|显示行号|
 |`-v`|反向选择|
-|`-E 'o1|o2|o3'|多匹配|
+|`-E 'o1|o2|o3'`|多匹配|
 
 ### wc
     +    -l    行数
     +    -m    字符
     +    -w    word
 
-###    mv
+### mv
     +    -i            # 覆盖时警告
     +    -b            # 重合加~
 
@@ -195,11 +197,10 @@
     +    -r            # 目录
     +    -f            # 强制
 
-
-    +    -R            # 同时更改所有子目录
-
 ### chmod
-    +    -R            # 同时更改所有子目录
+
+- `-R` 同时更改所有子目录
+
 ```bash
     SUID    4
         执行二进制文件时,权限提升为文件所有者
@@ -212,25 +213,26 @@
 ```
 
 ### file
-    +    -i        查看编码格式
-    +    -z        查看压缩格式
-    +    -b        查看文件的系统架构
-    +    -p        详细信息
 
-### umark
-
-### ln
-    +    -s            # 符号链接(软)
+- `-i` 查看编码格式
+- `-z` 查看压缩格式
+- `-b` 查看文件的系统架构
+- `-p` 详细信息
 
 ### diff
-    +    -r            # 递归比较两个目录
-    +    -b            # 忽略空格
-    +    -i            # 忽略大小写
-    +    -B            # 忽略空白行
-    +    -w            # 忽略空白字符
-    +    -u            # 使用"统一格式”显示,易于生成补丁文件
+
+- `-r` 递归比较两个目录
+- `-b` 忽略空格
+- `-i` 忽略大小写
+- `-B` 忽略空白行
+- `-w` 忽略空白字符
+- `-u` 使用"统一格式”显示,易于生成补丁文件
 
 ### patch
+
+补丁文件
+- [diff](#diff):文件差异对比
+
 ```bash
     diff -Naur <oldfile> <newfile>  >  <file.patch###     # -p[n] 拿掉路径中的/
     patch -p<n> <  <file.patch###         # 制作
@@ -238,81 +240,84 @@
 ```
 
 ### rsync
-    +    -a(archive):归档模式,用于完整同步
-    +    -v(verbose):详细模式,显示同步过程中的详细信息.
-    +    -u(update):仅在目标文件不存在或源文件更新时才同步.
-    +    -z(compress):在传输过程中压缩文件数据.
-    +    --delete:删除目标目录中多余的文件,使目标目录与源目录保持一致
-    +    -e(rsh):指定远程连接时使用的工具(如 ssh).
-    +    --exclude:指定排除的文件或目录模式.
-    +    --include:指定包含的文件或目录模式.
-    +    -P --progress:显示同步进度.
-    +    --bwlimit : 限速,用于单个大文件,避免占用过多带宽
-    +    --dry-run:模拟同步操作,不实际执行,用于测试同步命令的效果.
-    1.    本地同步
-        `rsync -avP /path/to/source/ /path/to/destination/`
-    2.    从本地同步到远程
-        `rsync -avzP /path/to/source/ user@remote_host:/path/to/destination/`
-    3.  同步时删除多余文件
-        `rsync -av --delete /path/to/source/ /path/to/destination/`
-    4.  排除某些文件或目录
-        `rsync -av --exclude 'temp/*' --exclude '*.log' /path/to/source/ /path/to/destination/`
-        --exclude 'temp/*':排除 temp 目录下的所有文件.
-        --exclude '*.log':排除所有 .log 文件.
-    5.  包含某些文件或目录
-        `rsync -av --include 'data/*' --exclude '*' /path/to/source/ /path/to/destination/`
-        --include 'data/*':仅包含 data 目录下的文件.
-        --exclude '*':排除其他所有文件.
-    6.  模拟同步操作
-        `rsync -av --dry-run /path/to/source/ /path/to/destination/`
+
++    -a(archive):归档模式,用于完整同步
++    -v(verbose):详细模式,显示同步过程中的详细信息.
++    -u(update):仅在目标文件不存在或源文件更新时才同步.
++    -z(compress):在传输过程中压缩文件数据.
++    --delete:删除目标目录中多余的文件,使目标目录与源目录保持一致
++    -e(rsh):指定远程连接时使用的工具(如 ssh).
++    --exclude:指定排除的文件或目录模式.
++    --include:指定包含的文件或目录模式.
++    -P --progress:显示同步进度.
++    --bwlimit : 限速,用于单个大文件,避免占用过多带宽
++    --dry-run:模拟同步操作,不实际执行,用于测试同步命令的效果.
+1.    本地同步
+    `rsync -avP /path/to/source/ /path/to/destination/`
+2.    从本地同步到远程
+    `rsync -avzP /path/to/source/ user@remote_host:/path/to/destination/`
+3.  同步时删除多余文件
+    `rsync -av --delete /path/to/source/ /path/to/destination/`
+4.  排除某些文件或目录
+    `rsync -av --exclude 'temp/*' --exclude '*.log' /path/to/source/ /path/to/destination/`
+    --exclude 'temp/*':排除 temp 目录下的所有文件.
+    --exclude '*.log':排除所有 .log 文件.
+5.  包含某些文件或目录
+    `rsync -av --include 'data/*' --exclude '*' /path/to/source/ /path/to/destination/`
+    --include 'data/*':仅包含 data 目录下的文件.
+    --exclude '*':排除其他所有文件.
+6.  模拟同步操作
+    `rsync -av --dry-run /path/to/source/ /path/to/destination/`
 
 ### find
-    +    -name [filename]    # 指定文件名
-    +    -print                # 打印结果在终端
-    +    -type [type]        # 指定类型
-    +    -atime <+-n###     # n天前使用的文件
-    +    -mtime <+-n###     # n天前修改的文件
-    +    find /usr/bin -name zip -print
 
-### locate
-
-### whereis
+- `-name [filename]` 指定文件名
+- `-print` 打印结果在终端
+- `-type [type]` 指定类型
+- `-atime <+-n###` n天前使用的文件
+- `-mtime <+-n###` n天前修改的文件
+- `find /usr/bin -name zip -print`
 
 ### which
     +    -a        # 全部列出
-### whoami
 
 ### uname
     +    -a    全部信息
 
-
 ### gzip
-    +    -d            # 解压
-    +    -l            # 查看压缩效果
 
-### bzip2
-    +    -d            # 解压
-    +    -l            # 查看压缩效果
+bzip2 与其使用方法相似
+
++ `-d` 解压
++ `-l` 查看压缩效果
 
 ### xz
-    +    -z            # 压缩
-    +    -d            # 解压
-    +    -l            # 查看压缩效果
-    +    -k            # 保留压缩原文件
-    +    -<number>     # 压缩等级
-    +    -T <n>        # 使用多个线程
-    +    -v            # 显示详细过程
+
+- **参数**
+  - `-d` 解压
+  - `-l` 查看压缩效果
+  - `-k` 保留压缩原文件
+  - `-[0-9]` 压缩等级(
+  - `-T [0-j]` 使用多个线程,0为尽可能多
+  - `-v` 显示详细过程
+  - `-c` 输出到标准输出,通常用于管道操作
+  - `-tvv` 测试完整性详细信息
+- **示例**
+  - `xz filename` 生成filename.xz,原文件消失(加k保留原文件)
+  - `xz -l --verbose filename.xz` 查看压缩文件信息
+  - `xc -c filename > filename.xz`
 
 ### tar 
-    +    -c            # 创建
-    +    -x            # 解开
-    +    -v            # 显示详细过程
-    +    -f <file>     # 指定文件名
-    +    -z            # 调用gzip
-    +    -j            # 调用bzip2
-    +    -J            # 调用xz
-	+	 -p            # 保留权限和所有
-    +    tar -cvjf shell.tar.bz2 shell/
+
+- `-c` 创建
+- `-x` 解开
+- `-v` 显示详细过程
+- `-f [file]` 指定文件名
+- `-z` 调用gzip
+- `-J` 调用xz
+- `-p` 保留权限和所有
+
+- `tar -cvjf shell.tar.bz2 shell/
 
 ### dd
 
@@ -792,8 +797,6 @@ umount -R /mnt  # 卸载所有分区
 reboot
 ```
 
----
-
 ### **iperf**
 
 - 通用参数
@@ -812,8 +815,6 @@ reboot
   - `-s` : 启动服务器
   - `-B` : 绑定指定IP
 
----
-
 ### **tee**
 
 接收来自前一个命令通过管道送来的输出,输出到stdout和多个文件中
@@ -821,8 +822,6 @@ reboot
 + `-a` - 将数据追加到文件末尾
 
 **特性:可处理`>`符号无法做到的权限问题**
-
----
 
 ### **acl**
 
