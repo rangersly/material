@@ -9,6 +9,7 @@ set wrap            " 自动折行
 set incsearch       " 搜索模式下，每输入一个字符，就跳到对应结果
 set ignorecase      " 忽略搜索大小写
 set iskeyword+=_,-  " 把 - 和 _ 也看作单词的一部分
+set mouse=a         " 启用鼠标支持
 
 
 " 格式设置

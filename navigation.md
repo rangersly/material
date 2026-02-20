@@ -17,7 +17,7 @@
 - **操作系统**
   - [windows](#windows)
   - [linux](#linux)
-- [第三方工具](#tools)
+- [第三方工具](#第三方工具)
 - [硬件知识](#hardware)
 - [脚本](#script)
 - [基于问题的合集](#q-a)
@@ -26,9 +26,6 @@
 ## algorithms
 
 - [st表](./docs/algorithms/st-table.cpp)
-
-## c-cpp
-
 
 ## windows
 
@@ -46,7 +43,7 @@
 - [根目录结构](./docs/linux/root-struct.md)
 - [elf可执行文件](./docs/linux/elf.md)
 
-## tools
+## 第三方工具
 
 - [vim](./docs/tools/vim/vim.md)
 - [ssh远程连接](./docs/tools/ssh/ssh.md)
@@ -54,6 +51,7 @@
 - [docker](./docs/tools/docker.md)
 - [git](./docs/tools/git.md)
 - [markdown](./docs/tools/markdown.md)
+- [tmux](./docs/tools/tmux.md)
 
 ## 脚本/配置
 
