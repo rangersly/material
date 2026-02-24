@@ -18,7 +18,8 @@
   - [windows](#windows)
   - [linux](#linux)
 - [第三方工具](#第三方工具)
-- [硬件知识](#hardware)
+- **硬件知识**
+  - [网线](./docs/hardware/EthernetCable.md)
 - [脚本](#script)
 - [基于问题的合集](#q-a)
 - [其他](#other)
