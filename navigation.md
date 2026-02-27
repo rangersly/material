@@ -10,7 +10,8 @@
 - [命令大全](./docs/commands.md)
 - [收藏有用的东西](./docs/star.md)
 - **编程**
-  - [算法](#algorithms)
+  - **算法**
+    - [st表](./docs/algorithms/st-table.cpp)
   - [c-cpp](#c-cpp)
   - [python](#python)
 - [网络](#network)
@@ -20,13 +21,12 @@
 - [第三方工具](#第三方工具)
 - **硬件知识**
   - [网线](./docs/hardware/EthernetCable.md)
+  - [硬盘](./docs/hardware/disk.md)
 - [脚本](#script)
 - [基于问题的合集](#q-a)
 - [其他](#other)
 
-## algorithms
 
-- [st表](./docs/algorithms/st-table.cpp)
 
 ## windows
 

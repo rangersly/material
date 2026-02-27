@@ -5,6 +5,7 @@
 
 - [tmux](./tools/tmux.md)
 - [dd](#dd)
+- [lsblk](#lsblk) 查看块设备及其依赖关系的核心工具
 
 - **文件**
   - [打包压缩](#打包压缩)
@@ -917,4 +918,27 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
   - `default deny incoming` : 默认拒绝所有传入(outcoming为传出)
   - `logging on` : 启用日志
 
----
+### lsblk
+
+- 命令格式 `lsblk [选项] [设备]`
+
+- [硬盘相关](./hardware/disk.md)
+
+- **常用选项**
+  - `-a` 显示所有设备
+  - `-d` 不显示从属设备(只有硬盘无分区)
+  - `-f` 显示文件系统信息(类型,标签,UUID,挂载点)
+  - `-p` 完整路径
+  - `-t` 显示拓扑信息(RAID,多路径)
+  - `-o` 指定输出列(输出列参数如下)
+    - `NAME` 设备名称
+    - `SIZE` 设备大小
+    - `TYPE` 设备类型
+    - `MOUNTPOINT` 挂载点
+    - `FSTYPE` 文件系统类型
+    - `UUID`
+    - `MODEL` 硬盘型号
+    - `SERIAL` 序列号
+    - `TRAN` 传输类型(sata,usb,nvme)
+    - `WWN` 全球唯一网络名
+    - `ROTA` 0-SSD 1-HDD
