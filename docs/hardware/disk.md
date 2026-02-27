@@ -10,3 +10,4 @@
 ## 相关工具
 
 - [lsblk](../commands.md#lsblk) 查看块设备及其依赖关系的核心工具
+- [smartctl](../commands.md#smartctl) 查看硬盘健康状态

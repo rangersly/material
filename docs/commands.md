@@ -5,7 +5,6 @@
 
 - [tmux](./tools/tmux.md)
 - [dd](#dd)
-- [lsblk](#lsblk) 查看块设备及其依赖关系的核心工具
 
 - [打包压缩](#打包压缩)
 - [文件属性](#文件属性)
@@ -66,9 +65,9 @@
 - [umount](#umount)
 - [df](#df)
 - [du](#du):分析文件占用大小
-- [sync](#sync)
-- [smartctl](#smartctl):查看smart参数
+- [smartctl](#smartctl) 查看smart参数
 - [parted](#parted)
+- [lsblk](#lsblk) 查看块设备及其依赖关系的核心工具
 
 ---
 
@@ -346,8 +345,27 @@ bzip2 与其使用方法相似
     +    df -hT
 
 ###  smartctl
-        -a    全部参数
-        -H    是否正常
+
+- `-a` 全部参数
+
+|属性ID|属性名              |含义	            |正常范围	|重要性 |
+|1	   |Raw_Read_Error_Rate	|原始读取错误率	    |越低越好	|高     |
+|3	   |Spin_Up_Time        |启动时间（毫秒）	|< 10000ms	|中     |
+|4	   |Start_Stop_Count    |启动/停止次数	    |< 300,000	|中     |
+|5	   |Reallocated_Sector_Ct|重分配扇区数	    |0       	|非常高 |
+|7	   |Seek_Error_Rate	    |寻道错误率	        |越低越好   |高     |
+|9	   |Power_On_Hours	    |通电时间(h)        |根据型号	|中     |
+|10	   |Spin_Retry_Count	|旋转重试次数	    |0	        |高     |
+|12	   |Power_Cycle_Count	|电源开关次数	    |< 50,000	|中     |
+|187   |Reported_Uncorrect	|报告不可纠正错误	|0	        |非常高 |
+|188   |Command_Timeout	    |命令超时次数	    |0	        |高     |
+|189   |High_Fly_Writes	    |飞行高度写入错误	|0	        |高     |
+|190   |Airflow_Temperature_Cel|温度（摄氏度）	|20-50°C	|中     |
+|192   |Power-Off_Retract_Count|意外断电次数	|越低越好	|中     |
+|193   |Load_Cycle_Count	|磁头加载/卸载次数	|< 600,000	|中     |
+|194   |Temperature_Celsius	|温度（另一种表示）	|20-50°C	|中     |
+|197   |Current_Pending_Sector|待处理扇区数	    |0       	|非常高 |
+|198   |Offline_Uncorrectable|离线不可纠正扇区	|0	        |非常高 |
 
 ### parted
     +    -i        列出所有设备的分区信息
@@ -941,3 +959,6 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
     - `TRAN` 传输类型(sata,usb,nvme)
     - `WWN` 全球唯一网络名
     - `ROTA` 0-SSD 1-HDD
+
+- **示例**
+  - `lsblk -o NAME,SIZE,MODEL,SERIAL,MOUNTPOINT`
