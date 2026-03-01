@@ -64,3 +64,7 @@
 - **AI提示词**
   - [CPP提示词](./docs/other/ai-c-cpp.md)
 - [视频知识](./docs/other/video.md)
+
+## q-a
+
+- [文件系统损坏或误删除处理](./docs/q-a/FileSystemCorruption.md)
