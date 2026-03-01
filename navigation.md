@@ -24,7 +24,7 @@
   - [硬盘](./docs/hardware/disk.md)
 - [脚本](#script)
 - [基于问题的合集](#q-a)
-- [其他](#other)
+- [其他](#其他)
 
 
 
@@ -54,7 +54,7 @@
 - [markdown](./docs/tools/markdown.md)
 - [tmux](./docs/tools/tmux.md)
 
-## 脚本/配置
+## 脚本
 
 - [服务器资源备份脚本](./script/server-backup.sh) 
 - [archlinux自动安装脚本](./script/archlinux-autoInstall.sh)
@@ -63,3 +63,4 @@
 
 - **AI提示词**
   - [CPP提示词](./docs/other/ai-c-cpp.md)
+- [视频知识](./docs/other/video.md)
