@@ -53,6 +53,7 @@
 - [git](./docs/tools/git.md)
 - [markdown](./docs/tools/markdown.md)
 - [tmux](./docs/tools/tmux.md)
+- [ffmpeg](./docs/tools/ffmpeg.md)
 
 ## 脚本
 

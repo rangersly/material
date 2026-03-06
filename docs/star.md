@@ -56,6 +56,7 @@
 - [qBitEE](https://github.com/c0re100/qBittorrent-Enhanced-Edition)
 - [手机物理实验工具](https://github.com/phyphox/phyphox-android)
 - [DDNS](https://github.com/jeessy2/ddns-go)
+- [ffmpeg套壳"脚本生成器"](https://github.com/ttqftech/FFBox)
 
 ## media
 

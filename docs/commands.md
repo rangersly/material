@@ -5,6 +5,7 @@
 
 - [tmux](./tools/tmux.md)
 - [dd](#dd)
+- [ffmpeg](./tools/ffmpeg.md)
 
 - [打包压缩](#打包压缩)
 - [文件属性](#文件属性)
