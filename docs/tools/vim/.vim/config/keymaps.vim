@@ -22,7 +22,7 @@ nnoremap <space>q :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt <c-w>T
-nnoremap <space>tb :tabedit #
+nnoremap <space>tb :buffers<cr>:tabedit #
 
 " 操作优化
 nnoremap gf <c-w>f<c-w>T

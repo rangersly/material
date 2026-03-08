@@ -324,19 +324,19 @@ fflush(FILE *stream);  // 强制刷新输出缓冲区
 1. 时间表示方式
   - `typedef long time_t;`(通常是自 1970-01-01 00:00:00 UTC 的秒数,即 **Unix 时间戳**)
   -  `struct tm` 存储**分解时间**(Broken-Down Time),包含以下字段
-    ```c
-    struct tm {
-        int tm_sec;   // 秒 [0, 60](60 用于闰秒)
-        int tm_min;   // 分钟 [0, 59]
-        int tm_hour;  // 小时 [0, 23]
-        int tm_mday;  // 月中的第几天 [1, 31]
-        int tm_mon;   // 月份 [0, 11](0 = 一月)
-        int tm_year;  // 自 1900 年起的年份
-        int tm_wday;  // 星期几 [0, 6](0 = 周日)
-        int tm_yday;  // 年中的第几天 [0, 365]
-        int tm_isdst; // 夏令时标志(>0: 夏令时,=0: 非夏令时,<0: 未知)
-    };
-    ```
+  ```c
+  struct tm {
+      int tm_sec;   // 秒 [0, 60](60 用于闰秒)
+      int tm_min;   // 分钟 [0, 59]
+      int tm_hour;  // 小时 [0, 23]
+      int tm_mday;  // 月中的第几天 [1, 31]
+      int tm_mon;   // 月份 [0, 11](0 = 一月)
+      int tm_year;  // 自 1900 年起的年份
+      int tm_wday;  // 星期几 [0, 6](0 = 周日)
+      int tm_yday;  // 年中的第几天 [0, 365]
+      int tm_isdst; // 夏令时标志(>0: 夏令时,=0: 非夏令时,<0: 未知)
+  };
+  ```
   - `typedef long clock_t;`(表示 CPU 时间,单位通常是**时钟滴答**)
 
 2. **时间获取函数**
