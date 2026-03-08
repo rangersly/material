@@ -436,65 +436,49 @@ fflush(FILE *stream);  // 强制刷新输出缓冲区
 ---
 
 ## **stdarg**
-`<stdarg.h>` 是 C 语言标准库中用于处理**可变参数**的头文件，它允许函数接受不定数量的参数，类似于 `printf()` 和 `scanf()` 的实现方式。
 
-### **1. 核心宏和类型**
-#### **(1) `va_list`**
-- 用于声明一个变量，该变量将保存可变参数列表
+`stdarg.h` 实现可变参数,底层设计可以概括为:通过指针算数,运行时手动遍历函数的调用栈
 
-#### **(2) `va_start`**
-- **宏**：`void va_start(va_list ap, last_arg);`
-- **功能**：初始化 `va_list` 使其指向第一个可变参数
-- **参数**：
-  - `ap`：`va_list` 对象
-  - `last_arg`：最后一个固定参数的名称
+1. **核心宏和类型**
 
-#### **(3) `va_arg`**
-- **宏**：`type va_arg(va_list ap, type);`
-- **功能**：获取下一个参数的值
-- **参数**：
-  - `ap`：`va_list` 对象
-  - `type`：期望获取的参数类型
-- **示例**：
-  ```c
-  int num = va_arg(args, int);
-  ```
+- `typedef char* va_list`  一个指针,指向当前可变参数
+- `va_start`  初始化 `va_list` ,让它指向第一个可变参数
+  - `#define va_start(ap, last_fixed)  ( (ap) = (va_list)&(last_fixed) + sizeof(last_fixed) )`
+    - `&last_fixed`  获取最后一个固定你参数在栈上的位置
+    - `+ sizeof(last_fixed)`  加上最后一个固定参数的大小到第一个可变参数的地址
+- `va_arg(ap, type)`  获取当前可变参数,并移动指针到下一个参数
+  - `#define va_arg(ap, type)  ( *(type*)((ap) += sizeof(type)) )`
+    - 从 `ap` 地址取出一个 `type` 类型值
+    - 移动 `ap` 到下一个地址
+    - 这里先增加指针再解引用,因为 `+=` 返回的是左值
+- `#define va_end(ap)  ((void)0)`  清理工作
 
-#### **(4) `va_end`**
-- **宏**：`void va_end(va_list ap);`
-- **功能**：清理 `va_list` 对象
-- **注意**：必须在使用完参数后调用
-- **示例**：
-  ```c
-  va_end(args);
-  ```
+**这里没有考虑内存对齐,调用约定等问题,实际中编译器会处理**
 
-### **3. 重要注意事项**
-1. **没有类型检查**：
-   - 编译器无法验证参数类型，错误使用会导致未定义行为
-   - **错误示例**：
-     ```c
-     int num = va_arg(args, double); // 如果传入的是int，将导致未定义行为
-     ```
+- **使用示例**
+```c
+#include <stdio.h>
+#include <stdarg.h>
 
-2. **必须知道参数数量**：
-   - 通常第一个参数用于指定后续参数的数量（如`printf`使用格式化字符串）
+// 计算 n 个整数的和
+int sum(int count, ...) {
+    int total = 0;
+    va_list args;                // 1. 声明一个 va_list 变量
+    va_start(args, count);       // 2. 初始化 args，指向第一个可变参数
+    for (int i = 0; i < count; i++) {
+        int value = va_arg(args, int);  // 3. 依次取出 int 类型的参数
+        total += value;
+    }
+    va_end(args);                // 4. 清理（习惯性调用）
+    return total;
+}
 
-3. **必须调用`va_end`**：
-   - 忘记调用可能导致内存泄漏或崩溃
-
-4. **避免类型混用**：
-   - 如果函数期望`int`但传入`float`，行为是未定义的
-
-### **5. 总结**
-| **宏/类型** | **功能** |
-|------------|---------|
-| `va_list` | 保存可变参数列表 |
-| `va_start` | 初始化参数列表 |
-| `va_arg` | 获取下一个参数 |
-| `va_end` | 清理参数列表 |
-
----
+int main() {
+    printf("1 + 2 = %d\n", sum(2, 1, 2));               // 3 个参数：个数 + 2 个加数
+    printf("1 + 2 + 3 + 4 = %d\n", sum(4, 1, 2, 3, 4)); // 5 个参数
+    return 0;
+}
+```
 
 ## **signal**
 
