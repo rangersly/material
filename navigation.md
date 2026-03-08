@@ -27,7 +27,6 @@
 - [其他](#其他)
 
 
-
 ## windows
 
 - [wsl](./docs/windows/wsl.md)
@@ -69,3 +68,7 @@
 ## q-a
 
 - [文件系统损坏或误删除处理](./docs/q-a/FileSystemCorruption.md)
+
+## c-cpp
+
+- [函数库](./docs/program/c_cpp/universal/libs.md)

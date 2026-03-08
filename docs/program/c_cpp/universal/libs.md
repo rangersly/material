@@ -318,84 +318,54 @@ fflush(FILE *stream);  // 强制刷新输出缓冲区
 ---
 
 ## **time**
-### **1. 时间表示方式**
-#### **(1) `time_t`**
-- `typedef long time_t;`(通常是自 1970-01-01 00:00:00 UTC 的秒数,即 **Unix 时间戳**)
-- `time_t now = time(NULL); // 获取当前时间戳`
 
-#### **(2) `struct tm`**
-存储**分解时间**(Broken-Down Time),包含以下字段
-```c
-struct tm {
-    int tm_sec;   // 秒 [0, 60](60 用于闰秒)
-    int tm_min;   // 分钟 [0, 59]
-    int tm_hour;  // 小时 [0, 23]
-    int tm_mday;  // 月中的第几天 [1, 31]
-    int tm_mon;   // 月份 [0, 11](0 = 一月)
-    int tm_year;  // 自 1900 年起的年份
-    int tm_wday;  // 星期几 [0, 6](0 = 周日)
-    int tm_yday;  // 年中的第几天 [0, 365]
-    int tm_isdst; // 夏令时标志(>0: 夏令时,=0: 非夏令时,<0: 未知)
-};
-```
+`time.h`
 
-#### **(3) `clock_t`**
-- `typedef long clock_t;`(表示 CPU 时间,单位通常是**时钟滴答**)
+1. 时间表示方式
+  - `typedef long time_t;`(通常是自 1970-01-01 00:00:00 UTC 的秒数,即 **Unix 时间戳**)
+  -  `struct tm` 存储**分解时间**(Broken-Down Time),包含以下字段
+    ```c
+    struct tm {
+        int tm_sec;   // 秒 [0, 60](60 用于闰秒)
+        int tm_min;   // 分钟 [0, 59]
+        int tm_hour;  // 小时 [0, 23]
+        int tm_mday;  // 月中的第几天 [1, 31]
+        int tm_mon;   // 月份 [0, 11](0 = 一月)
+        int tm_year;  // 自 1900 年起的年份
+        int tm_wday;  // 星期几 [0, 6](0 = 周日)
+        int tm_yday;  // 年中的第几天 [0, 365]
+        int tm_isdst; // 夏令时标志(>0: 夏令时,=0: 非夏令时,<0: 未知)
+    };
+    ```
+  - `typedef long clock_t;`(表示 CPU 时间,单位通常是**时钟滴答**)
 
-### **2. 时间获取函数**
-#### **(1) `time()`**
-- `time_t time(time_t *timer);`
-- 获取当前日历时间(Unix 时间戳).
+2. **时间获取函数**
+  - `time_t time(time_t *timer);` 获取当前时间戳
+  - `clock_t clock(void);` 获取程序运行的 **CPU 时间**(单位是 `CLOCKS_PER_SEC` 的分数).
+  - `double difftime(time_t end, time_t start);` 计算两个 `time_t` 时间的差值(单位：秒).
 
-#### **(2) `clock()`**
-- `clock_t clock(void);`
-- 获取程序运行的 **CPU 时间**(单位是 `CLOCKS_PER_SEC` 的分数).
-
-#### **(3) `difftime()`**
-- `double difftime(time_t end, time_t start);`
-- 计算两个 `time_t` 时间的差值(单位：秒).
-
-### **3. 时间转换函数**
-#### **(1) `gmtime()`**
-- `struct tm *gmtime(const time_t *timer);`
-- 将 `time_t` 转换为 **UTC 时间**(世界标准时间).
-
-#### **(2) `localtime()`**
-- `struct tm *localtime(const time_t *timer);`
-- 将 `time_t` 转换为 **本地时间**(受时区和夏令时影响).
-
-#### **(3) `mktime()`**
-- `time_t mktime(struct tm *timeptr);`
-- 将 `struct tm` 转换回 `time_t`(自动调整非法时间).
-
-#### **(4) `asctime()`**
-- `char *asctime(const struct tm *timeptr);`
-- 将 `struct tm` 转换为固定格式的字符串(如 `"Sun Jan 1 00:00:00 2023\n"`).
-
-#### **(5) `ctime()`**
-- `char *ctime(const time_t *timer);`
-- 将 `time_t` 转换为本地时间的字符串
-
-#### **(6) `strftime()`(更灵活的格式化)**
-- `size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr);`
-- `strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", t);`
-- **功能**：自定义时间格式
-- **常用格式符**：
-  | 格式符 | 说明 | 示例 |
-  |--------|------|------|
-  | `%Y` | 年份(4 位) | 2024 |
-  | `%m` | 月份(01-12) | 02 |
-  | `%d` | 日(01-31) | 15 |
-  | `%H` | 小时(00-23) | 14 |
-  | `%M` | 分钟(00-59) | 30 |
-  | `%S` | 秒(00-60) | 45 |
-  | `%A` | 星期全名 | Monday |
-  | `%a` | 星期缩写 | Mon |
-  | `%B` | 月份全名 | February |
-  | `%b` | 月份缩写 | Feb |
-  | `%c` | 完整日期时间 | Mon Feb 15 14:30:45 2024 |
-
----
+3. 时间转换函数
+  - `struct tm *gmtime(const time_t *timer);` 将 `time_t` 转换为 **UTC 时间**(世界标准时间).
+  - `struct tm *localtime(const time_t *timer);` 将 `time_t` 转换为 **本地时间**(受时区和夏令时影响).
+  - `time_t mktime(struct tm *timeptr);` 将 `struct tm` 转换回 `time_t`(自动调整非法时间).
+  - `char *asctime(const struct tm *timeptr);` 将 `struct tm` 转换为固定格式的字符串(如 `"Sun Jan 1 00:00:00 2023\n"`).
+  - `char *ctime(const time_t *timer);` 将 `time_t` 转换为本地时间的字符串
+  - `size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr);`
+  - `strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", t);`
+  - **常用格式符**：
+    | 格式符 | 说明 | 示例 |
+    |--------|------|------|
+    | `%Y` | 年份(4 位) | 2024 |
+    | `%m` | 月份(01-12) | 02 |
+    | `%d` | 日(01-31) | 15 |
+    | `%H` | 小时(00-23) | 14 |
+    | `%M` | 分钟(00-59) | 30 |
+    | `%S` | 秒(00-60) | 45 |
+    | `%A` | 星期全名 | Monday |
+    | `%a` | 星期缩写 | Mon |
+    | `%B` | 月份全名 | February |
+    | `%b` | 月份缩写 | Feb |
+    | `%c` | 完整日期时间 | Mon Feb 15 14:30:45 2024 |
 
 ## **errno**
 ### **1. `errno` 全局变量**
@@ -739,6 +709,7 @@ struct tm {
 ---
 
 ## **unistd**
+
 - 进程控制
   - [fork](../linux/fork.cpp)
   - [exec](../linux/exec.cpp)
@@ -768,6 +739,10 @@ struct tm {
     - 切换工作目录
     - 0 成功  -1 失败
   - `char *getcwd(char buf[.size], size_t size);`
+
+- 程序睡眠
+  - `unsigned int sleep(unsigned int seconds);//单位s`
+  - `int usleep(useconds_t usec);//微秒`
 
 - 其他
   - `int dup(int fildes);`
