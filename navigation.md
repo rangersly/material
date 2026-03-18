@@ -62,7 +62,9 @@
 ## 其他
 
 - **AI提示词**
-  - [CPP提示词](./docs/other/ai-c-cpp.md)
+  - [生成提示词的提示词](./docs/other/ai/prompt.md)
+  - [CPP提示词](./docs/other/ai/c-cpp.md)
+  - [电子工程师](./docs/other/ai/ee.md)
 - [视频知识](./docs/other/video.md)
 
 ## q-a
