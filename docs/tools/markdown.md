@@ -102,6 +102,7 @@ graph TD
 $E=mc^2$  这是一个行内公式
 
 多行公式
+
 $$
 \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 $$
@@ -110,9 +111,9 @@ $$
   - `x^2` 上标 $x^2$  `x_2` 下标 $x_2$
   - `\frac{分子}{分母}`  $\frac{c}{a}$
   - `\sqrt[n]{表达式}`  $\sqrt{b^2 - 4ac}$
-  - `\sum_{下限}^{上限}`  累加
-  - $\alpha$  $\beta$  $gamma$  $\pi&
-    - `$\alpha$  $\beta$  $gamma$  $\pi&`
+  - `\sum_{下限}^{上限}`  $\sum_{5}^{10}$  累加
+  - $\alpha$  $\beta$  $\gamma$  $\pi$
+    - `$\alpha$  $\beta$  $\gamma$  $\pi$`
 
 ## github特殊功能
 
