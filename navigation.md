@@ -33,7 +33,7 @@
 - [C盘结构](./docs/windows/c-disk.md)
 - [注册表](./docs/windows/注册表.txt)
 - [Win+R运行](./docs/windows/Windows+R.txt)
-- [快捷键](./docs/windows/快捷键.txt)
+- [快捷键](./docs/windows/fast-key.md)
 - [vbs脚本](./docs/windows/vbs/)
 
 ## linux

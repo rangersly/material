@@ -66,12 +66,6 @@
 | `\{ x \}` | $\{ x \}$ |
 | `\lvert x \rvert` | $\lvert x \rvert$ |
 | `\langle x \rangle` | $\langle x \rangle$ |
-| `\begin{matrix} 1 & 2 \\ 3 & 4 \end{matrix}` | $\begin{matrix} 1 & 2 \\ 3 & 4 \end{matrix}$ |
-| `\begin{pmatrix} a & b \\ c & d \end{pmatrix}` | $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ |
-| `\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}` | $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$ |
-| `\begin{aligned} f(x) &= (x+1)^2 \\ &= x^2+2x+1 \end{aligned}` | $\begin{aligned} f(x) &= (x+1)^2 \\ &= x^2+2x+1 \end{aligned}$ |
-| **分段函数** | |
-| `f(n) = \begin{cases} n/2, & \text{if } n \text{ even} \\ 3n+1, & \text{if } n \text{ odd} \end{cases}` | $f(n) = \begin{cases} n/2, & \text{if } n \text{ even} \\ 3n+1, & \text{if } n \text{ odd} \end{cases}$ |
 | **其他符号** | |
 | `\hat{a}` | $\hat{a}$ |
 | `\bar{a}` | $\bar{a}$ |
