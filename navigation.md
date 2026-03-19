@@ -51,6 +51,7 @@
 - [docker](./docs/tools/docker.md)
 - [git](./docs/tools/git.md)
 - [markdown](./docs/tools/markdown.md)
+  - [支持的数学表达式](./docs/tools/math-markdown.md)
 - [tmux](./docs/tools/tmux.md)
 - [ffmpeg](./docs/tools/ffmpeg.md)
 
