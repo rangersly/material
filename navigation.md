@@ -9,15 +9,10 @@
 
 - [命令大全](./docs/commands.md)
 - [收藏有用的东西](./docs/star.md)
-- **编程**
-  - **算法**
-    - [st表](./docs/algorithms/st-table.cpp)
-  - [c-cpp](#c-cpp)
-  - [python](#python)
+- [编程](#编程)
 - [网络](#network)
-- **操作系统**
-  - [windows](#windows)
-  - [linux](#linux)
+- [windows](#windows)
+- [linux](#linux)
 - [第三方工具](#第三方工具)
 - **硬件知识**
   - [网线](./docs/hardware/EthernetCable.md)
@@ -26,6 +21,15 @@
 - [基于问题的合集](#q-a)
 - [其他](#其他)
 
+## 编程
+
+- **算法**
+  - [st表](./docs/algorithms/st-table.cpp)
+- **工具**
+  - [gcc-g++](./docs/program/tool/gcc_g++.md)
+  - [gdb调试工具](./docs/program/tool/gdb.md)
+- **C-CPP**
+  - [函数库](./docs/program/c_cpp/universal/libs.md)
 
 ## windows
 
@@ -72,6 +76,3 @@
 
 - [文件系统损坏或误删除处理](./docs/q-a/FileSystemCorruption.md)
 
-## c-cpp
-
-- [函数库](./docs/program/c_cpp/universal/libs.md)
