@@ -17,7 +17,6 @@
 - **硬件知识**
   - [网线](./docs/hardware/EthernetCable.md)
   - [硬盘](./docs/hardware/disk.md)
-- [脚本](#script)
 - [基于问题的合集](#q-a)
 - [其他](#其他)
 
@@ -46,7 +45,9 @@
 - [终端快捷键](./docs/linux/keybroad.md)
 - [根目录结构](./docs/linux/root-struct.md)
 - [elf可执行文件](./docs/linux/elf.md)
-
+- **脚本**
+  - [服务器资源备份脚本](./script/server-backup.sh) 
+  - [archlinux自动安装脚本](./script/archlinux-autoInstall.sh)
 ## 第三方工具
 
 - [vim](./docs/tools/vim/vim.md)
@@ -59,10 +60,6 @@
 - [tmux](./docs/tools/tmux.md)
 - [ffmpeg](./docs/tools/ffmpeg.md)
 
-## 脚本
-
-- [服务器资源备份脚本](./script/server-backup.sh) 
-- [archlinux自动安装脚本](./script/archlinux-autoInstall.sh)
 
 ## 其他
 
