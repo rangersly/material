@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/rangersly/material/docs'
+let g:netrw_dirhist_0='/home/rangersly/material/docs/windows'
+let g:netrw_dirhist_9='/home/rangersly/material'
 let g:netrw_dirhist_8='/home/rangersly/.vim/config'
 let g:netrw_dirhist_7='/home/rangersly'
 let g:netrw_dirhist_6='/home/rangersly/.vim/config'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_5='/home/rangersly'
 let g:netrw_dirhist_4='/home/rangersly/.vim'
 let g:netrw_dirhist_3='/home/rangersly/.vim/config'
 let g:netrw_dirhist_2='/home/rangersly'
-let g:netrw_dirhist_1='/home/rangersly/.vim'
-let g:netrw_dirhist_0='/home/rangersly/.vim/config'
-let g:netrw_dirhist_9='/home'
