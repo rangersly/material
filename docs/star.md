@@ -13,6 +13,7 @@
 - [工具](#tool)
 - [学习](#study)
 - [资料查询](#docs)
+- [安卓玩机](#android-tool)
 
 ## game
 
@@ -84,3 +85,10 @@
 - [鸟哥linux私房菜](https://linux.vbird.org/)
 - [维修手册 iFixit](https://zh.ifixit.com/Guide)
 - [基础计算机教学](https://github.com/criwits/missing-web)
+
+## android-tool
+
+- [shizuku](https://github.com/RikkaApps/Shizuku/tree/master)
+- [MT管理器](https://mt2.cn/)
+- [scene](https://omarea.com/index.html#/)
+- [雹-冻结应用](https://github.com/aistra0528/Hail)
