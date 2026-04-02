@@ -46,8 +46,10 @@
 - [根目录结构](./docs/linux/root-struct.md)
 - [elf可执行文件](./docs/linux/elf.md)
 - **脚本**
-  - [服务器资源备份脚本](./script/server-backup.sh) 
-  - [archlinux自动安装脚本](./script/archlinux-autoInstall.sh)
+  - [服务器资源备份脚本](./docs/linux/script/server-backup.sh) 
+  - [archlinux自动安装脚本](./docs/linux/script/archlinux-autoInstall.sh)
+  - [新机自动部署脚本](./docs/linux/script/sync-config.sh)
+
 ## 第三方工具
 
 - [vim](./docs/tools/vim/vim.md)
@@ -59,7 +61,7 @@
   - [支持的数学表达式](./docs/tools/math-markdown.md)
 - [tmux](./docs/tools/tmux.md)
 - [ffmpeg](./docs/tools/ffmpeg.md)
-
+- [科学上网相关](./docs/tools/vpn.md)
 
 ## 其他
 
