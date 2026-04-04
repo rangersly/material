@@ -10,4 +10,11 @@ let g:netrw_banner = 0
 let g:netrw_winsize = 20
 
 " 在当前窗口打开文件
-let g:netrw_browse_split = 2
+let g:netrw_browse_split = 4
+
+" 核心功能：仅在无启动参数时，以侧边栏方式打开 Netrw
+let g:netrw_browse_split = 4
+augroup InitNetrw
+    autocmd!
+    autocmd VimEnter * if argc() == 0 | Lexplore! | endif
+augroup END

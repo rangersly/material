@@ -3,7 +3,7 @@
 
 ## 快速开始
 
-- [导航文件,方便查询所需内容](./navigation.md)
+- [导航](#导航)
 
 
 ## 说明
@@ -11,12 +11,77 @@
 - 仓库由rangersly在实践中慢慢积累出来的,原个人使用,所以做的比较粗糙. 不过已经在重构中,如果有认为有误或不足的地方欢迎大家提出 Issue 或提交 PR 哦.
 - 主要收录与计算机相关的内容
 
+## 导航
 
-## 结构
+- **未归纳资源** [tmp](./tmp/)
 
-等我学会 `mermaid` 就马上补上(bushi
+### 总目录
 
+- [命令大全](./docs/commands.md)
+- [收藏有用的东西](./docs/star.md)
+- [编程](#编程)
+- [网络](#network)
+- [windows](#windows)
+- [linux](#linux)
+- [第三方工具](#第三方工具)
+- **硬件知识**
+  - [网线](./docs/hardware/EthernetCable.md)
+  - [硬盘](./docs/hardware/disk.md)
+- [基于问题的合集](#q-a)
+- [其他](#其他)
 
-## 待办
+### 编程
 
-- `tools/p2p` 改成 `iyuu` `qBit` 的 `docker-compose.yml`
+- **算法**
+  - [st表](./docs/algorithms/st-table.cpp)
+- **工具**
+  - [gcc-g++](./docs/program/tool/gcc_g++.md)
+  - [gdb调试工具](./docs/program/tool/gdb.md)
+- **C-CPP**
+  - [函数库](./docs/program/c_cpp/universal/libs.md)
+
+### windows
+
+- [wsl](./docs/windows/wsl.md)
+- [C盘结构](./docs/windows/c-disk.md)
+- [注册表](./docs/windows/注册表.txt)
+- [Win+R运行](./docs/windows/Windows+R.txt)
+- [快捷键](./docs/windows/fast-key.md)
+- [vbs脚本](./docs/windows/vbs/)
+
+### linux
+
+- [proc文件系统](./docs/linux/proc.md)
+- [终端快捷键](./docs/linux/keybroad.md)
+- [根目录结构](./docs/linux/root-struct.md)
+- [elf可执行文件](./docs/linux/elf.md)
+- **脚本**
+  - [服务器资源备份脚本](./docs/linux/script/server-backup.sh) 
+  - [archlinux自动安装脚本](./docs/linux/script/archlinux-autoInstall.sh)
+  - [新机自动部署脚本](./docs/linux/script/sync-config.sh)
+
+### 第三方工具
+
+- [vim](./docs/tools/vim/vim.md)
+- [ssh远程连接](./docs/tools/ssh/ssh.md)
+- [scp文件传输](./docs/tools/ssh/scp-sftp.md)
+- [docker](./docs/tools/docker.md)
+- [git](./docs/tools/git.md)
+- [markdown](./docs/tools/markdown.md)
+  - [支持的数学表达式](./docs/tools/math-markdown.md)
+- [tmux](./docs/tools/tmux.md)
+- [ffmpeg](./docs/tools/ffmpeg.md)
+- [科学上网相关](./docs/tools/vpn.md)
+
+### 其他
+
+- **AI提示词**
+  - [生成提示词的提示词](./docs/other/ai/prompt.md)
+  - [CPP提示词](./docs/other/ai/c-cpp.md)
+  - [电子工程师](./docs/other/ai/ee.md)
+- [视频知识](./docs/other/video.md)
+
+### q-a
+
+- [文件系统损坏或误删除处理](./docs/q-a/FileSystemCorruption.md)
+

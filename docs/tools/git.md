@@ -23,6 +23,7 @@
     - [revert]():最安全的撤销,通过提交抵消修改,功能上类似reset
     - [rebase](#rebase) : 变基
     - [restore](#restore):撤销工作区修改
+    - [clean](#clean) : 删除未被跟踪内容
   - **分支**
     - [branch](#branch) : 分支
     - [switch](#switch) : 切换分支
@@ -234,3 +235,10 @@
   - **按交互排序**：`sort:interactions`按反应和评论的最高组合数排序。
   - **按反应排序**：`sort:reactions`按最高反应数排序。
   - **按作者日期排序**：`sort:author-date`按作者日期降序排序。
+
+## clean
+
+| 命令 | 作用 |
+|---|---|
+|`-n`| **演习模式** 显示会删除的文件,不实际执行|
+|`-fd`| **强制删除** 必须加,因为git保护机制|

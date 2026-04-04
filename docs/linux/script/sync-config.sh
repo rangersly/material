@@ -10,7 +10,8 @@ MAPPINGS=(
     ".bashrc:.bashrc"
     ".vimrc:../../tools/vim/.vimrc"
     ".tmux.conf:.tmux.conf"
-    ".vim:../../tools/vim/.vim"
+    ".vim/config:../../tools/vim/.vim/config"
+    ".vim/dict:../../tools/vim/.vim/dict"
 )
 
 usage() {

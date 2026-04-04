@@ -14,7 +14,7 @@ nnoremap <space>e :b#<cr>
 " 页面分割操作
 nnoremap <space>s :split<space>
 nnoremap <space>v :vsp<space>
-nnoremap <space>d <c-w>w
+nnoremap <tab> <c-w>w
 
 " 保存退出
 nnoremap <space>w :wq<cr>
@@ -45,3 +45,6 @@ inoremap “ "
 inoremap ， ,
 inoremap 。 .
 inoremap ？ ?
+inoremap 【 [
+inoremap 】 ]
+inoremap · `
