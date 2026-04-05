@@ -5,10 +5,10 @@ nnoremap <leader>p :%s/\t/    /g<cr>:wq<cr>
 nnoremap <Leader>cw :%s/\s\+$//e<CR>
 
 " 替换所有中文字符为英文字符
-nnoremap <leader>cc :call ConvertChinesePunctuationEnhanced()<CR>
+nnoremap <leader>cn :call ConvertChinesePunctuationEnhanced()<CR>
 
 " 缓冲区操作
-nnoremap <space>b :buffers<cr>:b<space>
+nnoremap <space>b :ls<cr>:b<space>
 nnoremap <space>e :b#<cr>
 
 " 页面分割操作
@@ -17,8 +17,7 @@ nnoremap <space>v :vsp<space>
 nnoremap <tab> <c-w>w
 
 " 保存退出
-nnoremap <space>w :wq<cr>
-nnoremap <space>q :q<cr>
+nnoremap <space>w :w<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt <c-w>T
