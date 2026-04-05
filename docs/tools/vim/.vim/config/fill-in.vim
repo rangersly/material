@@ -11,9 +11,10 @@ set lazyredraw
 set path=.,/usr/include,**
 
 " 设置补全菜单行为
-set completeopt=menu,menuone,noselect,noinsert
+set completeopt=menu,menuone,noselect,noinsert,popup
 set shortmess+=c  " 减少补全提示的干扰信息
 set pumheight=15  " 补全菜单最大高度
+set wildoptions+=fuzzy
 
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict

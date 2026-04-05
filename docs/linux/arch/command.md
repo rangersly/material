@@ -4,7 +4,7 @@
 
 
 ## pacman
- 
+
  +  `-S` 同步
  +  `-y` 更新软件包数据库
  +  `-u` 升级已有安装包
@@ -17,3 +17,12 @@
  +  `pacman -Rs <package_name>` 卸载同时删除无用的依赖
  +  `pacman -Ss <keyword>` 搜索软件包
  +  `sudo pacman -Sc` 清除缓存
+
+## pacman签名问题
+
+1. `sudo rm -rf /etc/pacman.d/gnupg` 清除旧配置
+2. `/etc/pacman.conf` 去除 `multlib` 注释
+3. 重建签名
+   - `sudo pacman-key --init`
+   - `sudo pacman-key --populate archlinux` 或 `sudo pacman -Sy archlinux-keyring`
+   - `sudo pacman -Sy archlinuxcn-keyring`
