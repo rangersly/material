@@ -22,6 +22,8 @@ set smarttab        " 行首使用Tab时,插入shiftwidth指定的空格数
 " 在编写makefile文件时使用tab
 autocmd FileType make setlocal noexpandtab
 
+" 光标移动时取消搜索高亮
+autocmd CursorMoved * :nohlsearch | redraw
 
 augroup numbertoggle 	"智能切换绝对行号和相对行号
   autocmd!

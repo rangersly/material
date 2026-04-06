@@ -18,6 +18,7 @@ nnoremap <tab> <c-w>w
 
 " 保存退出
 nnoremap <space>w :w<cr>
+nnoremap <space>q :wq<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt <c-w>T
@@ -29,7 +30,7 @@ nnoremap <space>r :reg<cr>
 inoremap jf <esc>
 cnoremap jf <c-c>
 
-" 文件名补全
+" 补全
 inoremap jn <c-x><c-f>
 
 " 打开文件树
