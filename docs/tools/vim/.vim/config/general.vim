@@ -11,7 +11,6 @@ set ignorecase      " 忽略搜索大小写
 set iskeyword+=_,-  " 把 - 和 _ 也看作单词的一部分
 set mouse=a         " 启用鼠标支持
 
-
 " 格式设置
 set expandtab       " tab to space
 set ts=4            " 设置一个Tab的宽度

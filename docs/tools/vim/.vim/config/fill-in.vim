@@ -16,6 +16,11 @@ set shortmess+=c  " 减少补全提示的干扰信息
 set pumheight=15  " 补全菜单最大高度
 set wildoptions+=fuzzy
 
+" 增强命令行补全
+set wildmenu
+set wildmode=full
+set path+=**
+
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
@@ -29,9 +34,9 @@ function! s:TriggerComplete()
     " 获取光标前的所有字符
     let before = getline('.')[0 : col('.')-2]
     " 获取光标前尾部连续非空字符（\S 匹配非空白）
-    let tail = matchstr(before, '\S\+$')
+    let tail = matchstr(before, '\w\+$')
 
-    if len(tail) >= 2 && !g:auto_comp_triggered
+    if len(tail) >= 3 && !g:auto_comp_triggered
         call feedkeys("\<C-n>", 'n')
         let g:auto_comp_triggered = 1
     elseif len(tail) == 0
