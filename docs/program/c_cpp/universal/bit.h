@@ -1,3 +1,6 @@
+/*
+ * 位运算技巧运用
+ */
 #include <stdint.h>
 #include <assert.h>
 
