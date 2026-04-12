@@ -142,6 +142,9 @@ alias sscl='sudo systemctl'
 # 快速查看电池信息
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
+# gcc映射
+alias gc23='gcc -std=c2x'
+
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
 

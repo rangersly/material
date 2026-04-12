@@ -644,46 +644,46 @@ int main() {
 定义固定宽度整数类型的头文件,C99,提供了明确位宽的整数类型
 
 1. **核心整数类型定义**
-| 类型 | 位宽 | 取值范围 | 对应传统类型 |
-|------|------|----------|--------------|
-| `int8_t` | 8位 | -128 ~ 127 | `signed char` |
-| `uint8_t` | 8位 | 0 ~ 255 | `unsigned char` |
-| `int16_t` | 16位 | -32768 ~ 32767 | `short` |
-| `uint16_t` | 16位 | 0 ~ 65535 | `unsigned short` |
-| `int32_t` | 32位 | -2147483648 ~ 2147483647 | `int` |
-| `uint32_t` | 32位 | 0 ~ 4294967295 | `unsigned int` |
-| `int64_t` | 64位 | -2^63 ~ 2^63-1 | `long long` |
-| `uint64_t` | 64位 | 0 ~ 2^64-1 | `unsigned long long` |
-| `int_least8_t` | 至少8位的有符号整数 |
-| `uint_least8_t` | 至少8位的无符号整数 |
-| ...（16/32/64位同理） | ... |
-| `int_fast8_t` | 最快处理的至少8位有符号整数 |
-| `uint_fast8_t` | 最快处理的至少8位无符号整数 |
-| ...（16/32/64位同理） | ... |
-| `intmax_t` | 系统支持的最大有符号整数 |
-| `uintmax_t` | 系统支持的最大无符号整数 |
-| `intptr_t` | 可保存指针值的有符号整数 |
-| `uintptr_t` | 可保存指针值的无符号整数 |
+  | 类型 | 位宽 | 取值范围 | 对应传统类型 |
+  |------|------|----------|--------------|
+  | `int8_t` | 8位 | -128 ~ 127 | `signed char` |
+  | `uint8_t` | 8位 | 0 ~ 255 | `unsigned char` |
+  | `int16_t` | 16位 | -32768 ~ 32767 | `short` |
+  | `uint16_t` | 16位 | 0 ~ 65535 | `unsigned short` |
+  | `int32_t` | 32位 | -2147483648 ~ 2147483647 | `int` |
+  | `uint32_t` | 32位 | 0 ~ 4294967295 | `unsigned int` |
+  | `int64_t` | 64位 | -2^63 ~ 2^63-1 | `long long` |
+  | `uint64_t` | 64位 | 0 ~ 2^64-1 | `unsigned long long` |
+  | `int_least8_t` | 至少8位的有符号整数 |
+  | `uint_least8_t` | 至少8位的无符号整数 |
+  | ...（16/32/64位同理） | ... |
+  | `int_fast8_t` | 最快处理的至少8位有符号整数 |
+  | `uint_fast8_t` | 最快处理的至少8位无符号整数 |
+  | ...（16/32/64位同理） | ... |
+  | `intmax_t` | 系统支持的最大有符号整数 |
+  | `uintmax_t` | 系统支持的最大无符号整数 |
+  | `intptr_t` | 可保存指针值的有符号整数 |
+  | `uintptr_t` | 可保存指针值的无符号整数 |
 
 
 2.  **极限值宏定义**
-| 宏 | 含义 |
-|----|------|
-| `INT8_MIN`/`INT8_MAX` | `int8_t` 的最小/最大值 |
-| `UINT8_MAX` | `uint8_t` 的最大值 |
-| `INTMAX_MIN`/`INTMAX_MAX` | `intmax_t` 的极限值 |
-| `UINTMAX_MAX` | `uintmax_t` 的最大值 |
-| `PTRDIFF_MIN`/`PTRDIFF_MAX` | `ptrdiff_t` 的极限值 |
-| `SIZE_MAX` | `size_t` 的最大值 |
+  | 宏 | 含义 |
+  |----|------|
+  | `INT8_MIN`/`INT8_MAX` | `int8_t` 的最小/最大值 |
+  | `UINT8_MAX` | `uint8_t` 的最大值 |
+  | `INTMAX_MIN`/`INTMAX_MAX` | `intmax_t` 的极限值 |
+  | `UINTMAX_MAX` | `uintmax_t` 的最大值 |
+  | `PTRDIFF_MIN`/`PTRDIFF_MAX` | `ptrdiff_t` 的极限值 |
+  | `SIZE_MAX` | `size_t` 的最大值 |
 
 3. **格式化输出宏**
-| 宏 | 对应类型 | 格式化字符串 |
-|----|----------|--------------|
-| `PRIi8`/`PRIu8` | `int8_t`/`uint8_t` | `%hhd`/`%hhu` |
-| `PRIi16`/`PRIu16` | `int16_t`/`uint16_t` | `%hd`/`%hu` |
-| `PRIi32`/`PRIu32` | `int32_t`/`uint32_t` | `%d`/`%u` |
-| `PRIi64`/`PRIu64` | `int64_t`/`uint64_t` | `%lld`/`%llu` |
-| `PRIiMAX`/`PRIuMAX` | `intmax_t`/`uintmax_t` | `%jd`/`%ju` |
+  | 宏 | 对应类型 | 格式化字符串 |
+  |----|----------|--------------|
+  | `PRIi8`/`PRIu8` | `int8_t`/`uint8_t` | `%hhd`/`%hhu` |
+  | `PRIi16`/`PRIu16` | `int16_t`/`uint16_t` | `%hd`/`%hu` |
+  | `PRIi32`/`PRIu32` | `int32_t`/`uint32_t` | `%d`/`%u` |
+  | `PRIi64`/`PRIu64` | `int64_t`/`uint64_t` | `%lld`/`%llu` |
+  | `PRIiMAX`/`PRIuMAX` | `intmax_t`/`uintmax_t` | `%jd`/`%ju` |
 
 - `<stdint.h>` 为 C 语言带来了：
   - **精确的位宽控制**

@@ -1,6 +1,5 @@
 # cpp-stream 
 
-
 # INDEX
 
 - [标准IO流](#iostream)

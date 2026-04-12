@@ -24,7 +24,7 @@ nnoremap <space>tt <c-w>T
 nnoremap <space>tb :buffers<cr>:tabedit #
 
 " 操作优化
-inoremap jf <esc>
+inoremap jf <esc>:w<cr>
 nnoremap gf <c-w>f<c-w>T
 nnoremap <space>r :reg<cr>
 
@@ -46,3 +46,5 @@ inoremap ？ ?
 inoremap 【 [
 inoremap 】 ]
 inoremap · `
+inoremap ： :
+inoremap ； ;
