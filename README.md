@@ -44,8 +44,7 @@
 
 - [wsl](./docs/windows/wsl.md)
 - [C盘结构](./docs/windows/c-disk.md)
-- [注册表](./docs/windows/注册表.txt)
-- [Win+R运行](./docs/windows/Windows+R.txt)
+- [Win+R运行](./docs/windows/winR.md)
 - [快捷键](./docs/windows/fast-key.md)
 - [vbs脚本](./docs/windows/vbs/)
 
@@ -55,10 +54,6 @@
 - [终端快捷键](./docs/linux/keybroad.md)
 - [根目录结构](./docs/linux/root-struct.md)
 - [elf可执行文件](./docs/linux/elf.md)
-- **脚本**
-  - [服务器资源备份脚本](./docs/linux/script/server-backup.sh) 
-  - [archlinux自动安装脚本](./docs/linux/script/archlinux-autoInstall.sh)
-  - [新机自动部署脚本](./docs/linux/script/sync-config.sh)
 
 ### 第三方工具
 
@@ -75,10 +70,7 @@
 
 ### 其他
 
-- **AI提示词**
-  - [生成提示词的提示词](./docs/other/ai/prompt.md)
-  - [CPP提示词](./docs/other/ai/c-cpp.md)
-  - [电子工程师](./docs/other/ai/ee.md)
+- [ai生成提示词的提示词](./docs/other/prompt.md)
 - [视频知识](./docs/other/video.md)
 
 ### q-a
