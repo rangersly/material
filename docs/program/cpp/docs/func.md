@@ -1,4 +1,4 @@
-# c-cpp function
+# cpp function
 
 ## index
 - [extern](#extern)
