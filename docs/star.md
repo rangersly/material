@@ -85,6 +85,7 @@
 - [鸟哥linux私房菜](https://linux.vbird.org/)
 - [维修手册 iFixit](https://zh.ifixit.com/Guide)
 - [基础计算机教学](https://github.com/criwits/missing-web)
+- [编程字体](https://www.nerdfonts.com/font-downloads) : 推荐使用JetBrainsMono Nerd Font
 
 ## android-tool
 
