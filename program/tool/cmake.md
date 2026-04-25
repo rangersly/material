@@ -7,6 +7,7 @@
 - [编译控制](#编译控制)
 - [链接库](#链接库)
 - [目录组织](#目录组织)
+- [链接第三方库](#链接第三方库)
 - [其他常用命令](#其他常用命令)
 
 ## 构建命令
@@ -65,9 +66,10 @@ add_executable(myapp src/main.cpp)
 |变量名|含义|
 |---|---|
 |`CMAKE_SOURCE_DIR`|顶层源目录|
+|`PROJECT_SOURCE_DIR`|最近的`project()`对应的源码目录|
 |`CMAKE_CURRENT_SOURCE_DIR`|当前`CMakeList`目录|
 |`CMAKE_BINARY_DIR`|顶层`build`目录|
-|`PROJECT_NAME`|项目名|
+|`CMAKE_PROJECT_NAME`|项目名|
 |`PROJECT_VERSION`|项目版本|
 
 ## 链接库
@@ -121,6 +123,40 @@ add_subdirectory(lib)
 add_subdirectory(src)
 ```
 
+## 链接第三方库
+
+- 引入第三方库
+  - `find_package(<包名> [版本] [REQUIRED] [COMPONENTS 组件1 组件2 ...])`
+    - 版本 : 库的最低版本(可选)
+    - REQUIRED : 必须找到
+    - COMPONENTS : 大部分库分组件,可以只找自己需要的(可选)
+    - 示例 : `find_package(Qt5 REQUIRED COMPONENTS Widgets Network)`
+- 链接第三方库
+  - `target_link_libraries(myapp PRIVATE fmt::fmt)` 
+
+> [!NOTE]
+> 目标名命名惯例通常是 `包名::库名` 但还是建议看库的官方文档
+
+### 集成第三方库
+
+```cmake
+# 加载 FetchContent 模块
+include(FetchContent)
+
+# 声明要下载的外部项目：名字叫 fmt
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY  https://github.com/fmtlib/fmt.git
+    GIT_TAG         10.0.0                # 用固定的版本号，保证可重复
+)
+
+# 让 CMake 下载并准备好这个依赖
+FetchContent_MakeAvailable(fmt)
+```
+
 # 其他常用命令
 
 - `message(STATIC "message")` : 输出内容
+- `file()` 操作文件
+  - `file(GLOB SRC_FILES "*.c" "*.cc")` 收集(GLOB)目录下所有源代码文件,加入到一个变量中
+  - 还有好多功能我懒得记录,应该不常用吧(Rangerlsy语)
