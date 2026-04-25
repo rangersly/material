@@ -48,9 +48,15 @@ cmake_minimum_required(VERSION 3.20)
 # 工程项目名
 project(MyFirstProject VERSION 1.0)
 
+# 将可执行文件输出到构建根目录
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
+
 # 创建一个目标,这个目标是可执行文件
 add_executable(myapp src/main.cpp)
 ```
+
 ## 编译控制
 
 - **目标级编译特性**
@@ -85,8 +91,6 @@ add_executable(myapp src/main.cpp)
 ```cmake
 # 创建静态库目标
 add_library(mylog STATIC src/mylog.cpp)
-# 创建动态库目标
-add_library(mylog SHARED src/mylog.cpp)
 # 链接源文件属性到库目标上
 target_link_libraries(myapp PRIVATE mylog)
 # 挂载库目录属性到目标上
