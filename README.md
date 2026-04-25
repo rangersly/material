@@ -17,63 +17,66 @@
 
 ### 总目录
 
-- [命令大全](./docs/commands.md)
-- [收藏有用的东西](./docs/star.md)
+> [!TIP]
+> 建议第一次看这个仓库的友友稍微看一下(尽管维护更新不太完善),熟悉仓库的直接搜索框检索内容啦
+
+- [命令大全](./commands.md)
+- [收藏有用的东西](./star.md)
 - [编程](#编程)
 - [网络](#network)
 - [windows](#windows)
 - [linux](#linux)
 - [第三方工具](#第三方工具)
 - **硬件知识**
-  - [网线](./docs/hardware/EthernetCable.md)
-  - [硬盘](./docs/hardware/disk.md)
+  - [网线](./hardware/EthernetCable.md)
+  - [硬盘](./hardware/disk.md)
 - [基于问题的合集](#q-a)
 - [其他](#其他)
 
 ### 编程
 
 - **算法**
-  - [st表](./docs/algorithms/st-table.cpp)
+  - [st表](./algorithms/st-table.cpp)
 - **工具**
-  - [gcc-g++](./docs/program/tool/gcc_g++.md)
-  - [gdb调试工具](./docs/program/tool/gdb.md)
+  - [gcc-g++](./program/tool/gcc_g++.md)
+  - [gdb调试工具](./program/tool/gdb.md)
 - **C-CPP**
-  - [函数库](./docs/program/c_cpp/universal/libs.md)
+  - [函数库](./program/c_cpp/universal/libs.md)
 
 ### windows
 
-- [wsl](./docs/windows/wsl.md)
-- [C盘结构](./docs/windows/c-disk.md)
-- [Win+R运行](./docs/windows/winR.md)
-- [快捷键](./docs/windows/fast-key.md)
-- [vbs脚本](./docs/windows/vbs/)
+- [wsl](./windows/wsl.md)
+- [C盘结构](./windows/c-disk.md)
+- [Win+R运行](./windows/winR.md)
+- [快捷键](./windows/fast-key.md)
+- [vbs脚本](./windows/vbs/)
 
 ### linux
 
-- [proc文件系统](./docs/linux/proc.md)
-- [终端快捷键](./docs/linux/keybroad.md)
-- [根目录结构](./docs/linux/root-struct.md)
-- [elf可执行文件](./docs/linux/elf.md)
+- [proc文件系统](./linux/proc.md)
+- [终端快捷键](./linux/keybroad.md)
+- [根目录结构](./linux/root-struct.md)
+- [elf可执行文件](./linux/elf.md)
 
 ### 第三方工具
 
-- [vim](./docs/tools/vim/vim.md)
-- [ssh远程连接](./docs/tools/ssh/ssh.md)
-- [scp文件传输](./docs/tools/ssh/scp-sftp.md)
-- [docker](./docs/tools/docker.md)
-- [git](./docs/tools/git.md)
-- [markdown](./docs/tools/markdown.md)
-  - [支持的数学表达式](./docs/tools/math-markdown.md)
-- [tmux](./docs/tools/tmux.md)
-- [ffmpeg](./docs/tools/ffmpeg.md)
-- [科学上网相关](./docs/tools/vpn.md)
+- [vim](./tools/vim/vim.md)
+- [ssh远程连接](./tools/ssh/ssh.md)
+- [scp文件传输](./tools/ssh/scp-sftp.md)
+- [docker](./tools/docker.md)
+- [git](./tools/git.md)
+- [markdown](./tools/markdown.md)
+  - [支持的数学表达式](./tools/math-markdown.md)
+- [tmux](./tools/tmux.md)
+- [ffmpeg](./tools/ffmpeg.md)
+- [科学上网相关](./tools/vpn.md)
 
 ### 其他
 
-- [ai生成提示词的提示词](./docs/other/prompt.md)
-- [视频知识](./docs/other/video.md)
+- [ai生成提示词的提示词](./other/prompt.md)
+- [视频知识](./other/video.md)
 
 ### q-a
 
-- [文件系统损坏或误删除处理](./docs/q-a/FileSystemCorruption.md)
+- [文件系统损坏或误删除处理](./q-a/FileSystemCorruption.md)
 
