@@ -54,6 +54,7 @@ int main() {
 }
 ```
 
+还可以插入mermaid图表,推荐使用ai生成之后自己进行修改
 ```mermaid
 graph TD
     A(mermaid图表) --> B{github可渲染}
@@ -116,7 +117,7 @@ $$
   - `\frac{分子}{分母}`  $\frac{c}{a}$
   - `\sqrt[n]{表达式}`  $\sqrt{b^2 - 4ac}$
 
-- [更多数学内容](./math-markdown.md)
+- [生成数学公式的工具](https://www.latexlive.com/home)
 
 ## github特殊功能
 
