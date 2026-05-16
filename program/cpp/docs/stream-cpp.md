@@ -5,8 +5,8 @@
 - [标准IO流](#iostream)
 - [cpp stdio](#cpp-stdio)
 - [cpp fio](#cpp-fio)
-- [关闭缓冲区读取](../linux/ncurses.c)
-- [ANSI](#./ansi.md)
+- [关闭缓冲区读取](../../c/linux/ncurses.c)
+- [ANSI](../../other/ansi.md)
 
 ---
 
