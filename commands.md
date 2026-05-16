@@ -1,148 +1,170 @@
-# 命令大全(以linux平台为主,Win会进行特殊标注
+# 命令大全
 
-## 目录
-
-- [tmux](./tools/tmux.md)
-- [dd](#dd)
-- [ffmpeg](./tools/ffmpeg.md)
-
-- [打包压缩](#打包压缩)
-- [文件属性](#文件属性)
-- [查看编辑文件](#查看编辑文件)
-- [文件操作](#文件操作)
-- [权限管理](#权限管理)
-- [磁盘](#磁盘)
-- [用户](#用户)
-- [进程](#进程)
+- [文件与目录](#文件与目录)
+- [文本与数据流](#文本与数据流)
+- [系统信息与监控](#系统信息与监控)
+- [磁盘与文件系统](#磁盘与文件系统)
+- [用户与权限](#用户与权限)
+- [进程与服务管理](#进程与服务管理)
 - [网络](#网络)
-- [系统](#系统)
-- [开发](#开发)
-- [其他](#其他)
+- [软件包管理](#软件包管理)
+- [开发工具](#开发工具)
+- [实用工具集](#实用工具集)
 
-## 文件操作
+## 文件与目录
 
-- [grep](#grep) : 查找指定内容
-- **ln** : 加-s是符号链接(快捷方式)
-- [patch](#patch) : 补丁
-- [rsync](#rsync) : 文件同步命令,更好用的cp
-- [find](#find) : 文件查找
-- [tee](#tee):数据分流
+- **查找**
+  - [find](#find) : 文件查找
+  - **locate** : 高效文件查找
+  - [which](#which): 查找命令
+- **查看与编辑**
+  - [cat](#cat) : 输出文件内容
+  - [tail](#tail): 显示文件的末尾内容
+  - [od](#od) : 查看二进制文件内容
+  - [vim](./tools/vim/vim.md) : 文件内容编辑工具
+- **属性与统计**
+  - [ls](#ls) : 查看当前工作目录下的文件
+  - [file](#file): 查看文件类型
+  - [wc](#wc) : 统计文件信息
+- **差异与补丁**
+  - [diff](#diff): 文件差异对比
+  - [patch](#patch) : 补丁
+- **同步与备份**
+  - [rsync](#rsync) : 文件同步命令,更好用的cp
+- **打包压缩**
+  - [tar](#tar) : 打包工具,将许多文件合而为一(方便压缩)
+  - [gzip](#gzip) : 最通用的压缩
+  - [xz](#xz) : 现代化的压缩工具
+- **基本操作**
+  - **mv** : 移动/重命名
+  - [cp](#cp) : 复制
+  - **rm** : 删除
+  - **ln** : 链接(加-s为符号链接)
+- **权限与属性**
+  - [chmod](#chmod): 更改文件权限
+  - **chown** : 更改文件所有者
+  - **umask** : 默认权限掩码
+  - [acl](#acl): 访问控制列表
+  - [attr](#attr): 底层文件属性控制
 
-## 查看编辑文件
+## 文本与数据流
 
-- [cat](#cat) : 输出文件内容
-- [od](#od) : 查看二进制文件内容
-- [diff](#diff):文件差异对比
-- **locate** : 高效文件查找
-- [tail](#tail):显示文件的末尾内容
-- [vim](./tools/vim/vim.md) : 文件内容编辑工具
+- **文本处理**
+  - [grep](#grep) : 查找指定内容
+  - **awk**
+  - **sed**
+- **管道与重定向**
+  - [tee](#tee): 数据分流
+- **编解码与校验**
+  - **md5sum** : MD5 校验
+  - **sha1sum** : SHA1 校验
+  - **cksum** : CRC 校验
+  - **base64** : Base64 编解码
+  - **basenc** : 各种 base 变种
+  - **iconv** : 字符编码转换
+  - **xxd** : 十六进制转换
 
-## 打包压缩
+## 系统信息与监控
 
-- [gzip](#gzip) : 最通用普遍的压缩
-- [bzip2](#gzip) : 效果稍好,较慢
-- [xz](#xz) : 现代化的压缩工具
-- [tar](#tar) : 打包工具,将许多文件合而为一(方便压缩)
+- **系统信息**
+  - [uname](#uname): 系统内核版本等信息
+  - [dmidecode](#dmidecode): 硬件信息
+  - [uptime](#uptime): 负载信息
+- **资源监控**
+  - [top](#top): 进程实时监控
+  - [btop](#btop): 更现代的 top
+  - [vmstat](#vmstat): 虚拟内存统计
+  - [iostat](#iostat) : 监测磁盘活动
+  - [perf](./program/tool/perf.md): 性能分析工具
+- **用户与会话**
+  - [last](#last) : 查看用户登录记录
+  - [whoami](#whoami): 当前用户
+  - [id](#id): 身份信息
 
-## 文件属性
+## 磁盘与文件系统
 
-- [ls](#ls) : 查看当前工作目录下的文件
-- [file](#file)
-- [wc](#wc) : 统计文件信息
+- **设备查看**
+  - [lsblk](#lsblk) : 查看块设备及其依赖关系
+  - [smartctl](#smartctl) : 查看 S.M.A.R.T. 参数
+- **分区管理**
+  - [parted](#parted): 分区工具
+- **挂载管理**
+  - [mount](#mount): 挂载文件系统
+  - [umount](#umount): 卸载文件系统
+  - **/etc/fstab** : 开机自动挂载配置
+- **磁盘用量**
+  - [df](#df): 磁盘空间使用情况
+  - [du](#du): 文件占用大小分析
+- **磁盘操作**
+  - [dd](#dd): 磁盘克隆与备份
 
-## 权限管理
+## 用户与权限
 
-- **chown** : 更改文件所有者
-- [chmod](#chmod)
-- [umark](#umark)
-- [acl](#acl):访问控制列表
-- [attr](#attr):底层文件属性控制
+- **用户管理**
+  - [sudo](#sudo): 权限提升
+  - [useradd](#useradd): 添加用户
+  - [userdel](#userdel): 删除用户
+  - [usermod](#usermod): 修改用户
+  - [passwd](#passwd): 密码管理
+- **组管理**
+  - [groupadd](#groupadd): 添加组
+  - [newgrp](#newgrp): 切换有效用户组
+- **身份查询**
+  - [id](#id): 用户与组 ID
+  - [whoami](#whoami): 显示当前用户
+  - [last](#last) : 查看用户登录记录
 
-## 磁盘
+## 进程与服务管理
 
-- [iostat](#iostat) : 监测磁盘活动
-- [mount](#mount)
-- [umount](#umount)
-- [df](#df)
-- [du](#du):分析文件占用大小
-- [smartctl](#smartctl) 查看smart参数
-- [parted](#parted)
-- [lsblk](#lsblk) 查看块设备及其依赖关系的核心工具
-
----
-
-##  用户
-
-- [sudo](#sudo)
-- [useradd](#useradd)
-- [groupadd](#groupadd)
-- [passwd](#passwd)
-- [userdel](#userdel)
-- [usermod](#usermod)
-- [id](#id):身份信息
-- [newgrp](#newgrp):切换有效用户组
-- [last](#last) : 查看用户登陆记录
-- [which](#which):查找命令
-- [whoami](#whoami)
-
----
-
-## 进程
-
-- [ps](#ps)
-- [uptime](#uptime)
-- [vmstat](#vmstat)
-- [top](#top)
-- [btop](#btop)
-- [lsop](#lsop):查看占用文件的进程
-- [kill](#kill)
-- [bg](#bg) : 暂停的jobs 放到后台运行
-- [fg](#fg) : 后台拉回前台
-- [jobs](#jobs)
-- [ulimit](#ulimit)
-
----
+- **进程查看**
+  - [ps](#ps): 进程快照
+  - [lsof](#lsop): 查看占用文件的进程 (原 `lsop` 应为 `lsof`)
+  - [jobs](#jobs): 作业列表
+- **作业控制**
+  - [bg](#bg) : 将暂停的作业放到后台运行
+  - [fg](#fg) : 将后台作业拉回前台
+  - [tmux](./tools/tmux.md) : 终端复用器
+- **信号与资源**
+  - [kill](#kill): 发送信号
+  - [ulimit](#ulimit): 资源限制
+- **服务管理**
+  - [systemctl](#systemctl): 系统服务管理
 
 ## 网络
 
-- [ip](#ip) : many net tool
-- [ss](#ss) : 端口
-- [ping](#ping)
-- [curl](#curl)
-- [wget](#wget)
-- [NetworkManager](#networkmanager)
-- [nmap](#nmap)
-- [iperf3](#iperf) : 网络性能测试工具
-- [ufw](#ufw) : 防火墙配置工具
+- **基础配置**
+  - [ip](#ip) : 多功能网络工具
+  - [NetworkManager](#networkmanager): 网络连接管理 (nmcli)
+- **连接与诊断**
+  - [ping](#ping): 连通性测试
+  - [ss](#ss) : 套接字统计
+  - [nmap](#nmap): 网络探测
+- **数据传输**
+  - [curl](#curl): URL 传输工具
+  - [wget](#wget): 文件下载
+- **防火墙**
+  - [ufw](#ufw) : 简化防火墙配置
+- **性能测试**
+  - [iperf3](#iperf) : 网络性能测试
 
----
+## 软件包管理
 
-## 系统
+- **Debian 系**
+  - [apt](#apt): 高级包管理工具
+  - [dpkg](#dpkg): 底层包管理
 
-- [systemctl](#systemctl)
-- [perf](../../program/tool/perf.md)
-- [dmidecode](#dmidecode)
-- [dpkg](#dpkg)
-- [apt](#apt)
-- [timeshift](#timeshift) : 备份工具
-- [uname](#uname):系统内核版本等信息
+## 开发工具
 
----
+- [objdump](./program/tool/objdump.md) : 可执行文件反汇编
+- [readelf](./program/tool/readelf.md) : ELF 文件结构分析
 
-## 开发
+## 实用工具集
 
-- [objdump](../program/tool/objdump.md) : 可自行文件反汇编
-- [readelf](../program/tool/readelf.md) : 观察elf文件结构
+- [bc](#bc): 高精度计算器
+- [timeshift](#timeshift) : 系统备份与恢复
+- [ffmpeg](./tools/ffmpeg.md) : 多媒体处理工具
 
----
-
-## 其他
-
-- [编解码工具](#编解码工具)
-- [高精度计算器](#bc)
-
-
-### ls
+## ls
 
 - `ls [<选项>]`
 
@@ -156,15 +178,15 @@
 |`-s`|在行首显示大小|
 |`-i`|inode|
 
-### cat
+## cat
 
 `-n` 显示行号
 
-### od
+## od
 
 - `-t [<o/x>]` 使用不同进制显示
 
-### grep
+## grep
 
 - 基本命令格式
   - `grep [选项] "要搜索的字符串" 目标路径`
@@ -179,87 +201,105 @@
 |`-i`|忽略大小写|
 |`-E 'o1|o2|o3'`|多匹配|
 
-### wc
-    +    -l    行数
-    +    -m    字符
-    +    -w    word
+## wc
 
-### mv
-    +    -i            # 覆盖时警告
-    +    -b            # 重合加~
+|参数|效果|
+|---|---|
+|`-l`|行数|
+|`-m`|字符|
+|`-w`|word|
 
-### cp    
-	+	 -a            # 归档模式
-	+    -p            # 保留文件的原始属性
-    +    -i            # 覆盖时警告
-    +    -b            # 重合加~
-    +    -u            # 仅复制更新
-    +    -v            # 详细显示
-    +    -r            # 目录
+## cp    
 
-### rm
-    +    -i            # 覆盖时警告
-    +    -r            # 目录
-    +    -f            # 强制
+|参数|效果|
+|---|---|
+|`-a`|归档模式|
+|`-p`|保留文件的原始属性|
+|`-i`|覆盖时警告|
+|`-b`|重合加~|
+|`-u`|仅复制更新|
+|`-v`|详细显示|
+|`-r`|目录|
 
-### chmod
+## rm
+
+|参数|效果|
+|---|---|
+|`-i`|删除时询问|
+|`-r`|递归删除子目录|
+|`-f`|强制删除|
+
+## chmod
 
 - `-R` 同时更改所有子目录
 
-```bash
-    SUID    4
-        执行二进制文件时,权限提升为文件所有者
-        
-    SGID    2
-        在此权限下的目录进入后,有效用户组变为所有组
+特殊权限 : 4位显示法的第一位
 
-    SBIT    1
-        在此权限下的文件夹里创建文件,仅有root与属主有权操作
+```
+SUID    4
+    执行二进制文件时,权限提升为文件所有者
+    
+SGID    2
+    在此权限下的目录进入后,有效用户组变为所有组
+
+SBIT    1
+    在此权限下的文件夹里创建文件,仅有root与属主有权操作
 ```
 
-### file
+## file
 
-- `-i` 查看编码格式
-- `-z` 查看压缩格式
-- `-b` 查看文件的系统架构
-- `-p` 详细信息
+查看文件的信息
 
-### diff
+|参数|效果|
+|---|---|
+|`-i`|查看编码格式|
+|`-z`|查看压缩格式|
+|`-b`|查看文件的系统架构|
+|`-p`|详细信息|
 
-- `-r` 递归比较两个目录
-- `-b` 忽略空格
-- `-i` 忽略大小写
-- `-B` 忽略空白行
-- `-w` 忽略空白字符
-- `-u` 使用"统一格式”显示,易于生成补丁文件
+## diff
 
-### patch
+|参数|效果|
+|---|---|
+|`-r`|递归比较两个目录|
+|`-b`|忽略空格|
+|`-i`|忽略大小写|
+|`-B`|忽略空白行|
+|`-w`|忽略空白字符|
+|`-u`|使用"统一格式”显示,易于生成补丁文件|
+
+## patch
 
 补丁文件
 - [diff](#diff):文件差异对比
 
 ```bash
-    diff -Naur <oldfile> <newfile>  >  <file.patch###     # -p[n] 拿掉路径中的/
-    patch -p<n> <  <file.patch###         # 制作
-    patch -p<n>-R <  <file.patch###     # 还原
+    diff -Naur <oldfile> <newfile>  >  <file.patch##     # -p[n] 拿掉路径中的/
+    patch -p<n> <  <file.patch##         # 制作
+    patch -p<n>-R <  <file.patch##     # 还原
 ```
 
-### rsync
+## rsync
 
-+    -a(archive):归档模式,用于完整同步
-+    -v(verbose):详细模式,显示同步过程中的详细信息.
-+    -u(update):仅在目标文件不存在或源文件更新时才同步.
-+    -z(compress):在传输过程中压缩文件数据.
-+    --delete:删除目标目录中多余的文件,使目标目录与源目录保持一致
-+    -e(rsh):指定远程连接时使用的工具(如 ssh).
-+    --exclude:指定排除的文件或目录模式.
-+    --include:指定包含的文件或目录模式.
-+    -P --progress:显示同步进度.
-+    --bwlimit : 限速,用于单个大文件,避免占用过多带宽
-+    --dry-run:模拟同步操作,不实际执行,用于测试同步命令的效果.
-1.    本地同步
+|参数|效果|
+|---|---|
+|`-a(archive)`|归档模式,用于完整同步|
+|`-v(verbose)`|详细模式,显示同步过程中的详细信息.|
+|`-u(update)`|仅在目标文件不存在或源文件更新时才同步.|
+|`-z(compress)`|在传输过程中压缩文件数据.|
+|`--delete`|删除目标目录中多余的文件,使目标目录与源目录保持一致|
+|`-e(rsh)`|指定远程连接时使用的工具(如 ssh).|
+|`--exclude`|指定排除的文件或目录模式.|
+|`--include`|指定包含的文件或目录模式.|
+|`-P --progress`|显示同步进度.|
+|`--bwlimit `| 限速,用于单个大文件,避免占用过多带宽|
+|`--dry-run`|模拟同步操作,不实际执行,用于测试同步命令的效果.|
+
+**示例内容**
+
+1.  本地同步
     `rsync -avP /path/to/source/ /path/to/destination/`
-2.    从本地同步到远程
+2.  从本地同步到远程
     `rsync -avzP /path/to/source/ user@remote_host:/path/to/destination/`
 3.  同步时删除多余文件
     `rsync -av --delete /path/to/source/ /path/to/destination/`
@@ -274,29 +314,33 @@
 6.  模拟同步操作
     `rsync -av --dry-run /path/to/source/ /path/to/destination/`
 
-### find
+## find
 
-- `-name [filename]` 指定文件名
-- `-print` 打印结果在终端
-- `-type [type]` 指定类型
-- `-atime <+-n###` n天前使用的文件
-- `-mtime <+-n###` n天前修改的文件
-- `find /usr/bin -name zip -print`
+|参数|效果|
+|---|---|
+|`-name [filename]`|指定文件名|
+|`-print`|打印结果在终端|
+|`-type [type]`|指定类型|
+|`-atime <+-n##`|n天前使用的文件|
+|`-mtime <+-n##`|n天前修改的文件|
+|`find /usr/bin -name zip -print`|
 
-### which
-    +    -a        # 全部列出
+## which
 
-### uname
-    +    -a    全部信息
++    -a    全部列出
 
-### gzip
+## uname
 
-bzip2 与其使用方法相似
+显示系统版本
+
++    -a    全部信息
+
+## gzip
 
 + `-d` 解压
 + `-l` 查看压缩效果
 
-### xz
+## xz
 
 - **参数**
   - `-d` 解压
@@ -312,7 +356,7 @@ bzip2 与其使用方法相似
   - `xz -l --verbose filename.xz` 查看压缩文件信息
   - `xc -c filename > filename.xz`
 
-### tar 
+## tar 
 
 - `-c` 创建
 - `-x` 解开
@@ -324,7 +368,7 @@ bzip2 与其使用方法相似
 
 - `tar -cvjf shell.tar.bz2 shell/
 
-### dd
+## dd
 
 - `if`    input file/device
 - `of`    output file/device
@@ -333,7 +377,7 @@ bzip2 与其使用方法相似
 - `oflag=sync`  sync
     
 
-### mount
+## mount
     +    -r            # 只读
     +    -o <loop>     # 特殊设备
     +    auto          # 开机自动挂载
@@ -346,10 +390,10 @@ bzip2 与其使用方法相似
 - `[设备/UUID] [挂载点] [文件系统] [参数] 0 0`
 
 
-### df
+## df
     +    df -hT
 
-###  smartctl
+##  smartctl
 
 - `-a` 全部参数
 
@@ -372,7 +416,7 @@ bzip2 与其使用方法相似
 |197   |Current_Pending_Sector|待处理扇区数	    |0       	|非常高 |
 |198   |Offline_Uncorrectable|离线不可纠正扇区	|0	        |非常高 |
 
-### parted
+## parted
     +    -i        列出所有设备的分区信息
     +    -s        非交互模式
     +    print                    显示当前设备的分区表
@@ -387,23 +431,23 @@ bzip2 与其使用方法相似
 `sudo parted -s /dev/sdb rm 2`
 
 
-### sudo    
+## sudo    
     +    -u        # 指定用户
 
-### useradd
+## useradd
     +    -m        # 同时建立主目录
     +    -g        # 指定用户组
     +    -s        # 指定shell
 
-### userdel
+## userdel
     +    -r        # 删除主目录
 
-### usermod
+## usermod
     +    -d            # 修改主目录
     +    -e <MM/DD/YY># 修改账号有效期
     +    -s            # 修改shell
 
-### id
+## id
 
 - `/etc/passwd`
 - `登录名:口令:UID:GID:x信息:主目录:shell`
@@ -413,20 +457,20 @@ bzip2 与其使用方法相似
 
 __用户所有组是passwd和groups的并集__
 
-### newgrp
+## newgrp
 
-### last
+## last
 - **-n <数字>**  表示查看最近n条
 - **-i**  显示IP而不是主机名
 
-### ps
+## ps
     +    aux
 
-### uptime
+## uptime
 `load average` 为过去 1, 5, 15 分钟内等待资源的进程数量
 若持续高于cpu核心数,表明进程可能在争抢资源
 
-### vmstat
+## vmstat
 检测系统状态
 + **`r`**      cpu队列  
 + **`b`**      io等待  
@@ -436,22 +480,22 @@ __用户所有组是passwd和groups的并集__
 - `-d`  磁盘统计信息
 - `-s`  统计
 
-### top
+## top
 
-### btop
+## btop
 
-### lsop    
+## lsop    
 
-### kill
+## kill
     +    -l            # 列出所有信号
 
-### bg
+## bg
 
-### fg
+## fg
 
-### jobs
+## jobs
 
-### nohup    命令挂机(退出登陆后依然执行)
+## nohup    命令挂机(退出登陆后依然执行)
 nohup [command] &
 `screen` 主要用于用户开启多个独立的会话(称为"窗口")在这些会话之间可以自由切换而不会中断已经运行的程序
 1. **启动一个新的 screen 会话**:
@@ -468,7 +512,7 @@ nohup [command] &
 10. **锁定当前会话**:
     在 screen 会话中按 `Ctrl-a` 然后按 `x`.
 
-### ulimit
+## ulimit
 - 查看和修改进程运行资源限制    
 - `-H/S`        # 设置/显示 软/硬 限制
 - `-a`          # 显示所有
@@ -483,8 +527,12 @@ nohup [command] &
 
 ---
 
-### ip
+## ip
+
+实现了Linux的网络命名空间,主要作用于数据链路层和网络层(TCP/IP五层模型)
+
 **作为一个统一的接口管理网络**
+
 + **全局选项**
   + `-s` - 更多信息
   + `-d` - 更详细
@@ -497,7 +545,7 @@ nohup [command] &
   + `set <dev> up/down` - 开启或关闭接口
   + `set <dev> address <MAC>` - 设置MAC地址(down)
   
-+ **address - IP地址**
++ **addr - IP地址**
   + `ip a` - 显示所有接口地址
   + `add <IP> dev <devname>` - 添加IP地址
   + `del <IP> dev <devname>`
@@ -512,6 +560,7 @@ nohup [command] &
   + `add [IP] lladdr [MAC] dev [eth0]` - 添加表项
   + `del [IP] dev [eth0]` - 删除表项
   + `flush all` - 清空
+
 ```
 REACHABLE:表示邻居设备可达.
 STALE:表示邻居设备的条目已过期,但之前是可达的.
@@ -529,22 +578,20 @@ PROBE:表示正在积极探测邻居设备是否可达
   + `all` - 所有事件
 
 
-### ss
-    +    -t        # tcp
-    +    -u        # udp
-    +    -n        # 以端口号显示
-    +    -l        # 列出正在监听的服务
-    +    -p        # + pid
-    +`    -r        # 路由表
-    +    ss -tlunp
+## ss
 
-### ping
++ `-t`  tcp
++ `-u`  udp
++ `-n`  以端口号显示
++ `-l`  列出正在监听的服务
++ `-p`  + pid
++ `-r`  路由表
++ `ss -tlunp`
 
----
 
-### **curl**
+## **curl**
 
-curl是一个强大的命令行工具,用于传输数据,支持多种协议(HTTP、HTTPS、FTP、FTPS、SCP、SFTP、TFTP、LDAP、DICT、TELNET等).它被广泛用于测试API、下载文件、上传数据等场景.
+curl用于 **传输数据**,支持多种协议(HTTP、HTTPS、FTP、FTPS、SCP、SFTP、TFTP、LDAP、DICT、TELNET等).广泛用于测试API、下载文件、上传数据等场景.
 
 
 - `-X` 或 `--request`: 指定HTTP请求方法(GET, POST, PUT, DELETE等)
@@ -662,9 +709,9 @@ curl -# -O https://example.com/largefile.zip
 
 ---
 
-### wget
+## wget
 
-### networkmanager
+## networkmanager
 - 连接无线网络
   1. `nmcli device status`  检查网卡是否启用
   2. `nmcli device wifi on` 启用wifi射频
@@ -673,7 +720,7 @@ curl -# -O https://example.com/largefile.zip
   5. `nmcli device wifi connect <SSID> password "password"
   6. `nmcli connection show`  验证连接
 
-### systemctl
+## systemctl
     +    start
     +    stop
     +    restart
@@ -693,16 +740,16 @@ curl -# -O https://example.com/largefile.zip
         +     hibernate    # 休眠
         +     rescue        # 修复
 
-### dmidecode
+## dmidecode
     +    -q        # 简洁
     +    -t        # 指定查看类型
 
-### dpkg
+## dpkg
     +    -i        # 安装
     +    -l        # 查看版本
     +    -r        # 卸载
 
-### apt
+## apt
         +    updata        # 更新软件包缓存
         +    upgrade        # 更新已有软件包的最新版本
         +    install        # 下载并安装
@@ -712,7 +759,7 @@ curl -# -O https://example.com/largefile.zip
         +    depends        # 列出依赖
     +    /etc/apt/sources.list
 
-### 编解码工具
+## 编解码工具
  +  md5sum   md5编码
  +  sha1sum  sha1
  +  cksum    crc
@@ -726,7 +773,7 @@ curl -# -O https://example.com/largefile.zip
 
 ---
 
-### **bc**
+## **bc**
 `bc`支持高精度数学运算、变量、函数、条件语句等编程功能
 
 - **基本用法**
@@ -785,7 +832,7 @@ square(4)  # 输出 16
 
 ---
 
-### **timeshift**
+## **timeshift**
 - 系统恢复步骤
 
 1. 挂载原系统根目录与重要分区到`/mnt`
@@ -821,7 +868,7 @@ umount -R /mnt  # 卸载所有分区
 reboot
 ```
 
-### **iperf**
+## **iperf**
 
 - 通用参数
   - `-p` : 指定端口
@@ -839,7 +886,7 @@ reboot
   - `-s` : 启动服务器
   - `-B` : 绑定指定IP
 
-### **tee**
+## **tee**
 
 接收来自前一个命令通过管道送来的输出,输出到stdout和多个文件中
 
@@ -847,7 +894,7 @@ reboot
 
 **特性:可处理`>`符号无法做到的权限问题**
 
-### **acl**
+## **acl**
 
 允许你为单个用户或组以及不在文件所属组中的用户或组设置更精细的访问权限
 
@@ -874,7 +921,7 @@ reboot
 
 ---
 
-### **attr**
+## **attr**
 
 控制文件本身的行为特性
 
@@ -892,9 +939,7 @@ reboot
   - `-V`:详细输出
   - `-a`:所有文件(包含隐藏)
 
----
-
-### tail
+## tail
 
 用于显示文件的末尾内容,它默认显示文件的最后 10 行,但可以通过选项进行高度自定义
 
@@ -920,9 +965,7 @@ reboot
   tail -v filename.txt
   ```
 
----
-
-### ufw
+## ufw
 
 Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
 
@@ -940,7 +983,7 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
   - `default deny incoming` : 默认拒绝所有传入(outcoming为传出)
   - `logging on` : 启用日志
 
-### lsblk
+## lsblk
 
 - 命令格式 `lsblk [选项] [设备]`
 

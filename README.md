@@ -41,7 +41,7 @@
   - [gcc-g++](./program/tool/gcc_g++.md)
   - [gdb调试工具](./program/tool/gdb.md)
 - **C-CPP**
-  - [函数库](./program/c_cpp/universal/libs.md)
+  - [函数库](./program/c/libs.md)
 
 ### windows
 
