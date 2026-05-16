@@ -152,6 +152,8 @@
 - **Debian 系**
   - [apt](#apt): 高级包管理工具
   - [dpkg](#dpkg): 底层包管理
+- **archlinux**
+  - [pacman](#pacman)
 
 ## 开发工具
 
@@ -1010,3 +1012,27 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
 
 - **示例**
   - `lsblk -o NAME,SIZE,MODEL,SERIAL,MOUNTPOINT`
+
+## pacman
+
++  `-S` 同步
++  `-y` 更新软件包数据库
++  `-u` 升级已有安装包
++  `-R` 卸载
++  `-Q` 查看已安装
+- 示例
+  +  `pacman -Sy` 同步数据库
+  +  `pacman -Syu` 更新系统
+  +  `pacman -S <package_name>` 安装软件包
+  +  `pacman -Rs <package_name>` 卸载同时删除无用的依赖
+  +  `pacman -Ss <keyword>` 搜索软件包
+  +  `sudo pacman -Sc` 清除缓存
+
+**pacman签名问题**
+
+1. `sudo rm -rf /etc/pacman.d/gnupg` 清除旧配置
+2. `/etc/pacman.conf` 去除 `multlib` 注释
+3. 重建签名
+   - `sudo pacman-key --init`
+   - `sudo pacman-key --populate archlinux` 或 `sudo pacman -Sy archlinux-keyring`
+   - `sudo pacman -Sy archlinuxcn-keyring`

@@ -5,7 +5,6 @@
 
 - [导航](#导航)
 
-
 ## 说明
 
 - 仓库由rangersly在实践中慢慢积累出来的,原个人使用,所以做的比较粗糙. 不过已经在重构中,如果有认为有误或不足的地方欢迎大家提出 Issue 或提交 PR 哦.
@@ -14,8 +13,6 @@
 ## 导航
 
 - **未归纳资源** [tmp](./tmp/)
-
-### 总目录
 
 > [!TIP]
 > 建议第一次看这个仓库的友友稍微看一下(尽管维护更新不太完善),熟悉仓库的直接搜索框检索内容啦
@@ -66,7 +63,6 @@
 - [docker](./tools/docker.md)
 - [git](./tools/git.md)
 - [markdown](./tools/markdown.md)
-  - [支持的数学表达式](./tools/math-markdown.md)
 - [tmux](./tools/tmux.md)
 - [ffmpeg](./tools/ffmpeg.md)
 - [科学上网相关](./tools/vpn.md)
@@ -79,4 +75,3 @@
 ### q-a
 
 - [文件系统损坏或误删除处理](./q-a/FileSystemCorruption.md)
-
