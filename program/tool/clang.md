@@ -13,6 +13,9 @@ UseTab: Never
 
 # 大括号风格
 BreakBeforeBraces: Attach
+
+# 类访问修饰符顶格
+AccessModifierOffset: -4
 ```
 
 .clang-tidy
