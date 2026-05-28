@@ -124,6 +124,7 @@
   - [bg](#bg) : 将暂停的作业放到后台运行
   - [fg](#fg) : 将后台作业拉回前台
   - [tmux](./tools/tmux.md) : 终端复用器
+  - [xargs](#xargs) : 并行任务工具
 - **信号与资源**
   - [kill](#kill): 发送信号
   - [ulimit](#ulimit): 资源限制
@@ -1036,3 +1037,14 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
    - `sudo pacman-key --init`
    - `sudo pacman-key --populate archlinux` 或 `sudo pacman -Sy archlinux-keyring`
    - `sudo pacman -Sy archlinuxcn-keyring`
+
+## xargs
+
+|选项|功能|
+|---|---|
+|`-P N`|设置最大并发数|
+|`-I {}`|定义替换字符串|
+|`-n M`|每次传递M个参数给命令|
+
+- 示例
+  - `cat urls.txt | xargs -P 8 -n 1 wget -q` : 多线程下载文件列表
