@@ -854,7 +854,25 @@ sudo timeshift --create \
 - `tags` : 标签,O(On demand)按需备份,D(每日),W(每周)
 - 如果已经配置过默认位置可以直接`--create + --comments`
 
-- 系统恢复步骤
+1. 列出快照 : `sudo timeshift --list`
+2. 恢复快照 : `sudo timeshift --restore --snapshot "2026-05-30-18-22-00" --yes` 
+3. 删除旧快照 : `sudo timeshift --delete --snapshot "2026-05-31-xxx"`
+
+### timeshift.json 配置文件
+
+位置: `/etc/timeshift/timeshift.json`
+
+**基于RSYNC模式的重点选项讲解**
+
+|配置项|含义|
+|---|---|
+|`backup_device_uuid`|存放快照的分区UUID|
+|`btrfs_mode`|选择false为RSYNC模式|
+|`exclude`|排除目录(`/`代表根目录开始,`**`匹配任意多级子目录)|
+
+---
+
+**系统恢复步骤**
 
 1. 挂载原系统根目录与重要分区到`/mnt`
 
