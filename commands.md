@@ -140,6 +140,7 @@
   - [ping](#ping): 连通性测试
   - [ss](#ss) : 套接字统计
   - [nmap](#nmap): 网络探测
+  - [vnstat](#vnstat) : 网络流量日志
 - **数据传输**
   - [curl](#curl): URL 传输工具
   - [wget](#wget): 文件下载
@@ -460,20 +461,17 @@ SBIT    1
 
 __用户所有组是passwd和groups的并集__
 
-## newgrp
-
 ## last
+
 - **-n <数字>**  表示查看最近n条
 - **-i**  显示IP而不是主机名
 
 ## ps
-    +    aux
 
-## uptime
-`load average` 为过去 1, 5, 15 分钟内等待资源的进程数量
-若持续高于cpu核心数,表明进程可能在争抢资源
++    aux
 
 ## vmstat
+
 检测系统状态
 + **`r`**      cpu队列  
 + **`b`**      io等待  
@@ -483,39 +481,16 @@ __用户所有组是passwd和groups的并集__
 - `-d`  磁盘统计信息
 - `-s`  统计
 
-## top
-
-## btop
-
-## lsop    
-
 ## kill
-    +    -l            # 列出所有信号
 
-## bg
-
-## fg
-
-## jobs
++    -l            # 列出所有信号
 
 ## nohup    命令挂机(退出登陆后依然执行)
+
 nohup [command] &
-`screen` 主要用于用户开启多个独立的会话(称为"窗口")在这些会话之间可以自由切换而不会中断已经运行的程序
-1. **启动一个新的 screen 会话**:
-   screen
-2. **列出当前的 screen 会话**:
-   screen -ls
-3. **重新连接到一个已存在的会话**:
-   screen -r [会话ID或名称]
-4. **分离当前会话**:
-   在 screen 会话中按 `Ctrl-a` 然后按 `d`.
-9. **退出 screen 会话**:
-   - 关闭当前窗口:在 screen 会话中按 `Ctrl-a` 然后按 `k`.
-   - 退出所有窗口并结束会话:在 screen 会话中按 `Ctrl-a` 然后按 `\`.
-10. **锁定当前会话**:
-    在 screen 会话中按 `Ctrl-a` 然后按 `x`.
 
 ## ulimit
+
 - 查看和修改进程运行资源限制    
 - `-H/S`        # 设置/显示 软/硬 限制
 - `-a`          # 显示所有
@@ -527,8 +502,6 @@ nohup [command] &
 - `-l`          # lock memory size
 - `-p`          # user processes
 - `-n`          # open file
-
----
 
 ## ip
 
@@ -583,14 +556,39 @@ PROBE:表示正在积极探测邻居设备是否可达
 
 ## ss
 
-+ `-t`  tcp
-+ `-u`  udp
-+ `-n`  以端口号显示
-+ `-l`  列出正在监听的服务
-+ `-p`  + pid
-+ `-r`  路由表
-+ `ss -tlunp`
+用于查看网络套接字统计信息
 
+格式 : `ss [选项] [过滤器]`
+
+|选项|功能|
+|---|---|
+|`-t`|tcp|
+|`-u`|udp|
+|`-n`|以端口号显示,不解析服务名,加快输出速度|
+|`-l`|仅列出正在监听的服务|
+|`-p`|显示关联的进程 pid|
+|`-r`|解析主机名(默认行为),与`-n`相反|
+|`-e`|拓展信息(inode,用户)|
+|`-m`|显示套接字内存使用详情|
+|`-s`|汇总统计:列出各类协议收发包,错误,连接数总计|
+|`ss -tlunp`||
+
+**输出列解读**
+
+- `Recv-Q` 和 `Send-Q`
+  - 对于 `LISTEN` 状态
+    - `Recv-Q` : 当前全连接队列(已完成三次握手但未`accept()`)(注意是否大量堆积)
+    - `Send-Q` : 最大连接队列长度(即backlog)
+  - 对于非监听
+    - `Recv-Q` : 内核接收缓冲区中,未被用户态程序拷走的数据字节数
+    - `Send-Q` : 已发送但尚未被远端确认的数据字节数(TCP) 或发送缓冲区尚未发出的数据字节数(UDP)
+- `ss -s` 快速汇总
+  - `Total` 所有协议族的套接字总数
+  - TCP行
+    - `estab` : 已建立连接状态的数量(TCP总数远大于estab,或者estab暴增都可能是DDoS攻击)
+    - `closed` : `CLOSED` 状态的套接字,通常少见
+    - `orphaned` : **孤儿套接字** 进程将其关闭,但是内核保留一段时间
+    - `timewait` : `TIME_WAIT` 状态,主动关闭一方等待2MSL(数量过大可能是短链接泛洪攻击)
 
 ## **curl**
 
@@ -836,6 +834,26 @@ square(4)  # 输出 16
 ---
 
 ## **timeshift**
+
+系统级备份工具(配置文件在`/etc/timeshift/timesift.json`)
+
+`sudo timeshift --list-devices` 查看可用备份设备(选择非系统盘进行备份)
+
+**创建快照** 完全非交互
+
+```
+sudo timeshift --create \
+  --snapshot-device /dev/sda2 \
+  --rsync \
+  --comments "手动备份：$(date +%Y-%m-%d_%H:%M)" \
+  --tags O
+```
+- `snapshot-device` : 存放快照的分区设备名
+- `rsync` : 强制使用rsync
+- `comments "xxx"` : 快照描述
+- `tags` : 标签,O(On demand)按需备份,D(每日),W(每周)
+- 如果已经配置过默认位置可以直接`--create + --comments`
+
 - 系统恢复步骤
 
 1. 挂载原系统根目录与重要分区到`/mnt`
@@ -1048,3 +1066,21 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
 
 - 示例
   - `cat urls.txt | xargs -P 8 -n 1 wget -q` : 多线程下载文件列表
+
+## vnstat
+
+超低性能占用的网络历史流量记录工具
+
+**安装后初始化**
+
+1. `sudo systemctl enable --now vnstat` 启动开机自启
+2. `ip link show` 查看网卡名
+3. `sudo vnstat -i eth0 --create` 未网卡创建数据库
+
+|选项|功能|
+|---|---|
+|`-h`|每小时流量|
+|`-d`|每日流量|
+|`-m`|每月流量|
+|`-t`|流量最高的十天|
+|`-i eth0`|指定查看某网卡|
