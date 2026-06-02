@@ -73,7 +73,7 @@
 - **资源监控**
   - [top](#top): 进程实时监控
   - [btop](#btop): 更现代的 top
-  - [vmstat](#vmstat): 虚拟内存统计
+  - [vmstat](#vmstat): 计算机资源统计
   - [iostat](#iostat) : 监测磁盘活动
   - [perf](./program/tool/perf.md): 性能分析工具
 - **用户与会话**
@@ -119,14 +119,17 @@
 - **进程查看**
   - [ps](#ps): 进程快照
   - [lsof](#lsop): 查看占用文件的进程 (原 `lsop` 应为 `lsof`)
-  - [jobs](#jobs): 作业列表
 - **作业控制**
-  - [bg](#bg) : 将暂停的作业放到后台运行
-  - [fg](#fg) : 将后台作业拉回前台
+  - `&` : 加在命令末尾直接在后台运行
+  - `jobs` : 列出当前终端中所有后台任务
+  - `bg %n` : 将暂停的作业在后台继续运行
+  - `fg` : 将后台作业拉回前台
+  - `Ctrl + z` : 将当前前台任务暂停扔到后台
+  - `nohup 命令 &` : 使程序在终端关闭之后继续运行
   - [tmux](./tools/tmux.md) : 终端复用器
   - [xargs](#xargs) : 并行任务工具
 - **信号与资源**
-  - [kill](#kill): 发送信号
+  - `kill %n` : 发送信号让任务停止,也可以`kill -9 %n`强制杀
   - [ulimit](#ulimit): 资源限制
 - **服务管理**
   - [systemctl](#systemctl): 系统服务管理
@@ -472,7 +475,6 @@ __用户所有组是passwd和groups的并集__
 
 ## vmstat
 
-检测系统状态
 + **`r`**      cpu队列  
 + **`b`**      io等待  
 + **`si/so`**  swap队列  
@@ -480,14 +482,6 @@ __用户所有组是passwd和groups的并集__
 - `-f`  自启动fork次数
 - `-d`  磁盘统计信息
 - `-s`  统计
-
-## kill
-
-+    -l            # 列出所有信号
-
-## nohup    命令挂机(退出登陆后依然执行)
-
-nohup [command] &
 
 ## ulimit
 
@@ -742,23 +736,57 @@ curl -# -O https://example.com/largefile.zip
         +     rescue        # 修复
 
 ## dmidecode
-    +    -q        # 简洁
-    +    -t        # 指定查看类型
+
+|选项|功能|
+|---|---|
+|`-q`|简洁|
+|`-t`|指定查看类型|
 
 ## dpkg
-    +    -i        # 安装
-    +    -l        # 查看版本
-    +    -r        # 卸载
+
+|选项|功能|
+|---|---|
+|`-i`|安装|
+|`-l`|查看版本|
+|`-r`|卸载|
 
 ## apt
-        +    updata        # 更新软件包缓存
-        +    upgrade        # 更新已有软件包的最新版本
-        +    install        # 下载并安装
-        +    remove        # 卸载
-        +    source        # 下载源码
-        +    search        # 搜索
-        +    depends        # 列出依赖
-    +    /etc/apt/sources.list
+
+|选项|功能|
+|---|---|
+|`updata`|从所有源下载软件包列表,不实际安装|
+|`upgrade`|更新已有软件包的最新版本|
+|`full-upgrade`|更彻底的升级,必要时删除冲突的包|
+|`search`|搜索包名或描述中包含关键词的包|
+|`show <包名>`|显示包的详细信息|
+|`list --installed`|列出所有已安装的包,可配合grep检查某包是否已装|
+|`rdepends <包名>`|列出哪些包依赖了这个包|
+|`install <包名>/<./本地包.deb>`|下载并安装|
+|`remove <包名>`|卸载,但保留配置文件|
+|`purge <包名>`|啥都不留|
+|`autoremove`|删除不再被需要的依赖包|
+|`clean`|清空所有包缓存|
+|`edit-source`|修改软件源文件|
+
+**软件源配置文件** : `/etc/apt/sources.list`
+
+**新版APT源配置格式** : 主要修改 `URIs` 行
+
+```
+Types: deb
+URIs: https://mirrors.aliyun.com/ubuntu/
+Suites: noble noble-updates noble-backports noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+```
+
+**多个下载导致死锁问题** : 执行下面的命令强制删除锁
+
+```
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock*
+```
 
 ## 编解码工具
  +  md5sum   md5编码
