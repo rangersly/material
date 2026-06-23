@@ -1,0 +1,126 @@
+# ============================================================
+# .clang-tidy 配置文件
+# 用于 C/C++ 项目的静态分析,提供代码质量、风格和性能建议
+# ============================================================
+
+# ---------- 检查器 (Checks) ----------
+# 格式: 逗号分隔的检查器名称,支持通配符 *
+# 规则:
+#   - '* '  禁用所有检查,再从零开始启用需要的组
+#   - 'google-*' 启用所有 Google 代码风格相关的检查
+#   - 'readability-*' 启用可读性改进建议(如简化表达式、命名建议等)
+#   - 'performance-*' 启用性能优化建议(如避免不必要拷贝、使用更快的算法等)
+#   - 'modernize-*' 启用现代化 C++ 建议(如使用 nullptr、override、auto 等)
+Checks: '
+  -*,
+  google-*,
+  readability-*,
+  performance-*,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -performance-avoid-endl'
+
+# - 禁用 'modernize-use-trailing-return-type' 是因为很多人不习惯尾随返回类型语法
+# -readability-identifier-naming,
+# - 禁用 'readability-identifier-naming' 暂时关闭强制命名规范,可根据项目需求打开
+# - 禁用 'readability-magic-numbers' 允许直接使用数字常量,避免代码过度碎片化
+# - 禁用 'performance-avoid-endl' 允许使用 std::endl(根据个人习惯,也可启用该检查)
+# 如果你想启用命名风格检查,请移除 '-readability-identifier-naming' 并在下方配置 CheckOptions
+
+# ---------- 警告视为错误 ----------
+# 若设为 '*', 所有警告都会导致构建失败(或其他工具报错)
+WarningsAsErrors: ''
+
+# ---------- 检查器参数 (CheckOptions) ----------
+# 许多检查器支持额外的参数配置,这里列出最常用的命名风格配置
+CheckOptions:
+# 类型命名使用大驼峰
+  - key: readability-identifier-naming.TypeCase
+    value: CamelCase
+  # 类名
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  # 结构体
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  # 枚举
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  # typedef
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  # union
+  - key: readability-identifier-naming.UnionCase
+    value: CamelCase
+
+  # 普通变量与函数参数
+  - key: readability-identifier-naming.VariableCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.ParameterCase
+    value: 'lower_case'
+  # 类成员变量有后缀下划线,结构体成员则没有
+  - key: readability-identifier-naming.MemberCase
+    value: 'lower_case'
+    # 为所有成员变量统一添加后缀下划线
+  - key: readability-identifier-naming.MemberSuffix
+    value: '_'
+
+  # 类静态常量
+  - key: readability-identifier-naming.ClassConstantCase
+    value: 'CamelCase'          # 使用大驼峰
+  - key: readability-identifier-naming.ClassConstantPrefix
+    value: 'k'                  # 使用'k'前缀
+
+  # 全局常量
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: 'k'
+  # 非常量的全局变量
+  - key: readability-identifier-naming.GlobalVariableCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.GlobalVariablePrefix
+    value: 'k'
+  # 非常量的静态全局变量(文件作用域的 static 变量)
+  - key: readability-identifier-naming.StaticVariableCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.StaticVariablePrefix
+    value: 'k'
+  # 枚举值
+  - key: readability-identifier-naming.EnumConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: 'k'
+  # constexpr变量
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ConstexprVariablePrefix
+    value: 'k'
+  # 静态常量 
+  - key: readability-identifier-naming.StaticConstantCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.StaticConstantPrefix
+    value: 'k'
+  # 非常量的静态局部变量(函数内部的 static 变量)
+  - key: readability-identifier-naming.StaticLocalVariableCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.StaticLocalVariablePrefix
+    value: 'k'
+  # 非常量的类静态成员(static 非 const 成员)
+  - key: readability-identifier-naming.ClassStaticMemberCase
+    value: 'CamelCase'
+  - key: readability-identifier-naming.ClassStaticMemberPrefix
+    value: 'k'
+
+  # 函数名使用 CamelCase 风格(首字母大写)
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  # 宏定义命名：全大写，单词间用下划线
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: 'UPPER_CASE'
+
+  # 命名空间名使用 lower_case 风格
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+
