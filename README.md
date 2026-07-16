@@ -20,7 +20,6 @@
 - [命令大全](./commands.md)
 - [收藏有用的东西](./star.md)
 - [编程](#编程)
-- [网络](#network)
 - [windows](#windows)
 - [linux](#linux)
 - [第三方工具](#第三方工具)
