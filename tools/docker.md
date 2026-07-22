@@ -69,6 +69,8 @@ __配置/etc/docker/daemon.json__
   + `docker run -d <镜像名>`  : 创建并后台运行容器
     + `-v` : 指定数据卷
     + `-p local_port:port` : 端口映射
+    - `--rm` 在容器运行结束后删除容器
+    - `-it` 进入交互式shell
   + `docker ps`  : 列出所有运行中容器
     + `-a` : 包括停止的容器
   + `docker stop [ID / NAME]`  : 停止某容器
