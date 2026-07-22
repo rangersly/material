@@ -216,7 +216,7 @@
 |`-m`|字符|
 |`-w`|word|
 
-## cp    
+## cp
 
 |参数|效果|
 |---|---|
@@ -245,7 +245,7 @@
 ```
 SUID    4
     执行二进制文件时,权限提升为文件所有者
-    
+
 SGID    2
     在此权限下的目录进入后,有效用户组变为所有组
 
@@ -363,7 +363,7 @@ SBIT    1
   - `xz -l --verbose filename.xz` 查看压缩文件信息
   - `xc -c filename > filename.xz`
 
-## tar 
+## tar
 
 - `-c` 创建
 - `-x` 解开
@@ -382,7 +382,7 @@ SBIT    1
 - `bs`    one black size
 - `count` count
 - `oflag=sync`  sync
-    
+
 
 ## mount
     +    -r            # 只读
@@ -438,8 +438,45 @@ SBIT    1
 `sudo parted -s /dev/sdb rm 2`
 
 
-## sudo    
-    +    -u        # 指定用户
+## sudo
+
+授权用户以其他用户身份执行程序
+
+### 优势
+
+- 最小权限:只有必要权限
+- 完整审计追踪:记录所有操作
+- 细粒度控制:针对不同用户/组设置不同权限
+- 用户使用自己的密码即可,无需root密码
+
+### 常用选项
+
+|参数|作用|
+|---|---|
+|`-u <用户>`|指定以某用户权限|
+|`-i`|模拟完整的登录环境|
+|`-l`|列出当前用户可执行的命令|
+|`-e <文件名>`|编辑系统配置文件临时提权,强烈推荐!|
+
+### 配置
+
+`/etc/sudoers` 包含用户的名字,可执行的命令,执行身份等写入配置
+
+- **权限规则设置** : `用户 主机=(运行身份:组) 命令`
+  - 用户如果使用用户组进行标记的话要在前面加个`%`
+  - 定义用户别名 : `User_Alias ADMINS = alice, rg, e0x1a`
+  - 定义命令别名 : `Cmnd_Alias CMD = /usr/bin/systemctl start nginx,/usr/bin/systemctl stop nginx`
+
+> [!IMPORTANT]
+> 更推荐在`/etc/sudoers.d/`下创建配置,避免文件出错影响整体配置
+
+### 使用记录
+
+对于使用`systemd`的系统可以使用`journalctl`查看记录
+
+- `sudo journalctl _COMM=sudo` 查看日志
+- `sudo journalctl _COMM=sudo --since today` 仅查看今天
+- `sudo journalctl _COMM=sudo _UID=1001` 通过`id -u <username>` 获取用户uid,然后进行过滤
 
 ## useradd
     +    -m        # 同时建立主目录
@@ -475,9 +512,9 @@ __用户所有组是passwd和groups的并集__
 
 ## vmstat
 
-+ **`r`**      cpu队列  
-+ **`b`**      io等待  
-+ **`si/so`**  swap队列  
++ **`r`**      cpu队列
++ **`b`**      io等待
++ **`si/so`**  swap队列
 
 - `-f`  自启动fork次数
 - `-d`  磁盘统计信息
@@ -485,7 +522,7 @@ __用户所有组是passwd和groups的并集__
 
 ## ulimit
 
-- 查看和修改进程运行资源限制    
+- 查看和修改进程运行资源限制
 - `-H/S`        # 设置/显示 软/硬 限制
 - `-a`          # 显示所有
 - `-t`          # cpu time
@@ -514,7 +551,7 @@ __用户所有组是passwd和groups的并集__
   + `show` - 显示所有接口
   + `set <dev> up/down` - 开启或关闭接口
   + `set <dev> address <MAC>` - 设置MAC地址(down)
-  
+
 + **addr - IP地址**
   + `ip a` - 显示所有接口地址
   + `add <IP> dev <devname>` - 添加IP地址
@@ -792,7 +829,7 @@ sudo rm /var/lib/dpkg/lock*
  +  md5sum   md5编码
  +  sha1sum  sha1
  +  cksum    crc
- +  base64  
+ +  base64
  +  basenc   各种base64变种
    +  `--base64url`
    +  `--base32`
@@ -883,7 +920,7 @@ sudo timeshift --create \
 - 如果已经配置过默认位置可以直接`--create + --comments`
 
 1. 列出快照 : `sudo timeshift --list`
-2. 恢复快照 : `sudo timeshift --restore --snapshot "2026-05-30-18-22-00" --yes` 
+2. 恢复快照 : `sudo timeshift --restore --snapshot "2026-05-30-18-22-00" --yes`
 3. 删除旧快照 : `sudo timeshift --delete --snapshot "2026-05-31-xxx"`
 
 ### timeshift.json 配置文件

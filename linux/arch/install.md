@@ -111,7 +111,7 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ### 普通用户
 
 `useradd -m -G wheel username`
-`vim /etc/sudoers`
+`sudo visudo`
 
 
 ### 配置中文双拼输入法
