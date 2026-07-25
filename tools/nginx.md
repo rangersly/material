@@ -34,3 +34,14 @@ http {
     }
 }
 ```
+
+### HTTP块
+
+**server块**
+
+|配置项|作用|
+|---|---|
+|`listen <port>`|监听某端口的请求(必须)|
+|`server_name <HOST> [HOST]`|只接受特定HOST头的请求|
+|`root <path>`|设置工作目录|
+|`index <filename>`|设置首页文件名|
