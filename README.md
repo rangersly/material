@@ -64,6 +64,7 @@
 - [markdown](./tools/markdown.md)
 - [tmux](./tools/tmux.md)
 - [ffmpeg](./tools/ffmpeg.md)
+- [llama.cpp](./tools/llama.md)
 - [科学上网相关](./tools/vpn.md)
 
 ### 其他
