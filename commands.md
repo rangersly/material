@@ -743,6 +743,17 @@ curl -# -O https://example.com/largefile.zip
 
 ## wget
 
+1. 基础下载
+  ```
+  wget URL                         # 下载到当前目录
+  wget -O newname.zip URL          # 另存为指定文件名
+  wget -P /tmp/downloads URL       # 保存到指定目录
+  wget -c URL                      # 断点续传
+  wget -b URL                      # 后台下载，日志默认 wget-log
+  wget -i urls.txt                 # 从文件批量下载
+  wget -t 0                        # 无限重试
+  ```
+
 ## networkmanager
 - 连接无线网络
   1. `nmcli device status`  检查网卡是否启用
