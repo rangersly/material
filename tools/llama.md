@@ -27,36 +27,21 @@ cmake --build build --config Release -j$(nproc)
 ## 模型
 
 - `qwen3.8-27B.gguf` — 27B，Q4_K_M 量化（约 16.4 GB）
-- `ornith1.5-9B.gguf` — 9B 模型
+- `ornith1.5-9B.gguf` — 9B 模型(推荐12g显存部署)
 
 ## 启动服务
 
-服务通过 `llama-server` 启动，进程绑定到 CPU 0-7 核，端口 22233。
+服务通过 `llama-server` 启动，端口 22233。
 实际命令对应 `~/myai` 下的 `ser-*.sh` 脚本：
-
-**qwen3.8-27B.gguf**（大模型，部分层留在 CPU）：
-
-```bash
-taskset -c 0-7 ./llama-ser -m qwen3.8-27B.gguf \
-    -ngl 29 \
-    -ctk q8_0 -ctv q8_0 \
-    --flash-attn on \
-    -t 8 \
-    -c 65535 \
-    --parallel 1 \
-    --port 22233 \
-    --host 127.0.0.1
-```
 
 **ornith1.5-9B.gguf**（小模型，全量放 GPU）：
 
 ```bash
-taskset -c 0-7 ./llama-ser -m ornith1.5-9B.gguf \
-    -ngl 99 \
+./llama-ser -m ornith1.5-9B.gguf \
+    -ngl 34 \
     -ctk q8_0 -ctv q8_0 \
     --flash-attn on \
-    -t 8 \
-    -c 128000 \
+    -c 80000 \
     --parallel 1 \
     --port 22233 \
     --host 127.0.0.1
@@ -90,3 +75,62 @@ taskset -c 0-7 ./llama-ser -m ornith1.5-9B.gguf \
 | Vulkan | 通用 GPU |
 | SYCL | Intel GPU |
 | ROCm | AMD GPU |
+
+## 基准测试（llama-bench）
+
+单文件 CLI，测模型推理吞吐与延迟，输出 `avg t/s ± stdev`。
+用法：`llama-bench [OPTIONS] MODEL [N_CTX]`。多值可用逗号或重复指定，范围用 `first-last`。
+
+### 基础用法
+
+默认测 512 个 prompt（`pp`）+ 128 个生成 token（`tg`），无需显式指定 `-p/-n`：
+
+```bash
+llama-bench ornith1.5-9B.gguf
+```
+
+自定义 prompt/生成长度与测试类型：
+
+```bash
+llama-bench -m ornith1.5-9B.gguf -p 512 -n 128 -pg pp,tg
+```
+
+`-pg <pp,tg>` 控制测试类型：`pp`（提示词处理）、`tg`（生成）、`pp+tg`（综合）。
+另支持 `--embeddings` 测嵌入向量。
+
+### 常用参数
+
+| 参数 | 作用 | 默认 | 说明 |
+|---|---|---|---|
+| `-m/--model` | 指定 GGUF 模型 | — | 必填 |
+| `-t/--threads` | CPU 线程数 | 自动 | 影响 prompt 处理速度 |
+| `-d/--n-depth` | 上下文长度 | 0 | 测试不同上下文下的吞吐 |
+| `-b/--batch-size` | batch 大小 | 2048 | 越大吞吐越高 |
+| `-ngl/--n-gpu-layers` | GPU 层数 | -1(自动) | 越大越快越占显存 |
+| `-ctk/-ctv` | KV 缓存量化 | f16 | q4_0/q8_0 权衡速度精度 |
+| `-fa/--flash-attn` | Flash Attention | auto | on/off 提速 |
+| `-sm/--split-mode` | 张量切分策略 | layer | 多卡负载均衡 |
+
+### 参数调优（示例）
+
+- **显存/CPU 平衡**：固定上下文，扫 `ngl` 找最优（范围 `30-50`）：
+  ```bash
+  llama-bench -m ornith1.5-9B.gguf -t 8 -fa on -d 32000 -ngl 30-50
+  ```
+- **上下文长度权衡**：观察 t/s 随上下文增长：
+  ```bash
+  for d in 1000 32000 64000 80000 128000; do
+    llama-bench -m ornith1.5-9B.gguf -fa on -d $d -ngl 34
+  done
+  ```
+- **量化取舍**：
+  ```bash
+  llama-bench -m ornith1.5-9B.gguf -ngl 34 -fa on -ctk q4_0 -ctv q4_0
+  llama-bench -m ornith1.5-9B.gguf -ngl 34 -fa on -ctk q8_0 -ctv q8_0
+  ```
+- **flash-attn**：`-fa on`（开）vs `-fa off`（关）对比。
+
+### 输出格式
+
+默认 Markdown 表格；`-o {csv,json,jsonl,md,sql}` 改格式。
+指标 `avg t/s ± stdev`：`pp` 提示处理、`tg` 生成、`pp+tg` 综合。
