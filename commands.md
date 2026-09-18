@@ -131,6 +131,7 @@
 - **信号与资源**
   - `kill %n` : 发送信号让任务停止,也可以`kill -9 %n`强制杀
   - [ulimit](#ulimit): 资源限制
+  - [taskset](#taskset): 设置进程 CPU 亲和性
 - **服务管理**
   - [systemctl](#systemctl): 系统服务管理
 
@@ -1000,6 +1001,41 @@ reboot
 - 服务端参数
   - `-s` : 启动服务器
   - `-B` : 绑定指定IP
+
+## taskset
+
+设置或获取进程的 **CPU 亲和性**（CPU affinity）：把进程绑定到指定的 CPU 或 CPU 集合上运行，调度器不会让它在其他 CPU 上跑。属于 util-linux，与 `chrt`、`nice` 配合使用。
+
+|选项|功能|
+|---|---|
+|`-a, --all-tasks`|对指定 PID 的所有线程（而非仅主线程）操作|
+|`-c, --cpu-list`|把 mask 当作 CPU 编号列表而非位掩码，用逗号分隔，可带范围（如 `0,5,8-11`）|
+|`-p, --pid`|操作已存在的 PID，不启动新进程。若 PID 为 0，则操作 taskset 自身|
+|`-h, --help`|显示帮助|
+|`-V, --version`|显示版本|
+
+**mask 两种表示法**（仅默认启动模式用位掩码）
+
+- **十六进制**（可带/不带 `0x`）：最低位对应 CPU 0
+  - `0x01` = CPU 0
+  - `0x03` = CPU 0 与 1
+  - `0xff` = CPU 0-31
+  - `0x32` = CPU 1、4、5
+- **CPU 列表**（配合 `-c`）：编号用逗号分隔，可写范围与步长
+  - `taskset -pc 0-2,6 <pid>` = CPU 0、1、2、6
+  - `taskset --cpu-list 0-10:2 ./app` = CPU 0、2、4、6、8、10（`:2` 为步长）
+
+**常用示例**
+
+1. 查看某进程当前 CPU 亲和性
+   `taskset -pc 0`
+2. 启动新进程并绑定到全部 32 核
+   `taskset 0xff ./myapp`
+3. 把已有进程限制到 CPU 0-1
+   `taskset -p 0x03 <pid>`
+
+> [!NOTE]
+> 只有同用户进程可被修改，修改他人进程需要 `CAP_SYS_NICE`，通常加 `sudo`。设置成功只代表不会跑到集合外，不代表立即迁移到目标 CPU。
 
 ## **tee**
 
