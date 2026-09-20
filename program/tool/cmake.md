@@ -1,9 +1,11 @@
 # CMake 构建工具
 
-> [!TIP] 本文怎么读
+> [!TIP]
+> **本文怎么读**
 > 下面先用 `program/template/CMakeLists.txt` 这个**完整小工程**走一遍（主线示例），每个概念在它出现的地方讲解「为什么」；末尾有速查表方便查阅。
 
-> [!NOTE] 核心理念
+> [!NOTE]
+> **核心理念**
 > CMake 围绕**目标(target)**组织，而不是围绕文件。文件只是生成目标的原料，`target_*` 命令才是核心。
 
 ## 0. 主线示例
@@ -87,7 +89,8 @@ if(BUILD_TESTING)
 endif()
 ```
 
-> [!IMPORTANT] 为什么 build 目录放在根目录
+> [!IMPORTANT]
+> **为什么 build 目录放在根目录**
 > 现代 CMake 约定把 `build/` 直接放在项目根目录下（`cmake -B build -S .`），而不是嵌套 `build/build/`。这样做是为了让 `.clangd` 在 `build/` 里读到 `compile_commands.json`，从而让编辑器正确识别跨目录头文件（如 `include/math_utils/math_utils.h`）。
 
 ---
@@ -110,7 +113,8 @@ ctest --test-dir build
 - `cmake --build build --target app`：只构建指定目标
 - `ctest --test-dir build`：运行测试
 
-> [!TIP] 为什么 -B 而不是旧式的 `cmake .`
+> [!TIP]
+> **为什么 -B 而不是旧式的 `cmake .`**
 > 旧式 `cmake .` 会把 build 目录嵌套在源码下（`build/build/`），并直接修改源码目录里的缓存文件。现代 CMake 用「out-of-source」构建：源码与构建产物完全分开，更干净。
 
 ---
@@ -130,7 +134,8 @@ project(cpp_template
 - `cmake_minimum_required`：声明最低 CMake 版本，低于此版本会报错
 - `project()`：声明项目、启用语言（C/C++）、设置版本。**它返回一个「顶层项目目标」**，后续所有 `target_*` 操作都围绕它组织
 
-> [!NOTE] 顶层项目目标
+> [!NOTE]
+> **顶层项目目标**
 > `project(cpp_template ...)` 本身定义了一个名为 `cpp_template` 的目标，它是整个工程的根，`CMAKE_PROJECT_NAME` 就等于这个名字。
 
 ---
@@ -180,7 +185,8 @@ add_compile_options(-Wall -Wextra)
 
 ### 全局 vs 目标级
 
-> [!IMPORTANT] 全局选项 vs 目标级选项
+> [!IMPORTANT]
+> **全局选项 vs 目标级选项**
 > - **全局**（`add_compile_options`、`set(CMAKE_CXX_STANDARD ...)`）：对所有目标生效，简单但不灵活
 > - **目标级**（`target_compile_options`、`target_compile_features`）：只对特定目标生效，灵活，但要理解「传播」
 >
@@ -216,7 +222,8 @@ add_executable(app src/main.cpp)
 | `SHARED` | 构建动态库 |
 | `EXCLUDE_FROM_ALL` | 默认不构建，常用于测试代码 |
 
-> [!NOTE] `add_library` 不带关键字的默认类型
+> [!NOTE]
+> **`add_library` 不带关键字的默认类型**
 > `add_library(foo ...)` 省略关键字时，类型由变量 `BUILD_SHARED_LIBS` 决定：该变量为 `ON` 时是**动态库（SHARED）**，否则默认是**静态库（STATIC）**。想明确类型就显式写 `STATIC` 或 `SHARED`；想全局统一切换可用 `set(BUILD_SHARED_LIBS ON)`。
 
 ### 4.2 包含路径
@@ -264,14 +271,16 @@ target_link_libraries(app
 | **PUBLIC** | ✅ | ✅ | 公开 API |
 | **INTERFACE** | ❌ | ✅ | 纯头文件库 |
 
-> [!TIP] 用 math_utils 讲透
+> [!TIP]
+> **用 math_utils 讲透**
 > - `math_utils` 自己编译 `src/math_utils.c` 时，需要 `include/` 和 `src/` 两个路径 → 两个都挂，自己能用
 > - `include/` 挂 **PUBLIC**：`app` 也用了 `include/` 里的公开头文件（`math_utils/math_utils.h`）→ 自动传给 `app`
 > - `src/` 挂 **PRIVATE**：只有 `math_utils` 自己用它（`math_utils.c` 内部 `#include "math_utils_internal.h"`），`app` 完全不需要 → 不传
 >
 > 结果：`app` 自动获得了 `include/` 路径，却不会拿到 `src/` 路径。这就是 PRIVATE/PUBLIC 的差别。
 
-> [!NOTE] INTERFACE：纯头文件库
+> [!NOTE]
+> **INTERFACE：纯头文件库**
 > 一个只有头文件、没有 `.cpp` 的库，既不自己用路径、又把路径传给依赖方，用 `INTERFACE`：
 > ```cmake
 > add_library(myutils INTERFACE)
@@ -293,7 +302,8 @@ target_compile_options(app PRIVATE -O2)
 - `target_compile_features`：声明目标需要的编译特性，如 `cxx_std_11/14/17/20/23`、`c_std_11/17/23`
 - `target_compile_options`：直接加编译选项，如 `-O2`、`-DNDEBUG`
 
-> [!TIP] 全局 vs 目标级怎么选
+> [!TIP]
+> **全局 vs 目标级怎么选**
 > - 全局（`add_compile_options`、`CMAKE_CXX_STANDARD`）：全工程统一，简单
 > - 目标级（`target_compile_options`、`target_compile_features`）：只对个别目标生效，灵活
 > - 全局和目标的设置会**合并**，目标级可以补充或覆盖全局的选项
@@ -320,10 +330,12 @@ endif()
 - `add_test(NAME ... COMMAND ...)`：把某个可执行目标注册成一条测试，`COMMAND` 后面是运行时要执行的命令
 - 注册后自动支持 `ctest --test-dir build`
 
-> [!NOTE] 用 `--build` 也能跑测试
+> [!NOTE]
+> **用 `--build` 也能跑测试**
 > `cmake --build build --target test` 会先构建所有测试，再自动运行 `ctest`。
 
-> [!TIP] 关闭测试
+> [!TIP]
+> **关闭测试**
 > 重新配置时加 `-DBUILD_TESTING=OFF` 即可跳过测试：
 > ```bash
 > cmake -B build -S . -DBUILD_TESTING=OFF
@@ -354,7 +366,8 @@ FetchContent_MakeAvailable(fmt)
   - 链接时用 `包名::库名` 命名，如 `fmt::fmt`（建议以官方文档为准）
 - `FetchContent`：让 CMake 自动下载并构建第三方项目
 
-> [!NOTE] 子目录拆分
+> [!NOTE]
+> **子目录拆分**
 > 项目变大时，把 `CMakeLists.txt` 拆分到各子目录，在根目录用 `add_subdirectory` 汇总：
 > ```cmake
 > add_subdirectory(lib)
