@@ -36,6 +36,7 @@
 - **工具**
   - [gcc-g++](./program/tool/gcc_g++.md)
   - [gdb调试工具](./program/tool/gdb.md)
+  - [CMake构建工具](./program/tool/cmake.md)
 - **C-CPP**
   - [函数库](./program/c/libs.md)
 
