@@ -1,0 +1,6 @@
+# clangd 配置
+# 让 clangd 到 build/ 目录读取 compile_commands.json,
+# 从而正确解析 include/ 与 src/ 的头文件搜索路径。
+# 生效前提:先执行过 `cmake -B build -S .` 生成编译数据库。
+CompileFlags:
+  CompilationDatabase: build

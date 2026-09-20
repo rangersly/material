@@ -1,0 +1,16 @@
+# 使用 Google 风格为基础
+BasedOnStyle: Google
+
+# 将缩进宽度改为 4 个空格
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# 大括号风格
+BreakBeforeBraces: Attach
+
+# 指针右对齐
+PointerAlignment: Right 
+
+# 类访问修饰符顶格
+AccessModifierOffset: -4
