@@ -480,17 +480,66 @@ SBIT    1
 - `sudo journalctl _COMM=sudo _UID=1001` 通过`id -u <username>` 获取用户uid,然后进行过滤
 
 ## useradd
-    +    -m        # 同时建立主目录
-    +    -g        # 指定用户组
-    +    -s        # 指定shell
+
+|选项|作用|
+|---|---|
+|`-m`|同时建立主目录|
+|`-g`|指定用户组|
+|`-s`|指定 shell|
+
+示例：`useradd -m -g mygroup -s /bin/bash alice`
 
 ## userdel
-    +    -r        # 删除主目录
+
+|选项|作用|
+|---|---|
+|`-r`|删除主目录|
+
+> [!IMPORTANT]
+> 不加 `-r` 仅删除账号，主目录仍保留
 
 ## usermod
-    +    -d            # 修改主目录
-    +    -e <MM/DD/YY># 修改账号有效期
-    +    -s            # 修改shell
+
+|选项|作用|
+|---|---|
+|`-d`|修改主目录|
+|`-e <MM/DD/YY>`|修改账号有效期|
+|`-s`|修改 shell|
+|`-aG 组名`|将用户追加到附加组，不删除原有附加组|
+|`-G 组名`|将用户加入指定组，会替换全部附加组|
+
+示例：`usermod -s /bin/zsh alice`
+
+> [!IMPORTANT]
+> 修改主目录时通常配合 `-m`，将原目录内容迁移过去
+> `-a` 追加，`-G` 不带 `-a` 会覆盖原有附加组
+> 修改后需注销重新登录才对新会话生效
+
+## groupadd
+
+|选项|作用|
+|---|---|
+|`-g GID`|指定 GID|
+|`-G groups`|将用户组加入其他组|
+|`-s SHELL`|指定默认 shell|
+|`-e DATE`|设置账号有效期|
+|`-f DAYS`|超过天数后自动禁用|
+
+示例：`groupadd -g 2000 mygroup`
+
+注意：
+- 默认在 `/etc/group` 创建静态组
+- `-r` 可创建动态组（需配合 NSS 动态 provider）
+
+## newgrp
+
+|选项|作用|
+|---|---|
+|`group`|切换为指定的组|
+|`-a command`|切换后直接执行命令|
+|`-s SHELL`|指定 shell|
+
+示例：`newgrp sudo -a vim`
 
 ## id
 
