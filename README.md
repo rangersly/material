@@ -39,6 +39,7 @@
   - [CMake构建工具](./program/tool/cmake.md)
 - **C-CPP**
   - [函数库](./program/c/libs.md)
+  - [poll IO 多路复用](./program/c/linux/poll.md)
 
 ### windows
 
