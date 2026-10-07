@@ -426,18 +426,50 @@ SBIT    1
 |198   |Offline_Uncorrectable|离线不可纠正扇区	|0	        |非常高 |
 
 ## parted
-    +    -i        列出所有设备的分区信息
-    +    -s        非交互模式
-    +    print                    显示当前设备的分区表
-    +    mklabel [gpt/msdos]        创建分区表
-    +    mkpart [part-type] [fs-type] [start] [end]        创建一个分区
-`例:    mkpart primary ext4 1MiB 1000MiB`
-    +    rm [number]                删除指定编号的分区
-    +    resizepart [number] [size]    重调大小
-    +    set [number] [mode]        设置分区标志
-    +    quit
-`sudo parted -s /dev/sdb mklabel gpt mkpart primary ext4 0% 100%`
-`sudo parted -s /dev/sdb rm 2`
+
+GNU parted 是 Linux 下强大的分区表管理工具，支持 GPT（大盘/UEFI 首选）与 MS-DOS 两种分区表格式，常用于给新盘分区、扩容/缩容已有分区。默认进入交互式命令行，配合 `-s` 脚本模式可一次命令自动化完成。
+
+**全局选项**
+
+|选项|说明|
+|---|---|
+|`-l, --list`|列出所有设备的分区信息，日常查看第一步|
+|`-s, --script`|脚本模式，永不交互，遇警告直接答 NO，可配合单条命令完成操作|
+|`-a, --align optimal`|新建分区时最优对齐，避免跨物理块的性能损耗|
+|`-f, --fix`|脚本模式下自动修复异常|
+
+**常用子命令**（进入交互模式后可直接使用）
+
+|子命令|说明|
+|---|---|
+|`print`|显示当前设备的分区表|
+|`mklabel [gpt\|msdos]`|创建分区表|
+|`mkpart [part-type] [fs-type] [start] [end]`|创建分区|
+|`resizepart [number] [size]`|调整分区大小（仅改端点，不改动文件系统）|
+|`rm [number]`|删除指定编号的分区|
+|`set [number] [mode]`|设置分区标志（boot/root/swap/esp 等）|
+|`quit`|退出交互|
+
+位置单位：默认按设备百分比（`0%`~`100%`），也可用绝对大小（`MiB`/`GB` 等）。
+
+**示例：空盘一键分区**（最常用）
+
+```bash
+# 在 10GiB 空盘 /dev/sdb 上创建 GPT 并写一个占满的 ext4 分区
+sudo parted -s /dev/sdb mklabel gpt mkpart primary ext4 1% 100%
+# 删除 /dev/sdb 上编号为 2 的分区
+sudo parted -s /dev/sdb rm 2
+```
+
+**示例：扩容已有分区**
+
+```bash
+# 将 /dev/sdb1 扩容到占满整个设备（前提：设备剩余空间未被占用）
+sudo parted /dev/sdb resizepart 1 100%
+```
+
+> [!IMPORTANT]
+> 分区操作危险，需 `sudo`；操作前建议备份。`resizepart` 缩容尤其危险，可能覆盖相邻数据；扩容前请确认磁盘剩余空间充足。
 
 
 ## sudo
