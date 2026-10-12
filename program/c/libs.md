@@ -632,7 +632,8 @@ int main() {
 用于布尔类型支持的头文件,C99 引入,提供了更清晰的布尔类型定义
 
 1. **核心定义**
-```#define bool _Bool
+```
+#define bool _Bool
 #define true 1
 #define false 0
 #define __bool_true_false_are_defined 1
