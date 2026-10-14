@@ -711,10 +711,62 @@ int main() {
 
 - 管道操作
   - `int pipe(int fildes[2]);`
-    - 创建匿名管道
-    - [0]读
-    - [1]写
-    - 0 成功  -1 失败
+    - 创建一条**匿名、端到端、无缓冲的字节流通道**（进程间通信，仅本机相关进程可用）
+    - `fildes[0]`：读端（数据从此端读取）；`fildes[1]`：写端（数据写入此端）
+    - 数据**单向流动**：只能从写端写入、从读端读取，不可反向
+    - 成功返回 `0`，失败返回 `-1` 并设置 `errno`（如 `EMFILE`、`ENFILE`、`EINVAL`）
+    - 内核维护的环形缓冲区，Linux 下默认 **64 KB**（单次写原子安全长度 `PIPE_BUF = 4096`）
+    - 写满阻塞写、空时阻塞读（阻塞行为取决于 `read`/`write` 是否非阻塞）
+  - **关键行为**
+    - 同一时刻只能有一个进程向写端写数据（多写方应合并后再写）
+    - 无写进程时，对读端 `read` 返回 `0`（EOF），`errno = EPIPE`
+    - 无读进程（或缓冲区已满）时，向写端写入会向调用进程发送 **`SIGPIPE`** 信号；默认动作为终止进程
+      - 若希望写入返回错误而非崩溃，可先 `signal(SIGPIPE, SIG_IGN)`，此时写入返回 `-1`，`errno = EPIPE`
+    - 仅字节流：无"行/记录"结构；不能跨机器（跨机器用 socket）
+  - **配套函数**（需组合使用）：`fork`、`dup2`（把管道端传给子进程）、`close`（用完须关闭两端）、`read`/`write`（传输）、`exec*`
+  - **限制**：长度受 64 KB 约束，不适合大数据量传输；必须成对、正确地 `close`，否则易死锁或丢数据
+  ```c
+  /* 父写子读：注意子进程分支末尾必须 _exit，否则子进程会坠落到父进程代码 */
+  #include <unistd.h>
+  #include <stdio.h>
+  #include <string.h>
+  #include <sys/wait.h>
+
+  #define BUFSZ 64
+
+  int main(void) {
+      int fd[2];
+      if (pipe(fd) == -1) { perror("pipe"); return 1; }
+
+      pid_t pid = fork();
+      if (pid == -1) { perror("fork"); return 1; }
+
+      if (pid == 0) {
+          /* 子进程：关闭写端，只保留读端 */
+          close(fd[1]);
+          printf("child: 读取到: ");
+          char buf[BUFSZ];
+          ssize_t n;
+          while ((n = read(fd[0], buf, BUFSZ - 1)) > 0) {   /* 读 BUFSZ-1 避免溢出 */
+              buf[n] = '\0';
+              fputs(buf, stdout);
+          }
+          fflush(stdout);                                    /* _exit 前必须刷新，否则子进程输出丢失 */
+          if (n == -1) { perror("read"); _exit(1); }
+          _exit(0);                                          /* 子进程必须显式退出 */
+      }
+
+      /* 父进程：关闭读端，向写端写入，等待子进程结束 */
+      close(fd[0]);
+      const char *msg = "hello from parent via pipe\n";
+      write(fd[1], msg, strlen(msg));
+      close(fd[1]);
+
+      wait(NULL);
+      printf("parent: done\n");
+      return 0;
+  }
+  ```
 
 - `uid_t getuid(void);`
   - 获取用户真实uid
