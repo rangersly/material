@@ -47,6 +47,7 @@
 
 ### 工具与速查
 
+- [Nmap](./tools/nmap.md) : 主机发现、端口扫描、服务识别与 NSE 脚本
 - [VPN 与代理](./tools/vpn.md) : 节点测试与基础概念
 - [网络在线工具](./tools/online-tools.md) : 公网 IP、测速、DDNS 等
 - [常见端口速查](./reference/ports.md) : 端口范围与常见服务端口
