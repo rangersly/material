@@ -118,7 +118,7 @@
 
 - **进程查看**
   - [ps](#ps): 进程快照
-  - [lsof](#lsop): 查看占用文件的进程 (原 `lsop` 应为 `lsof`)
+  - **lsof** : 查看占用文件的进程
   - [ldd](#ldd): 查看程序运行时依赖的动态库
 - **作业控制**
   - `&` : 加在命令末尾直接在后台运行
@@ -275,9 +275,9 @@ SBIT    1
 - [diff](#diff):文件差异对比
 
 ```bash
-    diff -Naur <oldfile> <newfile>  >  <file.patch##     # -p[n] 拿掉路径中的/
-    patch -p<n> <  <file.patch##         # 制作
-    patch -p<n>-R <  <file.patch##     # 还原
+diff -Naur <oldfile> <newfile> > <file.patch>
+patch -p<n> < <file.patch>      # 应用，-p[n] 表示拿掉路径中的前 n 层
+patch -p<n> -R < <file.patch>   # 还原
 ```
 
 ## rsync
@@ -322,9 +322,10 @@ SBIT    1
 |`-name [filename]`|指定文件名|
 |`-print`|打印结果在终端|
 |`-type [type]`|指定类型|
-|`-atime <+-n##`|n天前使用的文件|
-|`-mtime <+-n##`|n天前修改的文件|
-|`find /usr/bin -name zip -print`|
+|`-atime <+-n>`|n天前使用的文件|
+|`-mtime <+-n>`|n天前修改的文件|
+
+示例：`find /usr/bin -name zip -print`
 
 ## which
 
@@ -355,7 +356,7 @@ SBIT    1
 - **示例**
   - `xz filename` 生成filename.xz,原文件消失(加k保留原文件)
   - `xz -l --verbose filename.xz` 查看压缩文件信息
-  - `xc -c filename > filename.xz`
+  - `xz -c filename > filename.xz`
 
 ## tar
 
@@ -648,7 +649,7 @@ __用户所有组是passwd和groups的并集__
 
 |选项|功能|
 |---|---|
-|`updata`|从所有源下载软件包列表,不实际安装|
+|`update`|从所有源下载软件包列表,不实际安装|
 |`upgrade`|更新已有软件包的最新版本|
 |`full-upgrade`|更彻底的升级,必要时删除冲突的包|
 |`search`|搜索包名或描述中包含关键词的包|
