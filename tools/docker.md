@@ -16,7 +16,7 @@
   - [COMMAND](#docker-compose-command)
   - [YAML](#docker-compose-yml)
 - [daemon.json](#)
-- [解决防火墙导致错误](#display-iptables)
+- [Docker 网络](../network/services/docker-network.md)
 
 ---
 
@@ -35,12 +35,18 @@
 
 ```bash
 sudo apt-get update
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
-echo "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee -a /etc/apt/sources.list.d/docker.list
+sudo apt-get install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-# 验证安装
-sudo docker --version
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+docker --version
 ```
 
 __配置/etc/docker/daemon.json__
@@ -147,7 +153,7 @@ Dockerfile 是用于构建镜像的脚本文件，包含一系列指令，用于
 FROM ubuntu:latest
 
 # 维护者信息
-MAINTAINER Your Name <your.email@example.com>
+LABEL maintainer="Your Name <your.email@example.com>"
 
 # 更新包索引并安装软件
 RUN apt-get update && apt-get install -y \
@@ -171,9 +177,7 @@ CMD ["python3", "app.py"]
 ```
 
 2. Docker 网络
-- `docker network create <network_name>` 创建网络
-- `docker network ls` 查看网络
-- `docker network connect <network_name> <container_id>` 连接容器到网络
+- 网络模式、端口映射和容器互联见 [Docker 网络](../network/services/docker-network.md)
 
 3. Docker 安全
 - 使用非 root 用户运行容器
@@ -271,17 +275,3 @@ networks:           # 定义网络
   ]
 }
 ```
-
----
-
-## **display-iptables**
-
-因为配置防火墙会导致docker防火墙的一些问题,故关闭docker防火墙
-
-```/etc/docker/daemon.json
-{
-  "iptables": false
-}
-```
-
----

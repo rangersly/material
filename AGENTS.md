@@ -12,9 +12,10 @@
 
 - `linux/` — Linux 系统知识（ELF、proc、根目录结构、Arch Linux）
 - `program/` — 编程资料（`c/`、`cpp/`、`python/`、`tool/`、`other/`）
-- `tools/` — 第三方工具文档（Docker、Vim、SSH、Git、tmux 等）
+- `network/` — 网络知识（基础概念、网络命令、服务、Socket 编程）
+- `tools/` — 第三方工具文档（Docker、Vim、Git、tmux 等）
 - `windows/` — Windows 相关（WSL、快捷键、VBS 脚本）
-- `hardware/` — 硬件知识（网线、硬盘）
+- `hardware/` — 硬件知识（硬盘）
 - `algorithms/` — 算法实现
 - `q-a/` — 基于问题的合集
 - `other/` — 杂项

@@ -46,17 +46,12 @@
 
 ## tool
 
-- [查询公网ip](https://my-ip.cc/zh-hans/)
-- [中科大测速站](https://test.ustc.edu.cn/)
+- [网络相关工具](./network/tools/online-tools.md)
 - [Itellyou 系统站](https://next.itellyou.cn/)
 - [Xget URL 转换器](https://xuc.xi-xu.me/)
-- [给网站测速](https://www.itdog.cn/)
-- [图吧工具箱](www.tbtool.cn)
+- [图吧工具箱](https://www.tbtool.cn)
 - [检测显示屏](https://testufo.com/)
-- [封禁p2p吸血IP](https://github.com/PBH-BTN/PeerBanHelper)
-- [qBitEE](https://github.com/c0re100/qBittorrent-Enhanced-Edition)
 - [手机物理实验工具](https://github.com/phyphox/phyphox-android)
-- [DDNS](https://github.com/jeessy2/ddns-go)
 - [ffmpeg套壳"脚本生成器"](https://github.com/ttqftech/FFBox)
 
 ## media

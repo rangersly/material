@@ -1,8 +1,3 @@
 # 科学上网
 
-## 目录
-
-- **机场测试**
-  - 节点溯源 `curl https://ipinfo.io/` 显示IP信息
-  - IP 纯净度 <https://scamalytics.com>
-  - 网站测速 <https://www.speedtest.net>
+本文已迁移至 [network/tools/vpn.md](../network/tools/vpn.md)。

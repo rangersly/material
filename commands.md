@@ -138,21 +138,13 @@
 
 ## 网络
 
-- **基础配置**
-  - [ip](#ip) : 多功能网络工具
-  - [NetworkManager](#networkmanager): 网络连接管理 (nmcli)
-- **连接与诊断**
-  - [ping](#ping): 连通性测试
-  - [ss](#ss) : 套接字统计
-  - [nmap](#nmap): 网络探测
-  - [vnstat](#vnstat) : 网络流量日志
-- **数据传输**
-  - [curl](#curl): URL 传输工具
-  - [wget](#wget): 文件下载
-- **防火墙**
-  - [ufw](#ufw) : 简化防火墙配置
-- **性能测试**
-  - [iperf3](#iperf) : 网络性能测试
+网络命令已整理到独立分区：
+
+- [网络分区总览](./network/README.md)
+- [Linux 网络命令](./network/linux/commands.md)
+- [Windows 网络命令](./network/windows/commands.md)
+- [Docker 网络](./network/services/docker-network.md)
+- [常见端口速查](./network/reference/ports.md)
 
 ## 软件包管理
 
@@ -617,235 +609,6 @@ __用户所有组是passwd和groups的并集__
 - `-p`          # user processes
 - `-n`          # open file
 
-## ip
-
-实现了Linux的网络命名空间,主要作用于数据链路层和网络层(TCP/IP五层模型)
-
-**作为一个统一的接口管理网络**
-
-+ **全局选项**
-  + `-s` - 更多信息
-  + `-d` - 更详细
-  + `-4` - 仅IPv4
-  + `-6`
-  + `-o` - 单行
-
-+ **link - 网络接口(链路层)**
-  + `show` - 显示所有接口
-  + `set <dev> up/down` - 开启或关闭接口
-  + `set <dev> address <MAC>` - 设置MAC地址(down)
-
-+ **addr - IP地址**
-  + `ip a` - 显示所有接口地址
-  + `add <IP> dev <devname>` - 添加IP地址
-  + `del <IP> dev <devname>`
-  + `flush dev <devname>` - 清空
-
-+ **route - 路由表**
-  + `ip r` - 显示所有路由表
-  + `get <IP>` -获取指定IP的路由
-
-+ **neigh - ARP/NDISC缓存**
-  + `ip n`
-  + `add [IP] lladdr [MAC] dev [eth0]` - 添加表项
-  + `del [IP] dev [eth0]` - 删除表项
-  + `flush all` - 清空
-
-```
-REACHABLE:表示邻居设备可达.
-STALE:表示邻居设备的条目已过期,但之前是可达的.
-DELAY:表示正在等待确认邻居设备是否可达.
-PROBE:表示正在积极探测邻居设备是否可达
-```
-
-+ **rule - 策略路由规则**
-
-+ **tunnel - IP隧道**
-
-+ **maddress - 多播地址**
-
-+ **monitor - 网络事件**
-  + `all` - 所有事件
-
-
-## ss
-
-用于查看网络套接字统计信息
-
-格式 : `ss [选项] [过滤器]`
-
-|选项|功能|
-|---|---|
-|`-t`|tcp|
-|`-u`|udp|
-|`-n`|以端口号显示,不解析服务名,加快输出速度|
-|`-l`|仅列出正在监听的服务|
-|`-p`|显示关联的进程 pid|
-|`-r`|解析主机名(默认行为),与`-n`相反|
-|`-e`|拓展信息(inode,用户)|
-|`-m`|显示套接字内存使用详情|
-|`-s`|汇总统计:列出各类协议收发包,错误,连接数总计|
-|`ss -tlunp`||
-
-**输出列解读**
-
-- `Recv-Q` 和 `Send-Q`
-  - 对于 `LISTEN` 状态
-    - `Recv-Q` : 当前全连接队列(已完成三次握手但未`accept()`)(注意是否大量堆积)
-    - `Send-Q` : 最大连接队列长度(即backlog)
-  - 对于非监听
-    - `Recv-Q` : 内核接收缓冲区中,未被用户态程序拷走的数据字节数
-    - `Send-Q` : 已发送但尚未被远端确认的数据字节数(TCP) 或发送缓冲区尚未发出的数据字节数(UDP)
-- `ss -s` 快速汇总
-  - `Total` 所有协议族的套接字总数
-  - TCP行
-    - `estab` : 已建立连接状态的数量(TCP总数远大于estab,或者estab暴增都可能是DDoS攻击)
-    - `closed` : `CLOSED` 状态的套接字,通常少见
-    - `orphaned` : **孤儿套接字** 进程将其关闭,但是内核保留一段时间
-    - `timewait` : `TIME_WAIT` 状态,主动关闭一方等待2MSL(数量过大可能是短链接泛洪攻击)
-
-## **curl**
-
-curl用于 **传输数据**,支持多种协议(HTTP、HTTPS、FTP、FTPS、SCP、SFTP、TFTP、LDAP、DICT、TELNET等).广泛用于测试API、下载文件、上传数据等场景.
-
-
-- `-X` 或 `--request`: 指定HTTP请求方法(GET, POST, PUT, DELETE等)
-  ```bash
-  curl -X POST https://example.com/api
-  ```
-
-- `-H` 或 `--header`: 添加请求头
-  ```bash
-  curl -H "Content-Type: application/json" https://example.com/api
-  ```
-
-- `-d` 或 `--data`: 发送POST请求的数据
-  ```bash
-  curl -d "name=John&age=30" https://example.com/api
-  ```
-
-- `--data-raw`: 发送原始数据(不处理特殊字符)
-- `--data-binary`: 发送二进制数据
-- `--data-urlencode`: URL编码发送的数据
-  ```bash
-  curl --data-urlencode "name=John Doe" https://example.com/api
-  ```
-
-- `-F` 或 `--form`: 发送multipart/form-data(文件上传)
-  ```bash
-  curl -F "file=@photo.jpg" https://example.com/upload
-  ```
-
-- `-i` 或 `--include`: 输出包含响应头
-- `-I` 或 `--head`: 只获取响应头
-- `-v` 或 `--verbose`: 显示详细操作信息
-- `-s` 或 `--silent`: 静默模式(不显示进度或错误信息)
-- `-o` 或 `--output`: 将输出写入文件
-  ```bash
-  curl -o output.html https://example.com
-  ```
-
-- `-O` 或 `--remote-name`: 使用远程文件名保存
-  ```bash
-  curl -O https://example.com/file.zip
-  ```
-
-- `-u` 或 `--user`: 用户名和密码认证
-  ```bash
-  curl -u username:password https://example.com
-  ```
-
-- `--basic`: 使用HTTP Basic认证
-- `--digest`: 使用HTTP Digest认证
-- `--negotiate`: 使用HTTP Negotiate认证
-
-- `-x` 或 `--proxy`: 使用代理服务器
-  ```bash
-  curl -x http://proxy.example.com:8080 https://example.com
-  ```
-
-- `--connect-timeout`: 连接超时时间(秒)
-- `-m` 或 `--max-time`: 最大请求时间(秒)
-- `--retry`: 失败重试次数
-- `--retry-delay`: 重试间隔时间(秒)
-
-
-- `-k` 或 `--insecure`: 允许不安全的SSL连接
-- `--cacert`: 指定CA证书文件
-- `--cert`: 客户端证书文件
-- `--key`: 私钥文件
-
-- 发送JSON数据
-```bash
-curl -H "Content-Type: application/json" -d '{"name":"John","age":30}' https://example.com/api
-```
-
-- 从文件读取POST数据
-```bash
-curl -d @data.json https://example.com/api
-```
-
-- 使用cookie
-```bash
-curl -b "name=value" https://example.com  # 发送cookie
-curl -c cookies.txt https://example.com  # 保存cookie到文件
-curl -b cookies.txt https://example.com  # 从文件读取cookie
-```
-
-- 跟随重定向
-```bash
-curl -L https://example.com
-```
-
-- 限制下载速度
-```bash
-curl --limit-rate 100K -O https://example.com/largefile.zip
-```
-
-- 断点续传
-```bash
-curl -C - -O https://example.com/largefile.zip
-```
-
-- 同时下载多个文件
-```bash
-curl -O https://example.com/file1.zip -O https://example.com/file2.zip
-```
-
-- 使用通配符下载
-```bash
-curl -O https://example.com/files/[1-10].jpg
-```
-
-- 显示进度条
-```bash
-curl -# -O https://example.com/largefile.zip
-```
-
----
-
-## wget
-
-1. 基础下载
-  ```
-  wget URL                         # 下载到当前目录
-  wget -O newname.zip URL          # 另存为指定文件名
-  wget -P /tmp/downloads URL       # 保存到指定目录
-  wget -c URL                      # 断点续传
-  wget -b URL                      # 后台下载，日志默认 wget-log
-  wget -i urls.txt                 # 从文件批量下载
-  wget -t 0                        # 无限重试
-  ```
-
-## networkmanager
-- 连接无线网络
-  1. `nmcli device status`  检查网卡是否启用
-  2. `nmcli device wifi on` 启用wifi射频
-  3. `nmcli device wifi rescan` 刷新列表
-  4. `nmcli device wifi list`  列出所有可用wifi
-  5. `nmcli device wifi connect <SSID> password "password"
-  6. `nmcli connection show`  验证连接
-
 ## systemctl
     +    start
     +    stop
@@ -1066,24 +829,6 @@ umount -R /mnt  # 卸载所有分区
 reboot
 ```
 
-## **iperf**
-
-- 通用参数
-  - `-p` : 指定端口(但服务端有防火墙时测试udp性能必须设置,因为不设置的话会随机端口被防火墙阻拦)
-  - `-i` : 报告间隔时间(s)
-  - `-V` : 详细日志
-
-- 客户端参数
-  - `-c` : 指定服务端IP
-  - `-u` : UDP
-  - `-R` : 反向传输(服务器发,客户端收)
-  - `-P` : 并发连接数(由于Win的性能问题,单核能负担的udp打包有限,需要并发测试)
-  - `-b` : UDP目标带宽
-
-- 服务端参数
-  - `-s` : 启动服务器
-  - `-B` : 绑定指定IP
-
 ## taskset
 
 设置或获取进程的 **CPU 亲和性**（CPU affinity）：把进程绑定到指定的 CPU 或 CPU 集合上运行，调度器不会让它在其他 CPU 上跑。属于 util-linux，与 `chrt`、`nice` 配合使用。
@@ -1198,24 +943,6 @@ reboot
   tail -v filename.txt
   ```
 
-## ufw
-
-Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
-
-- **基础命令**
-  - `status verbose` : 列出详细规则
-  - `enable` : 启动UFW
-  - `disable` : 彻底关闭UFW
-  - `reset` : 完全重置,删除所有规则
-  - `allow 22/tcp` : 允许22端口连接
-    - `allow from 192.168.0.0/24` : 允许特定IP
-    - `allow from 192.168.0.0/24 to any port 22` : 允许特定IP
-  - `deny 21/tcp` : 拒绝端口访问
-    - `deny log 23/tcp` : 拒绝并记录日志(通常在`/var/log/ufw.log`)
-  - `delete allow 8080/tcp` : 删除规则(`delete`后接原始规则)
-  - `default deny incoming` : 默认拒绝所有传入(outcoming为传出)
-  - `logging on` : 启用日志
-
 ## lsblk
 
 - 命令格式 `lsblk [选项] [设备]`
@@ -1279,24 +1006,6 @@ Ubuntu默认的防火墙配置工具,简化了iptables的配置过程
 - 示例
   - `cat urls.txt | xargs -P 8 -n 1 wget -q` : 多线程下载文件列表
 
-## vnstat
-
-超低性能占用的网络历史流量记录工具
-
-**安装后初始化**
-
-1. `sudo systemctl enable --now vnstat` 启动开机自启
-2. `ip link show` 查看网卡名
-3. `sudo vnstat -i eth0 --create` 未网卡创建数据库
-
-|选项|功能|
-|---|---|
-|`-h`|每小时流量|
-|`-d`|每日流量|
-|`-m`|每月流量|
-|`-t`|流量最高的十天|
-|`-i eth0`|指定查看某网卡|
-
 ## ldd
 
 用于显示可执行文件或共享库**运行时依赖的动态库**，即程序运行时需要加载到内存的共享库（`.so`）。
@@ -1331,4 +1040,4 @@ libm-2.35-x86_64.so.6 => not found
 **相关命令**
 
 - [readelf](./program/tool/readelf.md) : 用 `readelf -d <file>` 查看 ELF 的动态段信息 (静态层面)
-- [elf可执行文件](../linux/elf.md) : ELF 与动态库的连接机制
+- [elf可执行文件](./linux/elf.md) : ELF 与动态库的连接机制

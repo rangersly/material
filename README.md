@@ -22,9 +22,10 @@
 - [编程](#编程)
 - [windows](#windows)
 - [linux](#linux)
+- [网络](./network/README.md)
 - [第三方工具](#第三方工具)
 - **硬件知识**
-  - [网线](./hardware/EthernetCable.md)
+  - [网线](./network/basics/ethernet.md)
   - [硬盘](./hardware/disk.md)
 - [基于问题的合集](#q-a)
 - [其他](#其他)
@@ -57,18 +58,30 @@
 - [根目录结构](./linux/root-struct.md)
 - [elf可执行文件](./linux/elf.md)
 
+### 网络
+
+- [网络分区总览](./network/README.md)
+- [网络基础](./network/basics/tcp-ip.md)
+- [Linux 网络命令](./network/linux/commands.md)
+- [Windows 网络命令](./network/windows/commands.md)
+- [网络故障排查](./network/linux/troubleshooting.md)
+- [SSH](./network/services/ssh.md)
+- [SCP 与 SFTP](./network/services/scp-sftp.md)
+- [Nginx](./network/services/nginx.md)
+- [Docker 网络](./network/services/docker-network.md)
+- [常见端口速查](./network/reference/ports.md)
+- [科学上网相关](./network/tools/vpn.md)
+- [网络在线工具](./network/tools/online-tools.md)
+
 ### 第三方工具
 
 - [vim](./tools/vim/vim.md)
-- [ssh远程连接](./tools/ssh/ssh.md)
-- [scp文件传输](./tools/ssh/scp-sftp.md)
 - [docker](./tools/docker.md)
 - [git](./tools/git.md)
 - [markdown](./tools/markdown.md)
 - [tmux](./tools/tmux.md)
 - [ffmpeg](./tools/ffmpeg.md)
 - [llama.cpp](./tools/llama.md)
-- [科学上网相关](./tools/vpn.md)
 
 ### 其他
 
