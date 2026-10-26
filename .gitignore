@@ -1,3 +1,21 @@
 
-# ---------- CMake 缓存 ----------
-program/template/.cache/
+# ---------- 通用缓存 ----------
+.cache/
+
+# ---------- Python 缓存 ----------
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
+
+# ---------- Node.js 缓存 ----------
+node_modules/
+.pnpm-store/
+.npm/
+
+# ---------- CMake 缓存与构建产物 ----------
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
