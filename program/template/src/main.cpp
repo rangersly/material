@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rangerlsy
+// Copyright (c) 2026 Rangersly
 // SPDX-License-Identifier: MIT
 //
 // 可执行程序入口,演示 C++ 代码链接并调用 C 库。

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rangerlsy
+// Copyright (c) 2026 Rangersly
 // SPDX-License-Identifier: MIT
 //
 // math_utils 的内部辅助函数,仅供本库实现使用,不属于公开接口。

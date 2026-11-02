@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rangerlsy
+// Copyright (c) 2026 Rangersly
 // SPDX-License-Identifier: MIT
 //
 // math_utils: 简单的整数数学工具库,演示 C 库对外公开的接口。

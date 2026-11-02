@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rangerlsy
+// Copyright (c) 2026 Rangersly
 // SPDX-License-Identifier: MIT
 //
 // math_utils 的 CTest 测试用例。
