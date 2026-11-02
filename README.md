@@ -42,6 +42,7 @@
   - [函数库](./program/c/libs.md)
   - [unistd POSIX](./program/c/headers/unistd.md)
   - [poll IO 多路复用](./program/c/linux/poll.md)
+  - [串口打开与配置](./program/c/linux/serial.md)
 
 ### windows
 
