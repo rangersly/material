@@ -64,8 +64,9 @@ CheckOptions:
   # 类成员变量使用尾下划线,结构体成员则没有
   - key: readability-identifier-naming.MemberCase
     value: lower_case
-  - key: readability-identifier-naming.MemberSuffix
-    value: '_'
+  # C++ 项目复用本配置时,取消注释以给 class 成员加尾下划线。
+  # - key: readability-identifier-naming.MemberSuffix
+  #   value: '_'
   # 非常量的全局变量
   - key: readability-identifier-naming.GlobalVariableCase
     value: lower_case
@@ -113,6 +114,10 @@ CheckOptions:
   # 宏定义命名：全大写，单词间用下划线
   - key: readability-identifier-naming.MacroDefinitionCase
     value: UPPER_CASE
+  # 头文件守卫形如 RKIT_<TOOL>_H_,允许结尾下划线;
+  # 系统特性宏(如 _DEFAULT_SOURCE)以下划线开头,同样放行
+  - key: readability-identifier-naming.MacroDefinitionIgnoredRegexp
+    value: '.*_H_$|^_.*$'
   # 命名空间名使用 lower_case 风格
   - key: readability-identifier-naming.NamespaceCase
     value: lower_case
