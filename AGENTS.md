@@ -17,7 +17,6 @@
 - `windows/` — Windows 相关（WSL、快捷键、VBS 脚本）
 - `hardware/` — 硬件知识（硬盘）
 - `algorithms/` — 算法实现
-- `q-a/` — 基于问题的合集
 - `other/` — 杂项
 - `tmp/` — 未归纳资源暂存区
 

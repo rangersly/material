@@ -27,7 +27,6 @@
 - **硬件知识**
   - [网线](./network/basics/ethernet.md)
   - [硬盘](./hardware/disk.md)
-- [基于问题的合集](#q-a)
 - [其他](#其他)
 
 ### 编程
@@ -88,7 +87,4 @@
 
 - [ai生成提示词的提示词](./other/prompt.md)
 - [视频知识](./other/video.md)
-
-### q-a
-
-- [文件系统损坏或误删除处理](./q-a/FileSystemCorruption.md)
+- [文件系统损坏或误删除处理](./other/file-recovery.md)
