@@ -57,6 +57,7 @@
 - [终端快捷键](./linux/keybroad.md)
 - [根目录结构](./linux/root-struct.md)
 - [elf可执行文件](./linux/elf.md)
+- [sudo 与 sudoers 配置](./linux/sudo.md)
 
 ### 网络
 

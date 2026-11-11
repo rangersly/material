@@ -467,7 +467,7 @@ sudo parted /dev/sdb resizepart 1 100%
 
 ## sudo
 
-授权用户以其他用户身份执行程序
+授权用户以其他用户身份执行程序,完整的配置与安全说明见 [sudo 与 sudoers 配置](./linux/sudo.md).
 
 ### 优势
 
@@ -489,7 +489,7 @@ sudo parted /dev/sdb resizepart 1 100%
 
 `/etc/sudoers` 包含用户的名字,可执行的命令,执行身份等写入配置
 
-- **权限规则设置** : `用户 主机=(运行身份:组) 命令`
+- **权限规则设置** : `用户 主机=(运行身份[:组]) 命令`
   - 用户如果使用用户组进行标记的话要在前面加个`%`
   - 定义用户别名 : `User_Alias ADMINS = alice, rg, e0x1a`
   - 定义命令别名 : `Cmnd_Alias CMD = /usr/bin/systemctl start nginx,/usr/bin/systemctl stop nginx`
