@@ -121,6 +121,22 @@ nmcli device wifi connect "<SSID>" password "<password>"
 nmcli connection show
 ```
 
+设置网卡参数
+
+```
+sudo nmcli connection modify "Wired connection 1" \
+  ipv4.method manual \
+  ipv4.addresses 192.168.10.2/24 \
+  ipv4.never-default yes
+```
+
+恢复默认
+
+```
+sudo nmcli connection modify "Wired connection 1" ipv4.method auto ipv4.never-default no
+sudo nmcli connection down "Wired connection 1" && sudo nmcli connection up "Wired connection 1"
+```
+
 ## ufw
 
 ```bash
