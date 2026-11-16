@@ -6,17 +6,60 @@
 + 仓库（Repository）：存储和分发镜像的地方，Docker Hub 是最常用的公共仓库
 
 ## index 
-- [核心组件](#)
+
+- [install](#install)
 - [docker](#docker)
-  - [install](#install)
-  - [基本命令](#docker-command)
-  - [数据管理](#)
-  - [高级用法](#)
+- [数据管理](#数据管理)
+- [Dockerfile](#dockerfile)
+- [杂项](#杂项)
 - [docker compose](#docker-compose)
   - [COMMAND](#docker-compose-command)
   - [YAML](#docker-compose-yml)
-- [daemon.json](#)
 - [Docker 网络](../network/services/docker-network.md)
+
+---
+
+## **install**
+
+```bash
+# 更新软件包和安装依赖
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+
+# 创建密钥环并导入GPG密钥
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# 添加软件源
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装docker引擎
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+docker --version
+```
+
+```bash
+# Arch Linux 安装 docker
+sudo pacman -S --needed docker docker-compose
+sudo systemctl enable --now docker
+docker --version
+```
+
+```bash
+# 将特定用户免root（执行后需重新登录才生效）
+sudo usermod -aG docker $USER
+```
+
+```bash
+# 配置镜像加速器并生效（一行命令）
+sudo mkdir -p /etc/docker && echo '{"registry-mirrors":["https://docker.1ms.run","https://docker.m.daocloud.io","https://docker.1panel.live"]}' | sudo tee /etc/docker/daemon.json > /dev/null && sudo systemctl daemon-reload && sudo systemctl restart docker
+
+# 验证镜像源是否生效
+sudo docker info | grep -A3 "Registry Mirrors"
+```
 
 ---
 
@@ -24,79 +67,43 @@
 
 定期使用`docker system prune`清理垃圾,保持环境整洁
 
----
+**镜像操作**
 
-### **install**
++ `docker pull <镜像名>`  : 从仓库拉取镜像
++ `docker image ls`  : 列出本地镜像
++ `docker rmi <镜像ID>`  : 删除镜像
++ `docker search <镜像名>`  搜索镜像
++ `docker build -t <image_name> .` 使用 Dockerfile 构建镜像
 
-+ 更新系统并安装依赖包
-+ 添加 Docker 官方 GPG 密钥并设置存储库
-+ 安装 Docker 引擎并启动服务
-+ 设置 Docker 开机自启
+**容器操作**
 
-```bash
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg
++ `docker run -d <镜像名>`  : 创建并后台运行容器
+  - `-v` : 指定数据卷
+  - `-p local_port:port` : 端口映射
+  - `--rm` 在容器运行结束后删除容器
+  - `-it` 进入交互式shell
++ `docker ps`  : 列出运行中容器(-a 列出所有)
++ `docker stop [ID / NAME]`  : 停止某容器
++ `docker start [ID / NAME]`	: 启动已经停止的容器
++ `docker rm [ID / NAME]`  : 删除容器
++ `docker commit <容器ID或名称> <新镜像名称>:<标签>` 将运行中的容器保存为镜像
++ `docker save -o my-new-image.tar my-new-image:latest` 导出为tar文件
++ `docker load -i my-new-image.tar`  导入镜像到目标环境
++ `docker logs <容器ID>`  : 查看容器日志
++ `docker exec -it [ID / NAME] /bin/bash`  : 进入容器
 
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+**其他**
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
++ `c-P c-Q` 退出容器交互式shell
++ `sudo systemctl daemon-reload && sudo systemctl restart docker`  重启
 
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo systemctl enable --now docker
-docker --version
-```
+**命令示例**
 
-__配置/etc/docker/daemon.json__
-```
-{
-	"registry-mirrors":
-	[
-        "https://dockerproxy.com",
-        "https://docker.mirrors.ustc.edu.cn",
-        "https://docker.nju.edu.cn"
-    ]  
-}
-```
-
----
-
-### **docker-command**
-1. 镜像操作
-  + `docker pull <镜像名>`  : 从仓库拉取镜像
-  + `docker image ls`  : 列出本地镜像
-  + `docker rmi <镜像ID>`  : 删除镜像
-  + `docker search <镜像名>`  搜索镜像
-  + `docker build -t <image_name> .` 使用 Dockerfile 构建镜像
-
-2. 容器操作
-  + `docker run -d <镜像名>`  : 创建并后台运行容器
-    + `-v` : 指定数据卷
-    + `-p local_port:port` : 端口映射
-    - `--rm` 在容器运行结束后删除容器
-    - `-it` 进入交互式shell
-  + `docker ps`  : 列出所有运行中容器
-    + `-a` : 包括停止的容器
-  + `docker stop [ID / NAME]`  : 停止某容器
-  + `docker start [ID / NAME]`	: 启动已经停止的容器
-  + `docker rm [ID / NAME]`  : 删除容器
-  + `docker commit <容器ID或名称> <新镜像名称>:<标签>` 将运行中的容器保存为镜像
-  + `docker save -o my-new-image.tar my-new-image:latest` 导出为tar文件
-  + `docker load -i my-new-image.tar`  导入镜像到目标环境
-  + `docker logs <容器ID>`  : 查看容器日志
-  + `docker exec -it [ID / NAME] /bin/bash`  : 进入容器
-
-3. 其他
-  + `c-P c-Q` :  退出容器
-  + `sudo systemctl daemon-reload && sudo systemctl restart docker`  重启
-
-4. example-command
 + `docker run -it ubuntu /bin/bash` 运行 Ubuntu 容器并进入交互式 shell
-+ `docker run -it --name mc-ser ubuntu -v /opt/mc:/opt/mc -p 25565:25565 /bin/bash`
++ `docker run -it --name mc-ser -v /opt/mc:/opt/mc -p 25565:25565 ubuntu /bin/bash` 创建名为 mc-ser 的容器
 
-### 数据管理
+## 数据管理
+
 Docker 提供了多种数据管理方式，包括 数据卷（Volumes）、绑定挂载（Bind Mounts） 和 临时文件系统（tmpfs）
 
 1. Docker 数据卷（Volumes）
@@ -104,22 +111,31 @@ Docker 提供了多种数据管理方式，包括 数据卷（Volumes）、绑�
 
 + 高性能：数据卷通常比绑定挂载性能更好。
 + 易于备份和迁移：数据卷可以通过 Docker 命令轻松备份和恢复。
-  + `docker volume create my_volume`  创建数据卷
-  + `docker volume ls`  查看数据卷
-  + `docker volume inspect my_volume`  查看数据卷详细信息
-  + `docker run -d --name my_container -v my_volume:/path/in/container <image_name>`  挂载数据卷到容器
-  + `docker volume rm my_volume`  删除数据卷
-  + `docker volume prune`  清理未使用的数据卷
-+ 迁移Volume数据
+
++ `docker volume create my_volume`  创建数据卷
++ `docker volume ls`  查看数据卷
++ `docker volume inspect my_volume`  查看数据卷详细信息
++ `docker run -d --name my_container -v my_volume:/path/in/container <image_name>`  挂载数据卷到容器
++ `docker volume rm my_volume`  删除数据卷
++ `docker volume prune`  清理未使用的数据卷
+
+**迁移Volume数据**
+
+思路：起一个临时容器，把数据卷挂到 `/data`，同时把宿主机当前目录挂到 `/backup`，用 `tar` 打包后压缩包直接落在宿主机上，无需 `docker cp`。
+
 ```bash
-# 1. 运行临时容器挂载 Volume，并将数据打包到容器内
-docker run --rm -v your_volume:/data busybox tar cvf /backup/data.tar /data
-
-# 2. 从容器中复制备份文件到宿主机
-docker cp <container_id>:/backup/data.tar ./data.tar
-
-# 3. 恢复时反向操作：将 data.tar 复制回新容器，并解压到 Volume
+# 备份：数据卷 -> 宿主机当前目录的 data.tar
+docker run --rm -v your_volume:/data -v "$(pwd)":/backup busybox \
+  tar cvf /backup/data.tar -C /data .
 ```
+
+```bash
+# 恢复：宿主机 data.tar -> 数据卷
+docker run --rm -v your_volume:/data -v "$(pwd)":/backup busybox \
+  tar xvf /backup/data.tar -C /data
+```
+
+`-C /data .` 表示切到 `/data` 再打包当前目录内容，解压回去时不会带多余的目录层级。
 
 2. 绑定挂载
 将主机上的文件或目录直接挂载到容器中
@@ -145,41 +161,36 @@ tmpfs 是一种基于内存的文件系统，适用于需要临时存储数据�
 
 ---
 
-### 高级用法
-1. Dockerfile
+## dockerfile
+
 Dockerfile 是用于构建镜像的脚本文件，包含一系列指令，用于定义镜像的构建过程
-```
-# 使用基础镜像
-FROM ubuntu:latest
 
-# 维护者信息
-LABEL maintainer="Your Name <your.email@example.com>"
-
-# 更新包索引并安装软件
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    python3
+```Dockerfile
+# 指定基础镜像
+FROM node:18-alpine
 
 # 设置工作目录
 WORKDIR /app
 
-# 复制当前目录下的文件到容器中的 /app 目录
-COPY . /app
+# 复制依赖文件（利用缓存）
+COPY package*.json ./
 
-# 暴露端口
-EXPOSE 80
+# 安装依赖
+RUN npm install
 
-# 设置环境变量
-ENV NAME World
+# 复制项目源码
+COPY . .
 
-# 运行命令
-CMD ["python3", "app.py"]
+# 声明容器端口
+EXPOSE 3000
+
+# 设置容器启动命令
+CMD ["node", "app.js"]
 ```
 
-2. Docker 网络
-- 网络模式、端口映射和容器互联见 [Docker 网络](../network/services/docker-network.md)
+## 杂项
 
-3. Docker 安全
+**Docker 安全**
 - 使用非 root 用户运行容器
 ```dockerfile
 FROM ubuntu
@@ -241,37 +252,4 @@ volumes:
 networks:           # 定义网络
   mynet:
     driver: bridge
-```
-
-## daemon.json
-```
-{
-  "registry-mirrors": [
-    "https://docker.1ms.run",
-    "https://docker.xuanyuan.me",
-    "https://docker.zhai.cm",
-    "https://a.ussh.net",
-    "https://hub.littlediary.cn",
-    "https://hub.rat.dev",
-    "https://atomhub.openatom.cn",
-    "https://docker.m.daocloud.io",
-    "https://dytt.online",
-    "https://func.ink",
-    "https://lispy.org",
-    "https://docker.xiaogenban1993.com",
-    "https://docker.mybacc.com",
-    "https://docker.yomansunter.com",
-    "https://dockerhub.websoft9.com",
-    "https://docker-0.unsee.tech",
-    "https://docker-cf.registry.cyou",
-    "https://docker.1panel.live",
-    "https://docker.imgdb.de",
-    "https://docker.hlmirror.com",
-    "https://dockerpull.org",
-    "https://dockerhub.icu",
-    "https://proxy.1panel.live",
-    "https://docker.1panel.top",
-    "https://docker.ketches.cn"
-  ]
-}
 ```
