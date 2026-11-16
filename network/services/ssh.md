@@ -26,40 +26,25 @@ Host iaalai
 
 SSH 免密登录允许用户在不输入密码的情况下登录远程服务器，步骤如下：
 
-1. **生成密钥对**
+```bash
+# 生成密钥对
+ssh-keygen -t ed25519
 
-   ```bash
-   ssh-keygen -t ed25519
-   ```
+# 复制公钥到远程服务器
+# 测试远程登录
+```
 
-2. **复制公钥到远程服务器**
+**禁用密码登录(服务端)**
 
-   ```bash
-   ssh-copy-id user@remote_host
-   ```
+编辑 `/etc/ssh/sshd_config`：
 
-   该命令会自动将公钥添加到远程服务器的 `~/.ssh/authorized_keys` 中。
+- `PubkeyAuthentication yes` 启用密钥登录
+- `PasswordAuthentication no` 禁用密码登录
 
-3. **测试免密登录**
-
-   ```bash
-   ssh user@remote_host
-   ```
-
-   无需输入密码即登录成功。
-
-4. **禁用密码登录（服务端）**
-
-   编辑 `/etc/ssh/sshd_config`：
-
-   - `PubkeyAuthentication yes` 启用密钥登录
-   - `PasswordAuthentication no` 禁用密码登录
-
-   修改后重启 sshd 服务生效。
+修改后重启 sshd 服务生效。
 
 ### 注意事项
 
-- 确保远程服务器 SSH 配置允许密钥认证（`/etc/ssh/sshd_config`）
 - 本地与远程 SSH 文件权限需正确：`~/.ssh` 为 `700`，`authorized_keys` 为 `600`
 - 排查问题时查看 SSH 日志，或用 `-v` 调试：`ssh -v user@remote_host`
 
