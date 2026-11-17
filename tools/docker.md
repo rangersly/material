@@ -61,6 +61,24 @@ sudo mkdir -p /etc/docker && echo '{"registry-mirrors":["https://docker.1ms.run"
 sudo docker info | grep -A3 "Registry Mirrors"
 ```
 
+```bash
+# 使用代理加速镜像拉取
+sudo mkdir -p /etc/systemd/system/docker.service.d
+
+sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf >/dev/null <<'EOF'
+[Service]
+Environment="HTTP_PROXY=http://你的代理地址:端口"
+Environment="HTTPS_PROXY=http://你的代理地址:端口"
+Environment="NO_PROXY=localhost,127.0.0.1"
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+# 验证是否生效
+sudo systemctl show --property=Environment docker
+```
+
 ---
 
 ## **docker**
