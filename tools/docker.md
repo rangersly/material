@@ -62,20 +62,31 @@ sudo docker info | grep -A3 "Registry Mirrors"
 ```
 
 ```bash
-# 使用代理加速镜像拉取
-sudo mkdir -p /etc/systemd/system/docker.service.d
+# 使用代理加速镜像拉取（dockerd + containerd 都要配）
+# 新版 Docker 用 containerd 拉取镜像，只配 docker.service 会拉取超时
+PROXY="http://你的代理地址:端口"
 
-sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf >/dev/null <<'EOF'
+sudo mkdir -p /etc/systemd/system/docker.service.d /etc/systemd/system/containerd.service.d
+
+sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf >/dev/null <<EOF
 [Service]
-Environment="HTTP_PROXY=http://你的代理地址:端口"
-Environment="HTTPS_PROXY=http://你的代理地址:端口"
+Environment="HTTP_PROXY=${PROXY}"
+Environment="HTTPS_PROXY=${PROXY}"
+Environment="NO_PROXY=localhost,127.0.0.1"
+EOF
+
+sudo tee /etc/systemd/system/containerd.service.d/http-proxy.conf >/dev/null <<EOF
+[Service]
+Environment="HTTP_PROXY=${PROXY}"
+Environment="HTTPS_PROXY=${PROXY}"
 Environment="NO_PROXY=localhost,127.0.0.1"
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl restart docker
+sudo systemctl restart containerd docker
 
-# 验证是否生效
+# 验证是否生效（两个都要有输出）
+sudo systemctl show --property=Environment containerd
 sudo systemctl show --property=Environment docker
 ```
 
