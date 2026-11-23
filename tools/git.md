@@ -209,6 +209,7 @@
 - `git restore <FILE>` 撤销单个文件**工作区**修改
 - `git restore .` 撤销**所有工作区**修改
 - `git restore --staged <FILE>` 取消**暂存**,移回**工作区**
+- `git restore --source=a1b2c3d -- <filename>` 将历史中的文件移回工作区
 
 
 ## revert
