@@ -865,15 +865,33 @@ reboot
 > [!NOTE]
 > 只有同用户进程可被修改，修改他人进程需要 `CAP_SYS_NICE`，通常加 `sudo`。设置成功只代表不会跑到集合外，不代表立即迁移到目标 CPU。
 
-## **tee**
+## tee
 
-把标准输入同时写到屏幕(标准输出)和文件,像管道上的"三通管":`命令 | tee a.txt b.txt`
+把标准输入同时写到标准输出和文件，像管道上的「三通管」：`命令 | tee a.log b.log`
 
-+ `-a` - 追加到文件末尾(默认覆盖)
+- 写入的是 `tee` 自己的 stdout，只有它连着终端时才显示在屏幕上
+- `-a`：追加到文件末尾，默认覆盖
 
-**用途**:边执行边看结果边存日志,如 `make 2>&1 | tee build.log`
+**日常用法**
 
-**解决权限**:`sudo cmd > file` 的重定向由普通用户执行会失败,改用 `sudo cmd | sudo tee file`
+```bash
+# 同时看和存：终端显示，同时写入文件
+make 2>&1 | tee build.log
+
+# 留档后继续处理：文件存一份，管道继续往下走
+cmd | tee run.log | grep ERROR
+
+# 提权写 root 文件：重定向由当前用户执行，sudo cmd > file 会失败
+echo '...' | sudo tee /etc/xxx.conf > /dev/null
+echo '...' | sudo tee -a /etc/xxx.conf > /dev/null
+```
+
+**注意**
+
+- `2>&1` 必须写在 `|` 之前，否则 stderr 不会进管道
+- `tee` 启动时先截断输出文件；`cat f | tee f` 读写同一文件是竞态，可能清空或写残
+- 需要保留上游的失败状态时，先 `set -o pipefail`
+- 日志实时性要求高时，写成 `stdbuf -oL cmd | tee run.log`
 
 ## **acl**
 
