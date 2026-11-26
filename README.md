@@ -81,6 +81,7 @@
 - [git](./tools/git.md)
 - [markdown](./tools/markdown.md)
 - [tmux](./tools/tmux.md)
+- [screen](./tools/screen.md)
 - [ffmpeg](./tools/ffmpeg.md)
 - [llama.cpp](./tools/llama.md)
 

@@ -128,6 +128,7 @@
   - `Ctrl + z` : 将当前前台任务暂停扔到后台
   - `nohup 命令 &` : 使程序在终端关闭之后继续运行
   - [tmux](./tools/tmux.md) : 终端复用器
+  - [screen](./tools/screen.md) : 终端复用器
   - [xargs](#xargs) : 并行任务工具
 - **信号与资源**
   - `kill %n` : 发送信号让任务停止,也可以`kill -9 %n`强制杀
